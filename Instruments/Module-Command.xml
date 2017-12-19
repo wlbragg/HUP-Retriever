@@ -1,0 +1,239 @@
+<?xml version="1.0"?>
+
+<!--
+    Usable with FlightGear
+    Property of Gerard Robin
+    Copyright 
+-->
+
+<PropertyList>
+
+    <path>Models/module-cmd.ac</path>
+    <texture-path>Models/Textures</texture-path>
+
+   <!-- <animation>
+            <type>noshadow</type>
+            <object-name></object-name>
+    </animation>-->
+    
+	<animation>
+                <condition>
+                    <equals>
+                        <property>sim/current-view/view-number</property>
+                        <value>999</value>
+                    </equals>
+            </condition>
+		<type>select</type>
+                <object-name>Gabarit-Pose</object-name>
+ 	</animation>
+
+       
+
+   <!-- <animation>
+        <type>rotate</type>
+        <object-name></object-name>
+        <property></property>
+        <factor></factor>
+
+       <interpolation>
+            <entry>
+                <ind>0.0</ind>
+                <dep>0</dep>
+            </entry>
+
+        </interpolation>
+
+        <center>
+            <x-m></x-m>
+            <y-m></y-m>
+            <z-m></z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+
+    <animation>
+        <type>pick</type>
+        <object-name></object-name>
+        <action>
+            <button>0</button>
+            <binding>
+                <command>property-toggle</command>
+                <property></property>
+            </binding>
+        </action>
+    </animation>-->
+
+
+     <animation>
+        <type>rotate</type>
+        <object-name>Cmd-Mix_Throttle</object-name>
+        <property>fdm/jsbsim/propulsion/eng0_mixture_auto</property>
+        <interpolation>
+            <entry>
+                <ind>0.6</ind>
+                <dep>0.0</dep>
+            </entry>
+            <entry>
+                <ind>0.7</ind>
+                <dep>-20</dep>
+            </entry>
+            <entry>
+                <ind>0.8</ind>
+                <dep>-35</dep>
+            </entry>
+            <entry>
+                <ind>1.20</ind>
+                <dep>-50</dep>
+            </entry>
+        </interpolation>
+        <center>
+            <x-m>-0.00015974</x-m>
+            <y-m>0</y-m>
+            <z-m>-0.0766543</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+    
+    
+    <animation>
+        <type>rotate</type>
+        <object-name>Wheel-Longitudinal</object-name>
+        <property>fdm/jsbsim/fcs/pitch-trim-cmd-norm</property>
+        <factor>-360</factor>
+        <center>
+            <x-m>0.00674013</x-m>
+            <y-m>0</y-m>
+            <z-m>-0.0505498</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+
+    <animation>
+        <type>pick</type>
+        <object-name>Wheel-Longitudinal</object-name>
+        <action>
+            <button>0</button> <!--mouse right button-->
+            <repeatable type="bool">true</repeatable>
+            <binding>
+                <command>property-adjust</command>
+                <property>fdm/jsbsim/fcs/pitch-trim-positionner</property>
+                <step>0.00034906585</step><!--0.02 deg-->
+                <min>-0.016</min>
+                <max>0.016</max>
+            </binding>
+        </action>
+        <action>
+            <button>1</button> <!--mouse middle button -->
+            <repeatable type="bool">true</repeatable>
+            <binding>
+                <command>property-adjust</command>
+                <property>fdm/jsbsim/fcs/pitch-trim-positionner</property>
+                <step>-0.00034906585</step><!--0.02 deg-->
+                <min>-0.016</min>
+                <max>0.016</max>
+            </binding>
+        </action>
+	<action>
+            <button>3</button> <!--with mouse wheel-->
+            <repeatable type="bool">true</repeatable>
+            <binding>
+                <command>property-adjust</command>
+                <property>fdm/jsbsim/fcs/pitch-trim-positionner</property>
+                <step>0.00034906585</step><!--0.02 deg-->
+                <min>-0.016</min>
+                <max>0.016</max>
+            </binding>
+        </action>
+        <action>
+            <button>4</button> <!--mouse wheel-->
+            <repeatable type="bool">true</repeatable>
+            <binding>
+                <command>property-adjust</command>
+                <property>fdm/jsbsim/fcs/pitch-trim-positionner</property>
+                <step>-0.00034906585</step><!--0.02 deg-->
+                <min>-0.016</min>
+                <max>0.016</max>
+            </binding>
+        </action>
+    </animation>
+
+
+
+    <animation>
+        <type>rotate</type>
+        <object-name>Wheel-Stick_pos</object-name>
+        <property>fdm/jsbsim/fcs/elevator-stick-pos</property>
+        <factor>-360</factor>
+        <center>
+            <x-m>-0.0175586</x-m>
+            <y-m>0</y-m>
+            <z-m>-0.0873628</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+
+    <animation>
+        <type>pick</type>
+        <object-name>Wheel-Stick_pos</object-name>
+        <action>
+            <button>0</button>
+            <repeatable type="bool">true</repeatable>
+            <binding>
+                <command>property-adjust</command>
+                <property>fdm/jsbsim/fcs/elevator-stick-pos</property>
+                <step>0.001</step>
+                <min>-1</min>
+                <max>1</max>
+            </binding>
+        </action>
+        <action>
+            <button>1</button>
+            <repeatable type="bool">true</repeatable>
+            <binding>
+                <command>property-adjust</command>
+                <property>fdm/jsbsim/fcs/elevator-stick-pos</property>
+                <step>-0.001</step>
+                <min>-1</min>
+                <max>1</max>
+            </binding>
+        </action>
+    </animation>
+
+    
+
+
+    <!--<animation>
+        <type>pick</type>
+        <object-name></object-name>
+        <action>
+            <button>0</button>
+            <binding>
+                <command>property-toggle</command>
+                <property></property>
+            </binding>
+        </action>
+    </animation>-->
+
+
+
+
+</PropertyList>

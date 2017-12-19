@@ -1,0 +1,453 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="http://jsbsim.sourceforge.net/JSBSim.xsl"?>
+<fdm_config
+  name="s-51 from  ah1s (template)"
+  version="2.0"
+  release="ALPHA"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="http://jsbsim.sourceforge.net/JSBSim.xsd">
+
+  <fileheader>
+    <author>GRTUX (Gérard) and Josh </author>
+
+    <filecreationdate>2011-09-21</filecreationdate>
+    <version> 0.2 2012-03-12</version>
+    <description> </description>
+
+    <!--<reference
+    
+    
+      refID=  "TA82"
+      author= "Talbot, Peter D., Tinling, Bruce E., Decker, William A., and Chen, Robert T. N."
+      title=  "A Mathematical Model of a Single Main Rotor Helicopter for Piloted Simulation - NASA TM-84281"
+      date=   "1982"/>
+    <reference
+      refID=  "BR59"
+      author= "Bramwell, A. R. S."
+      title=  "Longitudinal stability and control of the single rotor helicopter - Aeronautical Research Council R&amp;M 3104"
+      date=   "1959"/>
+    <reference
+      refID=  "SH79"
+      author= "Shaugnessy, J. D., Deaux, Thomas N., and Yenni, Kenneth R."
+      title=  "Development and Validation of a Piloted Simulation of a Helicopter and External Sling Load - NASA TP-1285"
+      date=   "1979"/>-->
+
+    <!--<note> Supersedes former model from 2010-01-12 </note>
+
+    <note> Aerodynamic helicopter model in wind axes.
+           Trigonometric functions are used to cover the full alpha/beta range (See /TA82/). </note>
+
+    <note> Wing aerodynamics are calculated in the same manner as in fixed wing aircraft.
+           The other contributions use helicopter specific quantities. </note>
+
+    <limitation> Due to gear vibrations the model should be run at 200Hz (the cause might be bad design
+                 of the skids, or numerical flutter in the ground reaction routines). </limitation>
+
+    <limitation> Downwash influence is only applied for alpha values between +/- 20 deg
+                 (and the opposite direction). </limitation>
+
+    <limitation> Estimation of fuselage moments is rather fair. </limitation>
+
+    <limitation> Landing the vehicle without AFCS can be a challenging task. </limitation>-->
+    <note>
+        This model was created using publicly available data, publicly available
+        technical reports, textbooks, and guesses. It contains no proprietary or
+        restricted data. It has been validated only to the extent that it seems
+        to "fly right", and possibly to comply to published, publicly known,
+        performance data (maximum speed, endurance, etc.). Thus, this model
+        is meant for educational and entertainment purposes only.
+
+        This simulation model is not endorsed by the manufacturer.
+     </note>
+    <documentation>
+        Engine
+        Continental R975-46
+        Fuel
+        115/145 or 100/130 minimum grade aviation gasoline
+        Engine limits
+        Normal Maximum (30 minute limit) 2350 RPM and 39 in. Hg. (475 HP)
+        Maximum allowable continuous 2350 RPM  37.5 in.Hg. (450 HP)
+        Rotor limits and engine
+        Power Off (Rotor Tach.)
+        Power On (Engine Tach.)
+        operating speeds
+        Maximum 360 r.p.m.
+        Maximum 2350 r.p.m.
+        Minimum 230 r.p.m.
+        Minimum 2100 r.p.m.
+        Airspeed limits
+        Vne (never exceed) 75 KIAS
+        C.G. range
+        14 in. forward to 5.5 in. aft of datum ( 0.3556  M to 0.1397 M
+        Datum
+        Point midway between rotors (related model 3.319 M =>  x=-0.429 M )
+        Maximum weight
+        5500 lb.
+        Minimum crew
+        1 (Pilot)
+        Fuel capacity
+        150 gal. (900 lb.)
+        Oil capacity
+        Engine oil 9.5 gal.
+        Forward transmission 3.0 quarts
+        Aft transmission 4.0 quarts
+
+        HUP Retriever
+        SAR  Tranporthubschrauber
+        Rotorblätter  3/3
+        Erstflug  03/1948
+        Antriebsart  1 Sternmotor
+        Triebwerkstyp  Continental R-975-46A
+        Leistung je TW  410 kW  550 hp
+        Geschwindigkeit  169 km/h  91 kts
+        Leermasse  1.782 kg  3.929 lbs
+        max. Startmasse  2.767 kg  6.100 lbs
+        Hauptrotordurchmesser  10,67 m  35,0 ft
+        Heckrotordurchmesser  10,67 m  35,0 ft
+        NACA 0012
+        Länge  17,35 m  56,9 ft
+        Höhe  3,81 m  12,5 ft
+        Daten für  Piasecki HUP-3 (UH-25C)
+        Bemerkungen  Gesamtproduktion: 339
+
+
+    </documentation>
+
+    <license>
+      <licenseName>GPLV2</licenseName>
+    </license>
+
+  </fileheader>
+
+  <metrics>
+    <wingarea       unit="M2">   0</wingarea>         <!-- metrics/Sw-sqft  -->
+    <wingspan       unit="M" >   0 </wingspan>         <!-- metrics/bw-ft    -->
+    <wing_incidence unit="DEG">    0 </wing_incidence>   <!-- metrics/iw-deg   -->
+    <chord          unit="M" >    0.0 </chord>            <!-- metrics/cbarw-ft -->
+    <htailarea      unit="M2">   0</htailarea>        <!-- metrics/Sh-sqft  -->
+    <htailarm       unit="M" >    0</htailarm>         <!-- metrics/lh-ft    -->
+    <vtailarea      unit="M2">   6.4</vtailarea>        <!-- metrics/Sv-sqft  -->
+    <vtailarm       unit="M" >  2.5 </vtailarm>         <!-- metrics/lv-ft    -->
+    <!-- more relevant parameters are given in the aerodynamics section -->
+
+    <location name="AERORP" unit="M">
+        <x>  0.75  </x><!-- -0.42-->
+       <y>  0.0 </y>
+       <z>0.50</z>   <!-- rotors  1.3     1.9   -->
+    </location>
+    <location name="EYEPOINT" unit="IN">
+       <x> 00.0 </x>
+       <y>   0.0 </y>
+       <z>  0.0 </z>
+    </location>
+    <location name="VRP" unit="IN">
+      <x>  0.0 </x>
+      <y>  0.0 </y>
+      <z> 0.0 </z>
+    </location>
+  </metrics>
+
+  <mass_balance>
+      <ixx unit="SLUG*FT2">       361 </ixx>
+      <iyy unit="SLUG*FT2">     13001 </iyy>
+      <izz unit="SLUG*FT2">     4929  </izz>
+    <ixz unit="SLUG*FT2">       0.0 </ixz>
+    <emptywt unit="LBS" > 4000</emptywt>
+    <location name="CG" unit="M"> <!--range from -0.7846  to 0.2893-->
+      <x>  -0.3 </x>
+      <y>  0.0 </y>
+      <z> 0.1 </z>
+    </location>
+
+    <pointmass name="Misc">
+        <weight unit="LBS">300</weight>
+        <location name="Main" unit="M">
+            <x>-0.30 </x>
+            <y> 0.00 </y>
+            <z> -0.5 </z>
+        </location>
+   </pointmass>
+   <pointmass name="Tail">
+       <weight unit="LBS">200</weight>
+       <location name="Main" unit="M">
+           <x> 2.7</x>
+           <y> 0.00 </y>
+           <z> -0.50</z>
+       </location>
+   </pointmass>
+    <pointmass name="Engine">
+       <weight unit="LBS">360</weight>
+       <location name="Main" unit="M">
+           <x> 1.00</x>
+           <y> 0.00 </y>
+           <z> -0.50</z>
+       </location>
+   </pointmass>
+   <pointmass name="Pilots">
+       <weight unit="LBS">340</weight>
+       <location name="Main" unit="M">
+           <x>-3.40</x>
+           <y> 0.0 </y>
+           <z> -0.20 </z>
+       </location>
+   </pointmass>
+   <pointmass name="Troops">
+       <weight unit="LBS">500</weight>
+       <location name="Main" unit="M">
+           <x> -2.05</x>
+           <y> 0.00 </y>
+           <z> -0.45 </z>
+       </location>
+   </pointmass>
+
+  </mass_balance>
+
+  <ground_reactions>
+    <contact type="BOGEY" name="LEFT"> <!--cp 00-->
+      <location unit="M">
+        <x>-1.50111</x>
+        <y>-1.4</y>
+        <z>-1.83758</z>
+      </location>
+      <static_friction>    0.8  </static_friction>
+      <dynamic_friction>   0.5 </dynamic_friction>
+      <rolling_friction>   0.02  </rolling_friction>
+      <spring_coeff unit="LBS/FT">        10000 </spring_coeff>
+      <damping_coeff unit="LBS/FT/SEC">  2400</damping_coeff>
+      <retractable>0</retractable>
+      <brake_group> LEFT </brake_group>
+    </contact>
+    <contact type="BOGEY" name="RIGHT"> <!--cp 01 -->
+        <location unit="M">
+        <x>-1.50111</x>
+        <y>1.4</y>
+        <z>-1.83758</z>
+        </location>
+        <static_friction>    0.8 </static_friction>
+        <dynamic_friction>   0.5  </dynamic_friction>
+        <rolling_friction>   0.02  </rolling_friction>
+        <spring_coeff unit="LBS/FT">        10000 </spring_coeff>
+        <damping_coeff unit="LBS/FT/SEC">   2400 </damping_coeff>
+        <retractable>0</retractable>
+        <brake_group> RIGHT </brake_group>
+    </contact>
+    <contact type="BOGEY" name="TAIL"> <!--cp 02-->
+        <location unit="M">
+            <x>3.2273</x>
+            <y>0.0</y>
+            <z>-1.82012</z>
+        </location>
+        <static_friction>    0.8</static_friction>
+        <dynamic_friction>   0.5  </dynamic_friction>
+        <rolling_friction>   0.02  </rolling_friction>
+        <spring_coeff unit="LBS/FT"> 7000 </spring_coeff>
+        <damping_coeff unit="LBS/FT/SEC"> 2000 </damping_coeff>
+        <max_steer unit="DEG"> 360.00 </max_steer>
+        <retractable>0</retractable>
+        <brake_group> NONE </brake_group>
+    </contact>
+
+    <contact type="BOGEY" name="ROTOR_LEFT">
+        <location unit="M">
+            <x> 0.37</x>
+            <y> -6.5</y>
+            <z> 1.40</z>
+        </location>
+        <static_friction> 0.2 </static_friction>
+        <dynamic_friction> 0.2 </dynamic_friction>
+        <rolling_friction> 0.2 </rolling_friction>
+        <spring_coeff unit="LBS/FT"> 100 </spring_coeff>
+        <damping_coeff unit="LBS/FT/SEC"> 20 </damping_coeff>
+        <damping_coeff_rebound>10</damping_coeff_rebound>
+        <max_steer unit="DEG"> 0.0 </max_steer>
+        <brake_group> NONE </brake_group>
+        <retractable>0</retractable>
+    </contact>
+    <contact type="BOGEY" name="ROTOR_RIGHT">
+        <location unit="M">
+            <x> 0.37 </x>
+            <y> 6.5</y>
+            <z> 1.40 </z>
+        </location>
+        <static_friction> 0.2 </static_friction>
+        <dynamic_friction> 0.2 </dynamic_friction>
+        <rolling_friction> 0.2 </rolling_friction>
+        <spring_coeff unit="LBS/FT"> 100 </spring_coeff>
+        <damping_coeff unit="LBS/FT/SEC"> 20 </damping_coeff>
+        <damping_coeff_rebound>10</damping_coeff_rebound>
+        <max_steer unit="DEG"> 0.0 </max_steer>
+        <brake_group> NONE </brake_group>
+        <retractable>0</retractable>
+    </contact>
+    <contact type="BOGEY" name="BELLY-AV">
+        <location unit="M">
+            <x>-4.67081</x>
+            <y> 0 </y>
+            <z>-0.917069</z>
+        </location>
+        <static_friction> 0.2 </static_friction>
+        <dynamic_friction> 0.2 </dynamic_friction>
+        <rolling_friction> 0.2 </rolling_friction>
+        <spring_coeff unit="LBS/FT"> 10000</spring_coeff>
+        <damping_coeff unit="LBS/FT/SEC"> 3000 </damping_coeff>
+        <damping_coeff_rebound>1000000</damping_coeff_rebound>
+        <max_steer unit="DEG"> 0.0 </max_steer>
+        <brake_group> NONE </brake_group>
+        <retractable>0</retractable>
+    </contact>
+    <contact type="STRUCTURE" name="FUSE-LEFT">
+        <location unit="M">
+            <x>-0.82581</x>
+            <y>-0.5</y>
+            <z>-0.80</z>
+        </location>
+        <static_friction> 1 </static_friction>
+        <dynamic_friction> 1 </dynamic_friction>
+        <rolling_friction> 1 </rolling_friction>
+        <spring_coeff unit="LBS/FT"> 10000</spring_coeff>
+        <damping_coeff unit="LBS/FT/SEC"> 3000 </damping_coeff>
+        <damping_coeff_rebound>1000000</damping_coeff_rebound>
+        <max_steer unit="DEG"> 0.0 </max_steer>
+        <brake_group> NONE </brake_group>
+        <retractable>0</retractable>
+    </contact>
+    <contact type="STRUCTURE" name="FUSE-RIGHT">
+        <location unit="M">
+            <x>-0.82581</x>
+            <y>0.5</y>
+            <z>-1.10</z>
+        </location>
+        <static_friction> 1 </static_friction>
+        <dynamic_friction> 1 </dynamic_friction>
+        <rolling_friction> 1 </rolling_friction>
+        <spring_coeff unit="LBS/FT"> 10000</spring_coeff>
+        <damping_coeff unit="LBS/FT/SEC"> 3000 </damping_coeff>
+        <damping_coeff_rebound>1000000</damping_coeff_rebound>
+        <max_steer unit="DEG"> 0.0 </max_steer>
+        <brake_group> NONE </brake_group>
+        <retractable>0</retractable>
+    </contact>
+    <contact type="STRUCTURE" name="FUSE-TAIL">
+        <location unit="M">
+            <x>3.90</x>
+            <y> 0 </y>
+            <z>-1.18</z>
+        </location>
+        <static_friction> 1 </static_friction>
+        <dynamic_friction> 1 </dynamic_friction>
+        <rolling_friction> 1 </rolling_friction>
+        <spring_coeff unit="LBS/FT"> 1000 </spring_coeff>
+        <damping_coeff unit="LBS/FT/SEC"> 300 </damping_coeff>
+        <damping_coeff_rebound>100000</damping_coeff_rebound>
+        <max_steer unit="DEG"> 0.0 </max_steer>
+        <brake_group> NONE </brake_group>
+        <retractable>0</retractable>
+        </contact>
+  </ground_reactions>
+
+  <propulsion>
+      <engine file='R975-46'>
+      <location unit="M">
+        <x> 0 </x>
+        <y> 0 </y>
+        <z> 0 </z>
+      </location>
+      <feed>0</feed>
+      <thruster file="hup_frt-rotor">
+        <location unit="M">
+            <x> -3.748 </x>
+          <y>  0.0 </y>
+          <z>  1.1</z>
+        </location>
+        <orient unit="DEG">
+          <roll>   0.0 </roll>
+          <pitch> 90 </pitch>
+          <yaw>    0.0 </yaw>
+        </orient>
+        <sense> -1 </sense>
+      </thruster>
+    </engine>
+    <!-- used for linkage -->
+    <engine file='1hp_dummy'>
+      <location unit="M">
+        <x> 0 </x>
+        <y> 0 </y>
+        <z> 0 </z>
+      </location>
+      <feed>0</feed>
+      <thruster file="hup_aft-rotor">
+        <location unit="M">
+            <x> 2.89 </x>
+          <y>   0 </y>
+          <z>  1.93 </z>
+        </location>
+        <orient unit="DEG">
+          <roll>  0.0 </roll>
+          <pitch> 87 </pitch>
+          <yaw>  0.0 </yaw>
+        </orient>
+        <sense> 1 </sense>
+      </thruster>
+    </engine>
+    <tank type="FUEL" number="0">
+      <location unit="M">
+        <x>   0.0 </x>
+        <y>   0.0 </y>
+        <z>   -0.5 </z>
+      </location>
+      <capacity unit="LBS">    1200  </capacity>
+      <contents unit="LBS">    800.0  </contents>
+    </tank>
+  </propulsion>
+  
+    <system file="init-at-start"/>
+
+    <system file="steady-behaviour"/>
+    <system file="crash-detect"/>
+
+    <!-- _________________-->
+    <system file="electrical-fdm-custom"/>
+    <system file="electrical-fdm"/>
+    <system file="electrical-lights"/>
+    <system file="instrumentation">
+        <property value="-6.0197835">instruments/agl-offset-ref</property>
+    </system>
+
+    <system file="landing-gear"/>
+
+  <system name="governor_decl">
+    <property value="262"> fcs/nominal-rpm </property>
+    <property value="2500"> fcs/nominal-engine-rpm </property>
+  </system>
+
+
+  <system file="rotor-power_ctrl"/>
+  <system file="engine_control"/>
+  <system file="mixture-control"/>
+
+  <system file="animation-dev"/>
+
+  <system name="control_decl">
+    <property value="0.0"> fcs/x-col </property>
+    <property value="0.0"> fcs/x-lat </property>
+    <property value="0.0"> fcs/x-lon </property>
+    <property value="0.0"> fcs/x-ped </property>
+  </system>
+
+   <system name="afcs_decl">
+      <property value="0.0"> ap/rudder-cmd </property>
+      <property value="0.0"> ap/aileron-cmd </property>
+      <property value="0.0"> ap/elevator-cmd </property>
+      <property value="0.0"> ap/collective-cmd </property>
+  </system>
+
+  <system file="rotor-flight_ctrl"/>
+  
+instruments/agl-offset-ref -6.0197835
+
+  <flight_control name="hup_fcs">
+  </flight_control>
+
+  <aerodynamics file="Aero/hup-aero.xml"/>
+
+</fdm_config>

@@ -1,0 +1,48 @@
+<PropertyList>
+
+
+    <!--
+    Usable with FlightGear
+      =>    Gerard Robin
+    Copyright License:  GPLV2
+    -->
+    <!--                   Auteur :      Gerard ROBIN            GPLV2  COPYRIGHT-->
+	<path>Models/hup-avrotor-tete.ac</path>
+
+	<texture-path>Models/Textures</texture-path>
+        <offsets>
+            <heading-deg>180</heading-deg>
+        </offsets>
+
+        <animation>
+                <condition>
+                    <equals>
+                        <property>sim/current-view/view-number</property>
+                        <value>999</value>
+                    </equals>
+            </condition>
+		<type>select</type>
+                <object-name>Gabarit-Pose</object-name>
+ 	</animation>
+
+
+        <animation>
+		<type>rotate</type>
+                <object-name>Rotor-Tete</object-name>
+                <property>sim/multiplay/generic/float[0]</property>
+		<factor>-1</factor>
+		<center>
+			<x-m>0</x-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>0</y>
+			<z>1</z>
+		</axis>
+	</animation>
+
+
+
+</PropertyList>

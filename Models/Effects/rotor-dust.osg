@@ -1,0 +1,149 @@
+
+Group {
+UniqueID Group_10
+
+
+  name "rotor-dust.osg"
+  
+ DataVariance STATIC
+  cullingActive TRUE
+
+osgParticle::ModularEmitter {
+    DataVariance DYNAMIC
+    cullingActive TRUE
+    enabled TRUE
+    referenceFrame ABSOLUTE
+    endless TRUE
+    lifeTime 0
+    startTime 0
+    currentTime 0
+    resetTime 5
+    useDefaultTemplate TRUE
+
+
+
+
+    osgParticle::ParticleSystem {
+      UniqueID ParticleSystem_4
+      DataVariance DYNAMIC
+      StateSet {
+        UniqueID StateSet_5
+        DataVariance STATIC
+        rendering_hint TRANSPARENT_BIN
+        renderBinMode USE
+        binNumber 1
+        binName DepthSortedBin
+        GL_LIGHTING OFF
+        GL_BLEND ON
+        Material {
+          DataVariance STATIC
+          ColorMode OFF
+          ambientColor 0.2 0.2 0.2 1
+          diffuseColor 0.8 0.8 0.8 1
+          specularColor FRONT 0 0 0 1
+          specularColor BACK  0 0 0 1
+          emissionColor FRONT 0 0 0 1
+          emissionColor BACK  0 0 0 1
+          shininess 0
+        }
+        BlendFunc {
+          DataVariance STATIC
+          source SRC_ALPHA
+          destination ONE_MINUS_SRC_ALPHA
+        }
+        textureUnit 0 {
+          GL_TEXTURE_2D ON
+          Texture2D {
+            DataVariance STATIC
+            file "particle.png"
+            wrap_s CLAMP
+            wrap_t CLAMP
+            wrap_r CLAMP
+            min_filter LINEAR
+            mag_filter LINEAR
+            internalFormatMode USE_IMAGE_DATA_FORMAT
+            subloadMode OFF
+          }
+          TexEnv {
+            DataVariance STATIC
+            mode MODULATE
+          }
+        }
+      }
+      supportsDisplayList FALSE
+      useDisplayList FALSE
+      DoublePassRendering FALSE
+      frozen FALSE
+      freezeOnCull FALSE
+      defaultBoundingBox -1 -1 -1 1 1 1
+      particleTemplate {
+        shape QUAD
+        lifeTime 10
+        sizeRange 0.1 0.4
+        alphaRange 1 0.1
+        colorRange 1 1 1 1 1 1 1 1
+        position 0 0 0
+        velocity 0 0 0
+        mass 0.1
+        radius 0.2
+        sizeInterpolator {
+          osgParticle::LinearInterpolator {
+            UniqueID LinearInterpolator_6
+            DataVariance DYNAMIC
+          }
+        }
+        alphaInterpolator {
+          osgParticle::LinearInterpolator {
+            UniqueID LinearInterpolator_7
+            DataVariance DYNAMIC
+          }
+        }
+        colorInterpolator {
+          osgParticle::LinearInterpolator {
+            UniqueID LinearInterpolator_8
+            DataVariance DYNAMIC
+          }
+        }
+      }
+    }
+    enabled TRUE
+   
+    useDefaultTemplate TRUE
+    osgParticle::RandomRateCounter {
+      DataVariance DYNAMIC
+      rateRange 80 100
+    }
+    osgParticle::PointPlacer {
+      DataVariance DYNAMIC
+      center 0 0 0
+    }
+    osgParticle::RadialShooter {
+      DataVariance DYNAMIC
+      thetaRange -2.90 2.90
+      phiRange -3.141595 3.141595
+      initialSpeedRange 3 3.5
+    }
+  }
+  osgParticle::ModularProgram {
+    DataVariance DYNAMIC
+    cullingActive TRUE
+    Use ParticleSystem_4
+    enabled TRUE
+   
+    osgParticle::AccelOperator {
+      DataVariance DYNAMIC
+      acceleration 0 0 -2
+    }
+  }
+  osgParticle::ParticleSystemUpdater {
+    DataVariance DYNAMIC
+    cullingActive TRUE
+    Use ParticleSystem_4
+  }
+  Geode {
+    DataVariance DYNAMIC
+    cullingActive TRUE
+    num_drawables 1
+    Use ParticleSystem_4
+  }
+}

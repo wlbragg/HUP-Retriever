@@ -1,0 +1,654 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="http://jsbsim.sourceforge.net/JSBSim.xsl"?>
+  <!--<note>
+      A talk with Thomas about rotor tandem spec
+  > Hi, Thomas
+  >
+  > Helicopter Tandem rotor related, we need some confirmations .
+  > Within Aerodynamic
+  >
+  > 1/
+  > The following <property> :
+      > metrics/rotor/R-ft
+      > metrics/rotor/solitity
+      > aero/ref/area-ft2
+      > aero/ref/vtip-fps
+      >
+      > Referring  to one (model) rotor, the values given to the property,
+      > will refer to the model.
+      > Here we don't mind about he rotor number (quantity)
+      > Is it Right ?
+
+      Hello Josh,
+
+      Yes, they should refer to the main/largest rotor.
+
+      >
+      > 2/
+      > The following <property> :
+          > metrics/rotor/Area-ft2
+          > aero/ref/volume-ft3
+          >
+          > Refer  to both  rotor , the values are sum.
+          > Here we mind about the rotor number (quantity)
+          > Is it right ?
+          >
+
+          aero/ref/volume-ft3, is a leftover from older tests and currently
+          unused, whereas metrics/rotor/Area-ft2 is only used in HIhat-ps and
+          HWhat-psft, this one should also refer to one rotor. See below for the
+          'hats'.
+
+          > 3/
+          > And what about the CDx_fus ?
+          > CDx_fus = (projected-area) / (aero/ref/area-ft2) * (0.5 .. 1.0)
+          >
+          > Is it  ?
+          > => (projected-area) / (aero/ref/area-ft2) * (0.5 .. 1.0)
+                  > or is it   ?
+          > => (projected-area) / (aero/ref/area-ft2) * (0.5 .. 1.0) * 2
+                  > since we have two rotors.
+          >
+
+          The CDx_fus coefficients are calculated to obtain a representation that
+          is analogous to the fixed wing (FW) case where the wing area
+          (metrics/Sw-sqft) is used for refence (As a result the heli coefficients
+          have at least a similar order of magnitude).
+
+          For the fuselage drag force it is in principle:
+          FW: Drag = qbar * CD_fus_fw * Wing-area
+          HELI: Drag = qbar * CDx_fus * HeliRef-area
+
+          Doubling the 'HeliRef-area' (Disk-area*solidity) would be closer to the
+          FW analogy, but I would prefer to stay with the value for one rotor.
+
+          > May be we with aerodynamic are missing anything else specific to
+          > Tandem.
+          >
+
+          Back to HIhat-ps/HWhat-psft, they originate from the calculations
+          described in the Bramwell paper where the whole rotor and the influence
+          of a horizontal tail is treated. In the ah1s fdm they are used for
+          calculating the influence of the tail fins and a (say gyroscopic?)
+          contribution to the roll moment (aero/moment/lr_fus).
+
+          Taking the CH-47 Chinook, all these contributions vanish - no real tail
+          fins, and lr_fus should be zero due to the counter rotating rotors.
+          On the other hand I expect that the whole fuselage provides some
+          stability in yaw, and that the tandem setup provides more pitching
+          stability than a single rotor with horizontal tail.
+
+          The H-21 has tail fins (unfortunately :), their contribution could be
+          treated as in the single rotor case, although the coefficients won't be
+          directly comparable.
+
+          I hope I haven't bored you. My resume/proposal is to treat a tandem
+          config as a kind of new 'class', and keep the HIhat/HWhat values one
+          rotor based.
+
+          Thomas
+
+          >
+          > Thanks
+          >
+          > Josh
+          >
+
+          </note>-->
+
+  <aerodynamics>
+      
+	<function name="sim-delta-sec">
+	    <sum>
+		    <property>sim-time-sec</property>
+		    <property>sim-time-sec-old</property>
+	    </sum>
+	</function>
+	
+	<function name="sim-time-sec-old">
+	    <product>
+		    <value>-1</value>
+		    <property>sim-time-sec</property>
+	    </product>
+	</function>
+	
+	
+	
+	<!--
+          Limiting the yaw rate:
+          0.0  :  pure model (mind: the model isn't complete).
+          0.05 :  compatible to the 'tweak'-value used in previous version.
+          1.0  :  yields to easier interactive handling when using mouse input
+          (And also helps when exploring backward flight).
+          -->
+    <property value="1"> aero/setup/Nr_limiter </property>
+    <!--temporary 1,  we are missing real data -->
+    
+    
+    <!--only used when devel-->
+      <property value="1">aero/coefficient/Clr_fus_K</property>
+      <property value="-0">aero/coefficient/Clr2_fus_K</property> <!--was -1-->
+      <property  value="1">aero/coefficient/CNv_vt_K</property>
+      <property value="1">aero/coefficient/CNr_vt_K</property>
+      
+
+    <!-- ==================================================
+           Rotor properties used below
+         ================================================ -->
+    <!--rotor  => metrics/rotor/Area-ft2  and => aero/ref/volume-ft3-->
+    <!-- NOTE: blade-area = num_blades * chord * radius -->
+    <property value=  "17.503"> metrics/rotor/R-ft     </property>
+    <property value="962.47"> metrics/rotor/Area-ft2 </property><!--1406.82-->
+    <property value="0.0644376"> metrics/rotor/solitity </property> <!-- blade-area / disk-area -->
+
+
+    <!-- ============================================================
+           Reference properties and non dimensional velocities
+         ============================================================ -->
+    <!--rotor  => metrics/rotor/Area-ft2  and => aero/ref/volume-ft3-->
+    <property value=  "62.012"> aero/ref/area-ft2   </property> <!-- solitity * Area -->
+    <property value="1085.52"> aero/ref/volume-ft3 </property> <!-- solitity * Area * Radius -->
+    <property value= "603.027"> aero/ref/vtip-fps   </property> <!-- rotor tip speed, Omega_mr * Radius -->
+
+    <function name="aero/HIhat-ps">  <!-- rho*solitity*Area * Omega*R * R -->
+      <description> Dynamic momentum, see /BR59/. </description>
+      <product>
+        <property> atmosphere/rho-slugs_ft3 </property>
+        <property> metrics/rotor/solitity   </property>
+        <property> metrics/rotor/Area-ft2   </property>
+        <property> aero/ref/vtip-fps        </property>
+        <property> metrics/rotor/R-ft       </property>
+      </product>
+    </function>
+
+    <function name="aero/HWhat-psft">  <!-- rho*solitity*Area * Omega*R * R*R -->
+      <description> Dynamic angular momentum, see /BR59/. </description>
+      <product>
+        <property> atmosphere/rho-slugs_ft3 </property>
+        <property> metrics/rotor/solitity   </property>
+        <property> metrics/rotor/Area-ft2   </property>
+        <property> aero/ref/vtip-fps        </property>
+        <property> metrics/rotor/R-ft       </property>
+        <property> metrics/rotor/R-ft       </property>
+      </product>
+    </function>
+
+    <function name="aero/mu">
+      <description> Common shortcut for advance ratio. </description>
+      <property> propulsion/engine/advance-ratio </property>
+    </function>
+
+    <function name="velocities/uhat">
+      <description> Non dimensional speed. </description>
+      <quotient>
+        <property> velocities/u-aero-fps </property>
+        <property> aero/ref/vtip-fps     </property>
+      </quotient>
+    </function>
+
+    <function name="velocities/vhat">
+      <description> Non dimensional speed. </description>
+      <quotient>
+        <property> velocities/v-aero-fps </property>
+        <property> aero/ref/vtip-fps     </property>
+      </quotient>
+    </function>
+
+
+
+    <!-- ============================================================
+           Downwash incidence and angle normalization
+         ============================================================ -->
+
+    <function name="aero/downwash-angle-wing-rad">
+      <description> Additional wing incidence angle due to downwash, approximation for low alpha. </description>
+      <product>
+        <table>
+          <independentVar lookup="row"> velocities/vhat </independentVar>
+          <independentVar lookup="column"> velocities/uhat </independentVar>
+          <tableData>
+                   -0.1  -0.07   0.0   0.07  0.1
+            -0.1    0.0   0.0    0.0   0.0   0.0
+            -0.08   0.0  -2.5   -1.5   0.0   0.0
+             0.0    0.0  -2.75  -1.57 -0.4   0.0
+             0.08   0.0  -2.5   -1.5   0.0   0.0
+             0.1    0.0   0.0    0.0   0.0   0.0
+          </tableData>
+        </table>
+        <cos> <property> aero/alpha-rad </property> </cos>
+        <cos> <property> aero/alpha-rad </property> </cos>
+      </product>
+    </function>
+
+    <function name="aero/raw_alpha_incidence_wing-rad">
+      <description> Wing incidence incl. downwash. </description>
+      <sum>
+        <property> aero/downwash-angle-wing-rad </property>
+        <property> aero/alpha-rad </property>
+        <property> metrics/iw-rad </property>
+      </sum>
+    </function>
+
+    <function name="aero/alpha_incidence_wing-rad">
+      <description> Normalize to +/- pi. </description>
+      <product>
+        <value>2.0</value>
+        <atan><tan>
+          <product>
+            <value>0.5</value>
+            <property> aero/raw_alpha_incidence_wing-rad </property>
+          </product>
+        </tan></atan>
+      </product>
+    </function>
+
+    <function name="aero/downwash-angle-ht-rad">
+      <description> Additional tail incidence angle due to downwash, approximation for low alpha. </description>
+      <product>
+        <table>
+          <independentVar lookup="row"> velocities/vhat </independentVar>
+          <independentVar lookup="column"> velocities/uhat </independentVar>
+          <tableData>
+                    -0.1   -0.07   0.02   0.1    0.2    0.35   0.5
+            -0.10    0.0    0.0    0.0    0.0    0.0    0.0    0.0
+            -0.08    0.0   -0.2   -1.0   -0.220 -0.05  -0.014  0.0
+             0.0     0.0   -0.22  -1.050 -0.220 -0.051 -0.018  0.0
+             0.08    0.0   -0.2   -1.0   -0.220 -0.05  -0.014  0.0
+             0.10    0.0    0.0    0.0    0.0    0.0    0.0    0.0
+          </tableData>
+        </table>
+        <cos> <property> aero/alpha-rad </property> </cos>
+        <cos> <property> aero/alpha-rad </property> </cos>
+      </product>
+    </function>
+
+    <function name="aero/raw_alpha_incidence_ht-rad">
+      <description> Horizontal tail incidence incl. downwash. </description>
+      <sum>
+        <property> aero/downwash-angle-ht-rad </property>
+        <property> aero/alpha-rad </property>
+        <value>0.10471976</value>
+      </sum>
+    </function>
+
+    <function name="aero/alpha_incidence_ht-rad">
+      <description> Normalize to +/- pi. </description>
+      <product>
+        <value>2.0</value>
+        <atan><tan>
+          <product>
+            <value>0.5</value> <property> aero/raw_alpha_incidence_ht-rad </property>
+          </product>
+        </tan></atan>
+      </product>
+    </function>
+
+
+    <!-- ============================================================
+           Coefficients
+         ============================================================ -->
+
+    <property value= "0.36"  > aero/coefficient/CD0_fus   </property> <!--52.312605/62.012 = 0.843588418371     =>     0.42 .....0.84  -->
+    <property value= "2"> aero/coefficient/CDa90_fus </property> <!-- lift -->
+   <!--125.11969/62.012  = 2.017668999550-->
+    <property value= "3.47"> aero/coefficient/CDb90_fus </property> <!--yaw-->
+    <!--215.49349/62.012 = 3.475028865380-->
+    <!--
+          NOTES: CDx_fus = (projected-area) / (aero/ref/area-ft2) * (0.5 .. 1.0)
+    exemple AHIS  =>    CD0_fus = 0.1  yield to approx. 170kts at 5000ft and 0.066 to approx. 185kts.
+
+
+    -->
+
+    <function name="aero/coefficient/Clr_fus">
+      <description> Fuselage roll coefficient depending on r. </description>
+      <product>
+          <value> 0.0 </value> <!-- lr_fus should be zero due to the counter rotating rotors -->
+        <property> aero/mu </property>
+      </product>
+    </function>
+
+    <function name="aero/coefficient/CMw_ht">
+      <description> Horizontal tail pitch coefficient depending on w (estimated from stability derivative). </description>
+      <table>
+        <independentVar> aero/mu </independentVar>
+        <tableData>
+              0.0   0.00
+              0.45 -0.07
+        </tableData>
+      </table>
+    </function>
+
+    <function name="aero/coefficient/CMq_ht">
+      <description> Horizontal tail pitch coefficient depending on q (estimated from stability derivative). </description>
+      <table>
+        <independentVar> aero/mu </independentVar>
+        <tableData>
+            0.0   0.00
+            0.45 -0.09
+        </tableData>
+      </table>
+    </function>
+
+    <function name="aero/coefficient/CNv_vt">
+      <description> Vertical tail yaw coefficient depending on v (guessed from CMw_ht). </description>
+      <table>
+        <independentVar> aero/mu </independentVar>
+        <tableData>
+              0.0   0.00
+              0.45  0.07
+        </tableData>
+      </table>
+    </function>
+
+    <function name="aero/coefficient/CNr_vt">
+      <description> Vertical tail yaw coefficient depending on r (guessed from CMq_ht). </description>
+      <table>
+        <independentVar> aero/mu </independentVar>
+        <tableData>
+            0.0  -0.005 <!-- tweak ! -->
+            0.45 -0.09
+        </tableData>
+      </table>
+    </function>
+
+    <!--<function name="aero/coefficient/CLa_wing">
+      <description> Wing lift coefficient (a=5.5, CL_max=1.92). </description>
+      <product>
+        <table>
+          <independentVar lookup="row"> aero/alpha_incidence_wing-rad </independentVar>
+          <tableData>
+             -3.49  -1.92
+             -3.14   0.00
+             -2.79   1.92
+             -2.74   1.92
+             -1.83   0.96
+             -1.57   0.00
+             -1.31  -0.96
+             -0.40  -1.92
+             -0.35  -1.92
+              0.00   0.00
+              0.35   1.92
+              0.40   1.92
+              1.31   0.96
+              1.57   0.00
+              1.83  -0.96
+              2.74  -1.92
+              2.79  -1.92
+              3.14   0.00
+              3.49   1.92
+          </tableData>
+        </table>
+
+        <cos> <property> aero/beta-rad </property> </cos>
+        <cos> <property> aero/beta-rad </property> </cos>
+      </product>
+    </function>-->
+
+    <!--<function name="aero/coefficient/CLa_ht">
+      <description> Horizontal tail lift coefficient (a=3.5, CL_max=1.83). </description>
+      <product>
+        <table>
+          <independentVar lookup="row"> aero/alpha_incidence_ht-rad </independentVar>
+          <tableData>
+             -3.67  -1.83
+             -3.14   0.00
+             -2.62   1.83
+             -2.57   1.83
+             -1.83   0.92
+             -1.57   0.00
+             -1.31  -0.92
+             -0.58  -1.83
+             -0.52  -1.83
+              0.00   0.00
+              0.52   1.83
+              0.58   1.83
+              1.31   0.92
+              1.57   0.00
+              1.83  -0.92
+              2.57  -1.83
+              2.62  -1.83
+              3.14   0.00
+              3.67   1.83
+          </tableData>
+        </table>
+
+        <cos> <property> aero/beta-rad </property> </cos>
+        <cos> <property> aero/beta-rad </property> </cos>
+      </product>
+    </function>-->
+
+    <function name="aero/coefficient/CNb_vt">
+      <description> Vertical tail side force coefficient (a=3.5, CL_max=1.83). </description>
+      <table>
+        <independentVar lookup="row"> aero/beta-rad </independentVar>
+        <tableData>
+           -1.57   0.00
+           -1.31  -0.92
+           -0.58  -1.83
+           -0.52  -1.83
+            0.00   0.00
+            0.52   1.83
+            0.58   1.83
+            1.31   0.92
+            1.57   0.00
+        </tableData>
+      </table>
+    </function>
+    <!--<function name="aero/coefficient/CNb_vt">
+        <value>0</value>
+    </function>-->
+    <!-- ============================================================
+           The axes
+         ============================================================ -->
+
+    <axis name="LIFT">
+
+      <function name="aero/force/L0_fus">
+        <description> Fuselage lift at zero incidence. </description>
+        <product>
+            <property>systems/rotor/blade-deployed</property>
+          <property> aero/qbar-psf </property>
+          <property> aero/ref/area-ft2 </property>
+          <value> -0.05 </value>
+          <property> aero/coefficient/CDa90_fus </property>
+          <cos> <property> aero/alpha-rad </property> </cos>
+          <cos> <property> aero/alpha-rad </property> </cos>
+        </product>
+      </function>
+      <function name="aero/force/La_fus">
+        <description> Fuselage lift due to alpha. </description>
+        <product>
+            <property>systems/rotor/blade-deployed</property>
+          <property> aero/qbar-psf </property>
+          <property> aero/ref/area-ft2 </property>
+          <property> aero/coefficient/CDa90_fus </property>
+          <sin> <property> aero/alpha-rad </property> </sin>
+          <cos> <property> aero/alpha-rad </property> </cos>
+          <sum>
+            <value> 0.2 </value>
+            <product>
+              <sin> <property> aero/alpha-rad </property> </sin>
+              <sin> <property> aero/alpha-rad </property> </sin>
+            </product>
+          </sum>
+        </product>
+      </function>
+    </axis>
+
+    <axis name="DRAG">
+
+      <function name="aero/force/D0_fus">
+        <description> Fuselage drag. </description>
+        <product>
+            <property>systems/rotor/blade-deployed</property>
+          <property> aero/qbar-psf </property>
+          <property> aero/ref/area-ft2 </property>
+          <property> aero/coefficient/CD0_fus </property>
+        </product>
+      </function>
+      <function name="aero/force/Da_fus">
+        <description> Fuselage drag variation due to alpha. </description>
+        <product>
+            <property>systems/rotor/blade-deployed</property>
+          <property> aero/qbar-psf </property>
+          <property> aero/ref/area-ft2 </property>
+          <difference>
+            <property> aero/coefficient/CDa90_fus </property>
+            <property> aero/coefficient/CD0_fus </property>
+          </difference>
+          <abs>
+            <sin> <property> aero/alpha-rad </property> </sin>
+          </abs>
+          <sin> <property> aero/alpha-rad </property> </sin>
+          <sin> <property> aero/alpha-rad </property> </sin>
+        </product>
+      </function>
+      <function name="aero/force/Db_fus">
+        <description> Fuselage drag variation due to beta. </description>
+        <product>
+            <property>systems/rotor/blade-deployed</property>
+          <property> aero/qbar-psf </property>
+          <property> aero/ref/area-ft2 </property>
+          <property> aero/coefficient/CDb90_fus </property>
+          <sin> <property> aero/beta-rad </property> </sin>
+          <sin> <property> aero/beta-rad </property> </sin>
+        </product>
+      </function>
+      <function name="aero/coefficient/CDgear">
+          <description>Drag_due_to_gear</description>
+          <product>
+              <property>aero/qbar-psf</property>
+              <value>1.5</value>
+          </product>
+    </function>
+    </axis>
+
+    <axis name="SIDE">
+      <function name="aero/force/Yb_wing">
+        <description> Side force on wing due to beta. </description>
+        <product>
+          <property> aero/qbar-psf </property>
+          <property> metrics/Sw-sqft </property>
+          <property> aero/beta-rad </property>
+          <value> -1.0 </value>
+          <value> 2.0 </value>
+          <sin> <property> aero/beta-rad </property> </sin>
+          <cos> <property> aero/beta-rad </property> </cos>
+        </product>
+      </function>
+
+
+      <function name="aero/force/Yb_fus">
+        <description> Side force on fuselage due to beta. </description>
+        <product>
+          <property> aero/qbar-psf </property>
+          <property> aero/ref/area-ft2 </property>
+          <property> aero/coefficient/CDb90_fus </property>
+          <value> -1.0 </value>
+          <sin> <property> aero/beta-rad </property> </sin>
+          <cos> <property> aero/beta-rad </property> </cos>
+          <sum>
+            <value> 1.0 </value>
+            <product>
+              <sin> <property> aero/beta-rad </property> </sin>
+              <sin> <property> aero/beta-rad </property> </sin>
+            </product>
+          </sum>
+        </product>
+      </function>
+
+    </axis>
+
+    <axis name="ROLL">
+      <!--<function name="aero/moment/lr_fus">
+        <description> Fuselage roll moment due to yaw rate. </description>
+        <product>
+          <property> aero/HWhat-psft </property>
+          <property> aero/coefficient/Clr_fus </property>
+          <property> velocities/r-aero-rad_sec </property>
+        </product>
+      </function>-->
+	
+	 <function name="aero/moment/Cl_fus">
+                <description>Roll_moment</description>
+                <product>
+                    <property>aero/qbar-psf</property>
+                    <property>aero/coefficient/Clr_fus</property>
+                    <property>aero/HIhat-ps</property>
+		    <property>aero/coefficient/Clr2_fus_K</property>
+                </product>
+            </function>
+
+    </axis>
+
+    <axis name="PITCH">
+
+      <function name="aero/moment/Mw_ht">
+        <description> Pitching moment due to w. </description>
+        <product>
+          <property> aero/HIhat-ps </property>
+          <property> aero/coefficient/CMw_ht </property>
+          <property> velocities/w-aero-fps </property>
+        </product>
+      </function>
+      <function name="aero/moment/Mq_ht">
+        <description> Pitching moment due to q. </description>
+        <product>
+          <property> aero/HWhat-psft </property>
+          <property> aero/coefficient/CMq_ht </property>
+          <property> velocities/q-aero-rad_sec </property>
+        </product>
+      </function>
+    </axis>
+
+    <axis name="YAW">
+      <function name="aero/moment/Nb_vt">
+        <description> Yawing moment due to vertical fin. </description>
+        <product>
+          <property> aero/qbar-psf </property>
+          <property> metrics/Sv-sqft </property>
+          <property> metrics/lv-ft </property>
+          <property> aero/coefficient/CNb_vt </property>
+        </product>
+      </function>
+      <function name="aero/moment/Nv_vt">
+        <description> Yawing moment due to v. </description>
+        <product>
+          <property> aero/HIhat-ps </property>
+          <property> aero/coefficient/CNv_vt </property>
+          <property> velocities/v-aero-fps </property>
+        </product>
+      </function>
+      <function name="aero/moment/Nr_vt">
+        <description> Yawing moment due to r. </description>
+        <product>
+          <property> aero/HWhat-psft </property>
+          <property> aero/coefficient/CNr_vt </property>
+          <property> velocities/r-aero-rad_sec </property>
+        </product>
+      </function>
+      
+       <function name="aero/moment/Nr_limiter">
+          <description> Limit yaw rate to get more stability in hover. </description>
+          <product>
+              <value> -0.1 </value>
+              <property> aero/HWhat-psft </property>
+              <property> velocities/r-aero-rad_sec </property>
+              <property> aero/setup/Nr_limiter </property>
+              <table>
+                  <independentVar> aero/mu </independentVar>
+                  <tableData>
+                      0.0   1.0
+                      0.08  0.9
+                      0.15  0.0
+                  </tableData>
+              </table>
+          </product>
+      </function>
+
+    </axis>
+
+
+  </aerodynamics>
+

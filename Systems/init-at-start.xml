@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+
+
+    <system name="initialization_at_start">
+	
+	<property value="0">systems/crash/switch</property>
+	
+	<property value="1">fcs/canopy-cmd-norm</property>
+	
+	<property value="0">animation/cabine-left-door-cmd-norm</property>
+	<property value="0">animation/cockpit-hatch-cmd-norm</property>
+	<property value="0">animation/cockpit-window-cmd-norm</property>
+	
+	<property value="0">systems/op-refuel-main</property>
+	<property value="0">systems/op-refuel-aux</property>
+	
+	<property value="0">instruments/heading-indicator/switch-tacan-dme</property>
+	<property value="0">instruments/heading-indicator/switch-nav-adf</property>
+	<property value="0">instruments/heading-indicator/nav-switch</property>
+		
+	<property value="0">electrical/switch/master</property>
+	<property value="0.9">electrical/lighting/instruments-norm</property>
+	<property value="1">electrical/lighting/beacon</property>
+	<property value="1">electrical/lighting/instruments</property>
+	<property value="0">electrical/lighting/landing-lights</property>
+	<property value="1">electrical/lighting/strobe-lights</property>
+	<property value="1">electrical/lighting/nav-lights</property>
+	<property value="1">electrical/lighting/position-lights</property>
+	<property value="1">electrical/lighting/sar-light-power</property>
+	
+	<!--FIXME  temporary  auto,  later on will be switches on panel -->
+	<property value="1">electrical/switches/strobe-lights</property>
+	
+	
+	<channel name="dialog trigger mixture">
+	    <switch name="animation/mixture/rich">
+	    <default value="0"/>
+	    <test  logic="AND" value="1">
+		fcs/mixture-cmd-norm ge 1
+	    </test>
+	    <output>/sim/gui/dialogs/HUP/engine-mixture-rich</output>
+	    </switch>  
+	    <switch name="animation/mixture/lean">
+	    <default value="0"/>
+	    <test  logic="AND" value="1">
+		fcs/mixture-cmd-norm lt 1
+	    </test>
+	    <output>/sim/gui/dialogs/HUP/engine-mixture-lean</output>
+	    </switch>  
+	</channel>
+
+    </system>

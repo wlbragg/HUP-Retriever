@@ -1,0 +1,403 @@
+<?xml version="1.0"?>
+
+
+<!--
+    Usable with FlightGear
+    Property of Gerard Robin
+    Copyright
+-->
+<PropertyList>
+
+	<path>Models/hi_nu-h21c.ac</path>
+	<texture-path>Models/Textures</texture-path>
+
+	<animation>
+		<type>noshadow</type>
+		<object-name>HI</object-name>
+	</animation>
+
+	<model>
+		<name>BoutonG</name>
+		<path>Aircraft/H-21C_Shawnee/Instruments/Bouton_pt-Nord.xml</path>
+		<offsets>
+                    <x-m>0.016</x-m>
+                    <y-m>-0.030431</y-m>
+                    <z-m>-0.030431</z-m>
+                    <pitch-deg>0</pitch-deg>
+		</offsets>
+	</model>
+
+        <model>
+            <name>BoutonD</name>
+            <path>Aircraft/H-21C_Shawnee/Instruments/Bouton_pt-Nord.xml</path>
+            <offsets>
+                <x-m>0.016</x-m>
+                <y-m>0.030431</y-m>
+                <z-m>-0.030431</z-m>
+                <pitch-deg>0</pitch-deg>
+            </offsets>
+	</model>
+
+
+
+
+
+
+
+	<animation include="Instrument-Light4.xml">
+		<object-name>Aiguille1</object-name>
+		<object-name>Aiguille2</object-name>
+	</animation>
+
+	<animation include="Instrument-Light1.xml">
+		<object-name>Cadran</object-name>
+	</animation>
+
+	<!--******************** Hotspots ******************************-->
+	<!--<panel>
+		<name>Cmd-HI</name>
+		<path>Aircraft/F4U7/Instruments/HI-Nord-hotspots.xml</path>
+		<bottom-left>
+			<x-m>0.014</x-m>
+			<y-m>-0.0361132</y-m>
+			<z-m>-0.0376666</z-m>
+		</bottom-left>
+		<bottom-right>
+			<x-m>0.014</x-m>
+			<y-m>0.0361132</y-m>
+			<z-m>-0.0376666</z-m>
+		</bottom-right>
+		<top-left>
+			<x-m>0.014</x-m>
+			<y-m>-0.0361132</y-m>
+			<z-m>0.0376666</z-m>
+		</top-left>
+	</panel>-->
+<!--*************************************************-->
+
+
+
+	<animation>
+		<type>rotate</type>
+		<object-name>Cadran</object-name>
+		<property>instrumentation/heading-indicator/indicated-heading-deg</property>
+		<factor>1</factor>
+		<center>
+			<x-m>0</x-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>
+		</center>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+
+
+<!--FIXME offset-->
+
+        <animation>
+            <type>pick</type>
+            <object-name>BoutonD</object-name>
+            <action>
+                <button>0</button>
+                <repeatable>true</repeatable>
+                <binding>
+                    <command>property-adjust</command>
+                    <property>instrumentation/heading-indicator/offset-deg</property>
+                    <step>0.1</step>
+                    <min>0</min>
+                    <max>6</max>
+                    <wrap>1</wrap>
+                </binding>
+            </action>
+            <action>
+                <button>1</button>
+                <repeatable>true</repeatable>
+                <binding>
+                    <command>property-adjust</command>
+                    <property>instrumentation/heading-indicator/offset-deg</property>
+                    <step>-0.1</step>
+                    <min>0</min>
+                    <max>6</max>
+                    <wrap>1</wrap>
+                </binding>
+            </action>
+        </animation>
+
+
+        <animation>
+            <type>rotate</type>
+            <object-name>BoutonD</object-name>
+            <property>instrumentation/heading-indicator/offset-deg</property>
+            <factor>1</factor>
+            <center>
+                <x-m>0.0</x-m>
+                <y-m>0.030431</y-m>
+                <z-m>-0.030431</z-m>
+            </center>
+            <axis>
+                <x>1</x>
+                <y>0</y>
+                <z>0</z>
+            </axis>
+	</animation>
+
+
+
+
+
+
+<!--**************************Heading********************-->
+
+	<animation>
+	    <type>select</type>
+		<object-name>Aiguille3</object-name>
+		<condition>
+		 
+		    <property>/instrumentation/heading-indicator/switch-tacan-nav</property>
+		
+		</condition>
+	</animation>
+
+
+
+	<animation>
+		<type>rotate</type>
+		<object-name>Aiguille3</object-name>
+		<property>instrumentation/heading-indicator/indicated-heading-deg</property>
+		<factor>1</factor>
+		<center>
+			<x-m>0</x-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>
+		</center>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>rotate</type>
+		<object-name>Aiguille3</object-name>
+		<property>instrumentation/heading-indicator/indicated-heading-deg</property>
+		<factor>1</factor>
+		<center>
+			<x-m>0</x-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>
+		</center>
+		<axis>
+			<x>-1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	
+
+
+<!--***************************Tacan Heading*********************	-->
+
+	<animation>
+	    <type>select</type>
+		<object-name>Aiguille1</object-name>
+		<condition>
+		 <not>
+		    <property>/instrumentation/heading-indicator/switch-tacan-nav</property>
+		</not>
+		</condition>
+	</animation>
+
+
+
+	<animation>
+		<type>rotate</type>
+		<object-name>Aiguille1</object-name>
+		<property>instrumentation/heading-indicator/indicated-heading-deg</property>
+		<factor>1</factor>
+		<center>
+			<x-m>0</x-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>
+		</center>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>Aiguille1</object-name>
+		<!--<property>/instrumentation/heading-indicator/course-pointer</property>-->
+		<property>/instrumentation/tacan/indicated-bearing-true-deg</property>
+		<factor>1</factor>
+		<center>
+			<x-m>0</x-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>
+		</center>
+		<axis>
+			<x>-1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+
+
+<!--********************Nav Heading************************-->
+
+	<!--<animation>
+		<type>rotate</type>
+		<object-name>Aiguille1-Nav</object-name>
+		<property>instrumentation/heading-indicator/indicated-heading-deg</property>
+		<factor>1</factor>
+		<center>
+			<x-m>0</x-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>
+		</center>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>Aiguille1-Nav</object-name>
+		<property>/instrumentation/nav[0]/heading-deg</property>
+		<center>
+			<x-m>0</x-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>
+		</center>
+		<axis>
+			<x>-1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>-->
+
+
+
+
+
+<!--***************Heading-Bug*******************************	-->
+
+
+	<animation>
+		<type>rotate</type>
+		<object-name>Aiguille2</object-name>
+		<property>instrumentation/heading-indicator/indicated-heading-deg</property>
+		<center>
+			<x-m>0</x-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>
+		</center>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>Aiguille2</object-name>
+                <property>/instrumentation/heading-indicator/heading-bug-deg</property>
+		<center>
+			<x-m>0</x-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>
+		</center>
+		<axis>
+			<x>-1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+
+        <animation>
+            <type>pick</type>
+            <object-name>BoutonG</object-name>
+            <action>
+                <button>0</button>
+                <repeatable type="bool">true</repeatable>
+                <binding>
+                    <command>property-adjust</command>
+                    <property>/instrumentation/heading-indicator/heading-bug-deg</property>
+                    <step>1</step>
+                    <min>0</min>
+                    <max>360</max>
+                    <wrap>1</wrap>
+                </binding>
+            </action>
+            <action>
+                <button>1</button>
+                <repeatable type="bool">true</repeatable>
+                <binding>
+                    <command>property-adjust</command>
+                    <property>/instrumentation/heading-indicator/heading-bug-deg</property>
+                    <step>-1</step>
+                    <min>0</min>
+                    <max>360</max>
+                    <wrap>1</wrap>
+                </binding>
+            </action>
+	     <action>
+                <button>3</button>
+                <repeatable type="bool">true</repeatable>
+                <binding>
+                    <command>property-adjust</command>
+                    <property>/instrumentation/heading-indicator/heading-bug-deg</property>
+                    <step>1</step>
+                    <min>0</min>
+                    <max>360</max>
+                    <wrap>1</wrap>
+                </binding>
+            </action>
+            <action>
+                <button>4</button>
+                <repeatable type="bool">true</repeatable>
+                <binding>
+                    <command>property-adjust</command>
+                    <property>/instrumentation/heading-indicator/heading-bug-deg</property>
+                    <step>-1</step>
+                    <min>0</min>
+                    <max>360</max>
+                    <wrap>1</wrap>
+                </binding>
+            </action>
+        </animation>
+
+        <animation>
+            <type>rotate</type>
+            <object-name>BoutonG</object-name>
+            <property>/instrumentation/heading-indicator/heading-bug-deg</property>
+            <factor>-5</factor>
+            <center>
+                <x-m>0.0</x-m>
+                <y-m>-0.030431</y-m>
+                <z-m>-0.030431</z-m>
+            </center>
+            <axis>
+                <x>1</x>
+                <y>0</y>
+                <z>0</z>
+            </axis>
+	</animation>
+
+
+
+</PropertyList>
+
+

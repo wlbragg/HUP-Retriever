@@ -1,0 +1,110 @@
+<PropertyList>
+
+
+    <!--
+    Usable with FlightGear
+      =>    Gerard Robin
+    Copyright License:  GPLV2
+    -->
+    <!--                   Auteur :      Gerard ROBIN            GPLV2  COPYRIGHT-->
+    
+	<path>Models/hup-arrotor-pale-base-v2.ac</path>
+
+	<texture-path>Models/Textures</texture-path>
+
+        <offsets>
+            <heading-deg>180</heading-deg>
+        </offsets>
+
+       <animation>
+                <condition>
+                    <equals>
+                        <property>sim/current-view/view-number</property>
+                        <value>999</value>
+                    </equals>
+            </condition>
+		<type>select</type>
+                <object-name>Gabarit-Pose</object-name>
+ 	</animation>
+
+        <!--ALPHA HIERARCHY=================-->
+        <animation>
+                <name>Alpha</name>
+                <object-name>Rotor-Pale</object-name>                
+                <object-name>Rotor-Pale-Base</object-name>
+                <object-name>Rotor-Pale-Fix</object-name>
+                <object-name>Rotor-Pale-Rot</object-name>
+                <object-name>Rotor-Disc_M-Pale</object-name>
+        </animation>
+
+        <effect>
+            <inherits-from>Effects/model-transparent</inherits-from>
+            <object-name></object-name>
+            <object-name></object-name>
+            <object-name>Rotor-Disc_M-Pale</object-name>
+        </effect>
+
+
+        <!--BLEND===================-->
+
+        <animation>
+		<type>blend</type>
+		<object-name>Rotor-Pale</object-name>
+                <property>sim/multiplay/generic/float[8]</property>
+		<factor>0.0035</factor>
+	</animation>
+
+        <animation>
+		<type>blend</type>
+                <object-name>Rotor-Pale-Base</object-name>
+                <object-name>Rotor-Pale-Fix</object-name>
+		<property>sim/multiplay/generic/float[8]</property>
+		<factor>0.0025</factor>
+	</animation>
+
+       <!-- <animation>
+		<type>blend</type>
+		<object-name>Rotor-Disc_M-Pale</object-name>
+		<property>sim/multiplay/generic/float[8]</property>-->
+                <!--<offset>-0.20</offset>-->
+               <!-- <max>0.9</max>-->
+                <!--<min>0.7</min>-->
+		<!--<factor>0.0015</factor>-->
+	<!--</animation>-->
+	
+	<!--NOSHADOW=====================-->
+	
+	 <animation>
+		<type>noshadow</type>
+                <object-name>Rotor-Disc_M-Pale</object-name>
+ 	</animation>
+	
+
+
+        <!--SELECT========================-->
+
+        <animation>
+		<condition>
+			<less-than>
+				<property>sim/multiplay/generic/float[8]</property>
+				<value>190</value>
+			</less-than>
+		</condition>
+		<type>select</type>
+                <object-name>Rotor-Pale</object-name>
+ 	</animation>
+
+        <animation>
+		<condition>
+			<greater-than>
+				<property>sim/multiplay/generic/float[8]</property>
+				<value>180</value>
+			</greater-than>
+		</condition>
+		<type>select</type>
+                <object-name>Rotor-Disc_M-Pale</object-name>
+ 	</animation>
+
+
+
+</PropertyList>

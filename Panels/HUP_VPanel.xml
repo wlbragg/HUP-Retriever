@@ -1,0 +1,367 @@
+<?xml version="1.0"?>
+
+<!--
+    Dedicated only to FlightGear
+      =>    Gerard Robin
+    License:  GPLV2
+-->
+<!--                         -->
+
+
+<PropertyList>
+
+    <path>Models/hup-vpanel.ac</path>
+    <texture-path>Models/Textures</texture-path>
+
+<!--==LINE 1 =========================-->
+
+    <model>
+            <name>ASI</name>
+            <path>Aircraft/HUP-Retriever/Instruments/Bezel-f4u7.xml</path>
+            <offsets>
+                    <x-m>0</x-m>
+                    <y-m>-0.0741572</y-m>
+                    <z-m>0.144376</z-m>
+            </offsets>
+    </model>
+
+    <model>
+            <name>ASI</name>
+            <path>Aircraft/HUP-Retriever/Instruments/ASI-S51.xml</path>
+            <offsets>
+                    <x-m>0</x-m>
+                    <y-m>-0.0741572</y-m>
+                    <z-m>0.144376</z-m>
+            </offsets>
+    </model>
+
+
+
+    <model>
+            <name>Compass</name>
+            <path>Aircraft/HUP-Retriever/Instruments/Bezel-f4u7.xml</path>
+            <offsets>
+                    <x-m>0</x-m>
+                    <y-m>0.0741572</y-m>
+                    <z-m>0.144376</z-m>
+            </offsets>
+    </model>
+
+    <model>
+            <name>Compass</name>
+            <path>Aircraft/HUP-Retriever/Instruments/mag-compass-HUP.xml</path>
+            <offsets>
+                    <x-m>0.004</x-m>
+                    <y-m>0.0741572</y-m>
+                    <z-m>0.144376</z-m>
+            </offsets>
+    </model>
+
+
+
+<!--==LINE 2 ===========================-->
+
+    <model>
+            <name>Manometer</name>
+            <path>Aircraft/HUP-Retriever/Instruments/Bezel-f4u7.xml</path>
+            <offsets>
+                    <x-m>0</x-m>
+                    <y-m>-0.237577</y-m>
+                    <z-m>0.039256</z-m>
+            </offsets>
+    </model>
+    
+     <model>
+            <name>Manometer</name>
+            <path>Aircraft/HUP-Retriever/Instruments/MP_OSI.xml</path>
+            <offsets>
+                    <x-m>0</x-m>
+                    <y-m>-0.237577</y-m>
+                    <z-m>0.039256</z-m>
+            </offsets>
+    </model>
+
+    <model>
+            <name>Tachymeter</name>
+            <path>Aircraft/HUP-Retriever/Instruments/Bezel-f4u7.xml</path>
+            <offsets>
+                    <x-m>0</x-m>
+                    <y-m>-0.119226</y-m>
+                    <z-m>0.039256</z-m>
+            </offsets>
+    </model>
+    
+    <model>
+            <name>Tachymeter</name>
+            <path>Aircraft/HUP-Retriever/Instruments/Engine_Rotor-HUP.xml</path>
+            <offsets>
+                    <x-m>0</x-m>
+                    <y-m>-0.119226</y-m>
+                    <z-m>0.039256</z-m>
+            </offsets>
+    </model>
+
+    <model>
+            <name>TURN</name>
+            <path>Aircraft/HUP-Retriever/Instruments/Bezel-f4u7.xml</path>
+            <offsets>
+                    <x-m>0</x-m>
+                    <y-m>0</y-m>
+                    <z-m>0.039256</z-m>
+            </offsets>
+    </model>
+
+    <model>
+            <name>TURN</name>
+            <path>Aircraft/HUP-Retriever/Instruments/TURN-Nord.xml</path>
+            <offsets>
+                    <x-m>0.001</x-m>
+                    <y-m>0</y-m>
+                    <z-m>0.039256</z-m>
+            </offsets>
+    </model>
+
+    <model>
+            <name>AI</name>
+            <path>Aircraft/HUP-Retriever/Instruments/Bezel-f4u7.xml</path>
+            <offsets>
+                    <x-m>0</x-m>
+                    <y-m>0.119226</y-m>
+                    <z-m>0.039256</z-m>
+            </offsets>
+    </model>
+
+    <model>
+            <name>AI</name>
+            <path>Aircraft/HUP-Retriever/Instruments/Attitude-S51.xml</path>
+            <offsets>
+                    <x-m>-0.004</x-m>
+                    <y-m>0.119226</y-m>
+                    <z-m>0.039256</z-m>
+            </offsets>
+    </model>
+
+    <model>
+            <name>Cylinder Head Temperature</name>
+            <path>Aircraft/HUP-Retriever/Instruments/Bezel-f4u7.xml</path>
+            <offsets>
+                    <x-m>0</x-m>
+                    <y-m>0.237577</y-m>
+                    <z-m>0.039256</z-m>
+            </offsets>
+    </model>
+    
+    <!-- <model>
+            <name>Cylinder Head Temperature</name>
+            <path>Aircraft/HUP-Retriever/Instruments/.xml</path>
+            <offsets>
+                    <x-m>0</x-m>
+                    <y-m>0.237577</y-m>
+                    <z-m>0.039256</z-m>
+            </offsets>
+    </model>-->
+
+
+    <!--==LINE 3============================================-->
+
+    <model>
+            <name>VSI</name>
+            <path>Aircraft/HUP-Retriever/Instruments/Bezel-f4u7.xml</path>
+            <offsets>
+                    <x-m>0</x-m>
+                    <y-m>-0.237577</y-m>
+                    <z-m>-0.0667085</z-m>
+            </offsets>
+    </model>
+
+     <model>
+            <name>VSI</name>
+            <path>Aircraft/HUP-Retriever/Instruments/IVSI-Nord.xml</path>
+            <offsets>
+                    <x-m>0</x-m>
+                    <y-m>-0.237577</y-m>
+                    <z-m>-0.0667085</z-m>
+            </offsets>
+    </model>
+
+    <model>
+            <name>Altitude</name>
+            <path>Aircraft/HUP-Retriever/Instruments/Bezel-f4u7.xml</path>
+            <offsets>
+                    <x-m>0</x-m>
+                    <y-m>-0.119226</y-m>
+                    <z-m>-0.0667085</z-m>
+            </offsets>
+    </model>
+
+    <model>
+            <name>Altitude</name>
+            <path>Aircraft/HUP-Retriever/Instruments/ALT-Nord.xml</path>
+            <offsets>
+                    <x-m>-0.008</x-m>
+                    <y-m>-0.119226</y-m>
+                    <z-m>-0.0667085</z-m>
+            </offsets>
+    </model>
+
+    <model>
+            <name>HI</name>
+            <path>Aircraft/HUP-Retriever/Instruments/Bezel-f4u7.xml</path>
+            <offsets>
+                    <x-m>0</x-m>
+                    <y-m>0</y-m>
+                    <z-m>-0.0667085</z-m>
+            </offsets>
+    </model>
+    <model>
+            <name>HI</name>
+            <path>Aircraft/HUP-Retriever/Instruments/HI-h21.xml</path>
+            <offsets>
+                    <x-m>0</x-m>
+                    <y-m>0</y-m>
+                    <z-m>-0.0667085</z-m>
+            </offsets>
+    </model>
+    
+
+    <model>
+            <name>Fuel and Oil Pressure</name>
+            <path>Aircraft/HUP-Retriever/Instruments/Bezel-f4u7.xml</path>
+            <offsets>
+                    <x-m>0</x-m>
+                    <y-m>0.119226</y-m>
+                    <z-m>-0.0667085</z-m>
+            </offsets>
+    </model>
+    
+     <model>
+            <name>Fuel and Oil Pressure</name>
+            <path>Aircraft/HUP-Retriever/Instruments/CTRL_OIL_FUEL_Eng0-Nord.xml</path>
+            <offsets>
+                    <x-m>0</x-m>
+                    <y-m>0.119226</y-m>
+                    <z-m>-0.0667085</z-m>
+            </offsets>
+    </model>
+
+    <model>
+            <name>Temperature</name>
+            <path>Aircraft/HUP-Retriever/Instruments/Bezel-f4u7.xml</path>
+            <offsets>
+                    <x-m>0</x-m>
+                    <y-m>0.237577</y-m>
+                    <z-m>-0.0667085</z-m>
+            </offsets>
+    </model>
+    
+  <!--  <model>
+            <name>Temperature</name>
+            <path>Aircraft/HUP-Retriever/Instruments/.xml</path>
+            <offsets>
+                    <x-m>0</x-m>
+                    <y-m>0.237577</y-m>
+                    <z-m>-0.0667085</z-m>
+            </offsets>
+    </model>-->
+
+<!--==LINE 4 ============================================-->
+
+    <model>
+            <name>Fuel Quantity</name>
+            <path>Aircraft/HUP-Retriever/Instruments/Bezel_tpt-S51.xml</path>
+            <offsets>
+                    <x-m>0</x-m>
+                    <y-m>-0.237787</y-m>
+                    <z-m>-0.165451</z-m>
+            </offsets>
+    </model>
+     
+     <model>
+            <name>Fuel Quantity</name>
+            <path>Aircraft/HUP-Retriever/Instruments/Fuel.xml</path>
+            <offsets>
+                    <x-m>0</x-m>
+                    <y-m>-0.237787</y-m>
+                    <z-m>-0.165451</z-m>
+            </offsets>
+    </model>
+    
+
+    <model>
+            <name>Clock</name>
+            <path>Aircraft/HUP-Retriever/Instruments/Bezel_tpt-S51.xml</path>
+            <offsets>
+                    <x-m>0</x-m>
+                    <y-m>-0.119435</y-m>
+                    <z-m>-0.165451</z-m>
+            </offsets>
+    </model>
+    
+    <model>
+            <name>Clock</name>
+            <path>Aircraft/HUP-Retriever/Instruments/Clock.xml</path>
+            <offsets>
+                    <x-m>0</x-m>
+                    <y-m>-0.119435</y-m>
+                    <z-m>-0.165451</z-m>
+            </offsets>
+    </model>
+
+    <model>
+            <name>Auto Pilote Synchronasation Master</name>
+            <path>Aircraft/HUP-Retriever/Instruments/AP-Sync-Master.xml</path>
+            <offsets>
+                    <x-m>0</x-m>
+                    <y-m>0</y-m>
+                    <z-m>-0.165451</z-m>
+            </offsets>
+    </model>
+    
+    
+
+    <model>
+            <name>Clock Elapse Time</name>
+            <path>Aircraft/HUP-Retriever/Instruments/Bezel_tpt-S51.xml</path>
+            <offsets>
+                    <x-m>0</x-m>
+                    <y-m>0.119435</y-m>
+                    <z-m>-0.165451</z-m>
+            </offsets>
+    </model>
+    
+    <!--should be Clock Elapse Time-->
+    
+     <model>
+            <name>Volt</name>
+            <path>Aircraft/HUP-Retriever/Instruments/Voltage.xml</path>
+            <offsets>
+                    <x-m>0</x-m>
+                    <y-m>0.119435</y-m>
+                    <z-m>-0.165451</z-m>
+            </offsets>
+    </model>
+
+    <model>
+            <name>Volt-Amp</name>
+            <path>Aircraft/HUP-Retriever/Instruments/Bezel_tpt-S51.xml</path>
+            <offsets>
+                    <x-m>0</x-m>
+                    <y-m>0.237787</y-m>
+                    <z-m>-0.165451</z-m>
+            </offsets>
+    </model>
+    
+     <model>
+            <name>Volt-Amp</name>
+            <path>Aircraft/HUP-Retriever/Instruments/Ampere-0.xml</path>
+            <offsets>
+                    <x-m>0</x-m>
+                    <y-m>0.237787</y-m>
+                    <z-m>-0.165451</z-m>
+            </offsets>
+    </model>
+
+
+
+
+</PropertyList>

@@ -1,0 +1,275 @@
+<?xml version="1.0"?>
+
+<system name="rotor">
+
+  <!--<property value="0.0">systems/rotor/clutch-cmd</property>-->
+  <property value="0">animation/rotor_clutch-switch</property>
+
+
+
+
+
+  <!-- Clutch ********************************************** -->
+
+  <channel name="clutch">
+
+   <!--<kinematic name="clutch control">
+     <input>systems/rotor/clutch-cmd</input>
+     <traverse>
+       <setting>
+          <position> 0 </position>
+          <time>     0 </time>
+       </setting>
+       <setting>
+          <position> 1 </position>
+          <time>     5 </time>
+       </setting>
+     </traverse>
+     <output>propulsion/engine[0]/clutch-ctrl-norm</output>
+     <output>propulsion/engine[1]/clutch-ctrl-norm</output>
+   </kinematic>-->
+      
+      <switch name="systems/rotor/clutch-cmd">
+          <default value="systems/rotor/clutch-cmd-norm"/>
+	  <test logic="AND" value="0">
+              propulsion/engine[0]/rotor-rpm  LE 50
+              systems/rotor/brake-cmd-norm != 0
+          </test>
+          <test logic="AND" value="1">
+	      propulsion/engine[0]/engine-rpm GT 500	
+	      animation/rotor_clutch-switch == 1
+          </test>
+          <output>systems/rotor/clutch-cmd-norm</output>
+      </switch>
+      
+    
+
+
+      
+
+   <kinematic name="clutch control">
+     <input>systems/rotor/clutch-cmd-norm</input>
+     <traverse>
+       <setting>
+          <position> 0 </position>
+          <time>     0 </time>
+       </setting>
+       <setting>
+          <position> 1 </position>
+          <time>  60 </time>
+       </setting>
+     </traverse>
+     <output>propulsion/engine[0]/clutch-ctrl-norm</output>
+     <output>propulsion/engine[1]/clutch-ctrl-norm</output>
+   </kinematic>
+
+      
+      
+      
+      
+
+  </channel>
+
+  <!-- Brake *********************************************** -->
+
+
+    <property value="1">animation/rotor_brake-switch-lock-cmd</property>
+    <property value="1">animation/rotor_brake-switch-cmd</property>
+
+  <channel name="brake">
+
+      
+      <switch name="animation/rotor_brake-switch-lock">
+          <default value="0"/>
+          <test logic="AND" value="1">
+              animation/rotor_brake-switch-lock-cmd == 1
+          </test>
+      </switch>
+
+      <switch name="systems/rotor/rotor_brake-switch">
+          <default value="0"/>
+          <test logic="AND" value="1">
+              animation/rotor_brake-switch-lock  == 1
+              animation/rotor_brake-switch-cmd == 1
+          </test>
+          <output>animation/rotor_brake-switch-cmd</output>
+      </switch>
+
+      <!--<switch name="animation/rotor_brake-switch">
+          <default value="1"/>
+          <test logic="AND" value="0">
+              systems/rotor/rotor_brake-switch  == 1
+          </test>
+      </switch>-->
+
+
+
+      <kinematic name="systems/rotor/brake-cmd">  
+          <input>systems/rotor/rotor_brake-switch</input>
+          <traverse>
+              <setting>
+                  <position>0</position>
+                  <time>0</time>
+              </setting>
+              <setting>
+                  <position>1</position>
+                  <time>0.5</time>
+              </setting>
+          </traverse>
+              <output>systems/rotor/brake-cmd-norm</output>
+      </kinematic>
+
+
+	<switch name="systems/rotor/brake-cmd-norm-tr">
+	    <default value="systems/rotor/brake-cmd-norm"/>
+	    <test logic="AND" value="1">
+		fcs/blade-fold-pos-norm  GT 0
+	    </test>
+	    <test logic="AND" value="0.05">
+		propulsion/engine[0]/rotor-rpm  LE 32
+		propulsion/engine[0]/rotor-rpm  GT 3
+		systems/rotor/brake-cmd-norm == 1
+	    </test>
+	    <test logic="AND" value="1">
+		propulsion/engine[0]/rotor-rpm  LE  5
+		systems/rotor/brake-cmd-norm == 1
+	    </test>
+	</switch>
+
+	<kinematic name="brake control">
+	    <input>systems/rotor/brake-cmd-norm-tr</input>
+	    <traverse>
+	    <setting>
+		<position> 0 </position>
+		<time>     0 </time>
+	    </setting>
+	    <setting>
+		<position> 1 </position>
+		<time>     5 </time>
+	    </setting>
+	    </traverse>
+	    <output>propulsion/engine[0]/brake-ctrl-norm</output>
+	    <output>propulsion/engine[1]/brake-ctrl-norm</output>
+	</kinematic>
+
+  </channel>
+
+
+  <!-- Collective ******************************************* -->
+  
+  
+   <property value="0">fcs/pitch-trim-positionner</property>
+
+  <channel name="collective">
+      
+      <fcs_function name="fcs/pitch-trim-positionner-norm">
+        <function>
+            <product>
+                <property>fcs/pitch-trim-positionner</property>
+                <value>1</value>
+            </product>
+        </function>
+	<clipto>
+	    <min>-0.016</min>
+	    <max>+0.016</max>
+	</clipto>
+    </fcs_function>   
+  
+
+ 
+    <!-- map throttle axis to collective -->
+      <fcs_function name="map">
+        <function>
+           <table>
+             <independentVar>fcs/throttle-cmd-norm</independentVar>
+             <tableData>
+                  0   1
+                  1   0
+             </tableData>
+           </table>
+        </function>
+        <output>systems/rotor/collective-cmd-norm</output>
+      </fcs_function>
+
+
+      <lag_filter name="fcs/collective-lag">
+        <input> systems/rotor/collective-cmd-norm </input>
+        <c1>    5.0 </c1>
+      </lag_filter>
+
+
+      <pure_gain name="fcs/collective-frt-gain">
+        <input>  fcs/collective-lag </input>
+        <gain>   0.135</gain>
+        <output> fcs/x-frt_col </output>
+      </pure_gain>
+
+
+      <pure_gain name="fcs/collective-aft-gain">
+          <input>  fcs/collective-lag </input>
+          <gain>   0.135</gain>
+          <output> fcs/x-aft_col </output>
+      </pure_gain>
+
+      <!--(1 deg))-->
+      <fcs_function name="fcs/collective-dcp">
+          <function>
+              <sum>
+                  <property>fcs/pitch-trim-positionner</property>
+                  <product>
+                      <property>fcs/elevator-cmd-norm</property>
+                      <value>0.017453292500</value>
+                  </product>
+              </sum>
+          </function>
+    </fcs_function>
+
+    <fcs_function name="fcs/collective-frt-dcp">
+        <function>
+            <product>
+                <property>fcs/collective-dcp</property>
+                <value>-1</value>
+            </product>
+        </function>
+    </fcs_function>
+
+    <fcs_function name="fcs/collective-aft-dcp">
+        <function>
+            <product>
+                <property>fcs/collective-dcp</property>
+                <value>1</value>
+            </product>
+        </function>
+    </fcs_function>
+
+
+      <summer name="fcs/collective-frt_ctrl-rad">
+        <input> fcs/x-frt_col </input>
+        <input>fcs/collective-frt-dcp</input>
+        <input> ap/collective-cmd </input>
+        <bias>  0.08 </bias>
+        <clipto>
+          <min> 0.0 </min>
+          <max> 0.7 </max>
+        </clipto>
+        <output> propulsion/engine[0]/collective-ctrl-rad </output>
+      </summer>
+
+
+        <summer name="fcs/collective-aft_ctrl-rad">
+            <input> fcs/x-aft_col </input>
+            <input>fcs/collective-aft-dcp</input>
+            <input> ap/collective-cmd </input>
+            <bias>  0.08</bias>
+            <clipto>
+                <min> 0.0 </min>
+                <max> 0.7 </max>
+            </clipto>
+            <output> propulsion/engine[1]/tail-collective-ctrl-rad </output>
+        </summer>
+    </channel>
+
+
+
+
+</system>

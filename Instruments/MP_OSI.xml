@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+
+<!--
+    Usable with FlightGear
+    Author Gerard Robin (C) 2009-2010
+    Copyright 
+-->
+
+<PropertyList>
+
+ <path>Models/mp_osi.ac</path>
+ <texture-path>Models/Textures</texture-path>
+
+        <animation include="Instrument-Light4.xml">
+                <object-name>Aiguille0</object-name>
+        </animation>
+
+
+        <animation include="Instrument-Light3.xml">
+                <object-name>Cadran</object-name>
+        </animation>
+
+        <animation>
+                <type>rotate</type>
+                <object-name>Aiguille0</object-name>
+                <property>/engines/engine[0]/mp-osi</property>
+                <interpolation>
+                        <entry>
+                        <ind>10</ind>
+                        <dep>0</dep>
+                        </entry>
+                        <entry>
+                        <ind>75</ind>
+                        <dep>343.85</dep>
+                        </entry>
+                </interpolation>
+                <center>
+                        <x-m>0</x-m>
+                        <y-m>0</y-m>
+                        <z-m>0</z-m>
+                </center>
+                <axis>
+                        <x>-1</x>
+                        <y>0</y>
+                        <z>0</z>
+                </axis>
+        </animation>
+
+
+</PropertyList>

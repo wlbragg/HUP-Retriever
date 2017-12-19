@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+
+
+
+<rotor name="h21c_aft-rotor">
+
+    <controlmap>TANDEM</controlmap>
+    <ExternalRPM> 0 </ExternalRPM>
+
+    <diameter  unit="M"> 10.67 </diameter>
+    <numblades>  3 </numblades>
+    <gearratio>7.5987842</gearratio>
+  <nominalrpm> 329</nominalrpm> <!-- shaft gear engine 2500 rpm / -->
+
+  <minrpm>3</minrpm>
+  <maxrpm>300</maxrpm>
+  <chord unit="M">  0.36</chord>
+  <liftcurveslope>  6 </liftcurveslope><!--NACA 0012-->
+  <!--<flappingmoment unit="SLUG*FT2"> </flappingmoment>-->
+  <flappingmoment unit="KG*M2">1400</flappingmoment>
+  <twist> -0.10 </twist>
+  <massmoment>64</massmoment>
+  <tiplossfactor> 0.96 </tiplossfactor>
+  <!--<polarmoment unit="SLUG*FT2">6149.4</polarmoment>-->
+  <inflowlag>  0.07 </inflowlag>
+  <hingeoffset unit="FT"> 0.5 </hingeoffset>
+
+
+  <maxbrakepower unit="HP">16</maxbrakepower>
+
+  <groundeffectexp> 0.05 </groundeffectexp>
+  <groundeffectshift unit="M">  1.5 </groundeffectshift>
+
+
+
+</rotor>

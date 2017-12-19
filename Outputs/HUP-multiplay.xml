@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+
+<PropertyList>        
+
+               
+                    <generic>
+                        <float n="0" alias="/fdm/jsbsim/animation/rotor/main/pale0pos-deg"/>
+                        <float n="1" alias="/fdm/jsbsim/animation/rotor/main/pale1pos-deg"/>
+                        <float n="2" alias="/fdm/jsbsim/animation/rotor/main/pale2pos-deg"/>
+                        <float n="3" alias="/fdm/jsbsim/animation/rotor/main2/pale0pos-deg"/>
+                        <float n="4" alias="/fdm/jsbsim/animation/rotor/main2/pale1pos-deg"/>
+                        <float n="5" alias="/fdm/jsbsim/animation/rotor/main2/pale2pos-deg"/>
+                        <float n="6" alias="/fdm/jsbsim/fcs/blade-fold-pos-norm"/>
+                        <float n="7" alias="/fdm/jsbsim/animation/rotor/main/rotation"/>
+			<float n="8" alias="/fdm/jsbsim/animation/rotor/main2/rotation"/>      
+                        <float n="9" alias="/fdm/jsbsim/systems/crash-detect/crashed"/>
+                        <int type="int">0</int>
+                        <int type="int">0</int>
+                        <int type="int">0</int>
+                    </generic>       
+
+
+</PropertyList>

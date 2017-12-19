@@ -1,0 +1,416 @@
+<?xml version="1.0"?>
+<!--
+    Usable with FlightGear
+    Property of Gerard Robin (C) 2008-2010
+    Copyright 
+-->
+<PropertyList>
+    
+    
+    
+    
+    
+	<animation>
+            <type>select</type>
+            <object-name>gabarit-pose</object-name>
+            <condition>                   
+		    <equals>
+			<property>sim/current-view/view-number</property>
+                        <value>99</value>
+                    </equals>		
+	    </condition>
+	</animation>
+	
+	
+	<animation></animation>
+	<animation></animation>
+	<animation></animation>
+	<animation></animation>
+	<animation></animation>
+	<animation></animation>
+	<animation></animation>
+	<animation></animation>
+	
+	
+	
+	
+	<animation>
+            <type>rotate</type>            
+	     <object-name>Epaule</object-name>	     
+	    <property>fdm/jsbsim/animation/yoke-aileron</property>
+	    <factor>4</factor>
+	    <center>
+                <x-m>0</x-m>
+                <y-m>0.153642</y-m>
+		<z-m>0.567676</z-m>
+            </center>
+            <axis>
+                <x>1</x>
+                <y>0</y>
+                <z>0</z>
+            </axis>
+        </animation>
+	
+	<animation>
+            <type>rotate</type>            
+	     <object-name>Bras-H</object-name>
+	      <object-name>Bras-B</object-name>
+	       <object-name>Main-Droite</object-name>
+	       <object-name>Prot-Civ1</object-name>
+	    <property>fdm/jsbsim/animation/yoke-elevator</property>	    
+	     <interpolation>
+                <entry>
+                    <ind>-1.0</ind>
+                    <dep>18</dep>
+                </entry>
+                <entry>
+                    <ind>0.0</ind>
+                    <dep>0</dep>
+                </entry>
+                <entry>
+                    <ind>1</ind>
+		    <dep>-16</dep>
+                </entry>                
+            </interpolation>
+	    <center>
+                <x-m>-0.0071735</x-m>
+                <y-m>0</y-m>
+                <z-m>0.514226</z-m>
+            </center>
+            <axis>
+                <x>0</x>
+                <y>-1</y>
+                <z>0</z>
+            </axis>
+        </animation>
+	
+	<animation>
+            <type>rotate</type>            
+	     <object-name>Bras-H</object-name>
+	      <object-name>Bras-B</object-name>
+	       <object-name>Main-Droite</object-name>
+	       <object-name>Prot-Civ1</object-name>
+	    <property>fdm/jsbsim/animation/yoke-elevator</property>	   
+	    <interpolation>
+                <entry>
+                    <ind>-1.0</ind>
+                    <dep>7</dep>
+                </entry>
+                <entry>
+                    <ind>0.0</ind>
+                    <dep>0</dep>
+                </entry>
+                <entry>
+                    <ind>1</ind>
+		    <dep>-5</dep>
+                </entry>                
+            </interpolation>
+	    <center>
+                <x-m>0</x-m>
+                <y-m>0.183136</y-m>
+                <z-m>0.548622</z-m>
+            </center>
+            <axis>
+                <x>1</x>
+                <y>0</y>
+                <z>0</z>
+            </axis>
+        </animation>
+	
+	
+	
+	<animation>
+            <type>rotate</type>            
+	     <object-name>Bras-H</object-name>
+	      <object-name>Bras-B</object-name>
+	       <object-name>Main-Droite</object-name>
+	       <object-name>Prot-Civ1</object-name>
+	    <property>fdm/jsbsim/animation/yoke-aileron</property>	    
+	     <interpolation>
+                <entry>
+                    <ind>-1.0</ind>
+                    <dep>-10</dep>
+                </entry>
+                <entry>
+                    <ind>0.0</ind>
+                    <dep>0</dep>
+                </entry>
+                <entry>
+                    <ind>1</ind>
+                    <dep>11</dep>
+                </entry>                
+            </interpolation>
+	    <center>
+                <x-m>0</x-m>
+                <y-m>0.183136</y-m>
+                <z-m>0.548622</z-m>
+            </center>
+            <axis>
+                <x>1</x>
+                <y>0</y>
+                <z>0</z>
+            </axis>
+        </animation>
+	
+	<animation>
+            <type>rotate</type>            
+	     <object-name>Bras-H</object-name>
+	      <object-name>Bras-B</object-name>
+	       <object-name>Main-Droite</object-name>
+	       <object-name>Prot-Civ1</object-name>
+	    <property>fdm/jsbsim/animation/yoke-aileron</property>
+	    <factor>3</factor>
+	    <center>
+                <x-m>-0.0071735</x-m>
+                <y-m>0</y-m>
+                <z-m>0.514226</z-m>
+            </center>
+            <axis>
+                <x>0</x>
+                <y>-1</y>
+                <z>0</z>
+            </axis>
+        </animation>
+	
+	
+	<animation>
+            <type>rotate</type>            	     
+	      <object-name>Bras-B</object-name>
+	       <object-name>Main-Droite</object-name>	       
+	    <property>fdm/jsbsim/animation/yoke-elevator</property>	   
+	    <interpolation>
+                <entry>
+                    <ind>-1.0</ind>
+                    <dep>-28</dep>
+                </entry>
+                <entry>
+                    <ind>0.0</ind>
+                    <dep>0</dep>
+                </entry>
+                <entry>
+                    <ind>1</ind>
+                    <dep>26</dep>
+                </entry>                
+	    </interpolation>
+	    <center>
+               <x-m>-0.150024</x-m>
+                <y-m>0</y-m>
+                <z-m>0.303776</z-m>
+            </center>
+            <axis>
+                <x>0</x>
+                <y>-1</y>
+                <z>0</z>
+            </axis>
+        </animation>
+	
+	<animation>
+            <type>rotate</type>            	     
+	      <object-name>Bras-B</object-name>
+	       <object-name>Main-Droite</object-name>	       
+	    <property>fdm/jsbsim/animation/yoke-aileron</property>	    
+	     <interpolation>
+                <entry>
+                    <ind>-1.0</ind>
+                    <dep>8</dep>
+                </entry>
+                <entry>
+                    <ind>0.0</ind>
+                    <dep>0</dep>
+                </entry>
+                <entry>
+                    <ind>1</ind>
+                    <dep>-4</dep>
+                </entry>                
+            </interpolation>
+	    <center>
+                <x-m>-0.150024</x-m>
+                <y-m>0</y-m>
+                <z-m>0.303776</z-m>
+            </center>
+            <axis>
+                <x>0</x>
+                <y>-1</y>
+                <z>0</z>
+            </axis>
+        </animation>
+	
+	<animation>
+            <type>rotate</type>            	     
+	      <object-name>Bras-B</object-name>
+	       <object-name>Main-Droite</object-name>	       
+	    <property>fdm/jsbsim/animation/yoke-elevator</property>	    
+	     <interpolation>
+                <entry>
+                    <ind>-1.0</ind>
+                    <dep>0</dep>
+                </entry>
+                <entry>
+                    <ind>0.0</ind>
+                    <dep>0</dep>
+                </entry>
+                <entry>
+                    <ind>1</ind>
+                    <dep>-6</dep>
+                </entry>                
+            </interpolation>
+	    <center>
+                <x-m>-0.150024</x-m>
+                <y-m>0.244077</y-m>
+                <z-m>0</z-m>
+            </center>
+            <axis>
+                <x>0</x>
+                <y>0</y>
+                <z>1</z>
+            </axis>
+        </animation>
+	
+	
+	<animation>
+            <type>rotate</type>            	     
+	      <object-name>Bras-B</object-name>
+	       <object-name>Main-Droite</object-name>	       
+	    <property>fdm/jsbsim/animation/yoke-aileron</property>	    
+	    <interpolation>
+                <entry>
+                    <ind>-1.0</ind>
+                    <dep>10</dep>
+                </entry>
+                <entry>
+                    <ind>0.0</ind>
+                    <dep>0</dep>
+                </entry>
+                <entry>
+                    <ind>1</ind>
+                    <dep>-8</dep>
+                </entry>                
+            </interpolation>
+	    <center>
+                <x-m>-0.150024</x-m>
+                <y-m>0.244077</y-m>
+                <z-m>0</z-m>
+            </center>
+            <axis>
+                <x>0</x>
+                <y>0</y>
+                <z>1</z>
+            </axis>
+        </animation>
+	
+	
+	<animation>
+            <type>rotate</type>	     
+	       <object-name>Main-Droite</object-name>	       
+	    <property>fdm/jsbsim/animation/yoke-elevator</property>	    
+	    <interpolation>
+                <entry>
+                    <ind>-1.0</ind>
+                    <dep>2</dep>
+                </entry>
+                <entry>
+                    <ind>0.0</ind>
+                    <dep>0</dep>
+                </entry>
+                <entry>
+                    <ind>1</ind>
+		    <dep>-12</dep>
+                </entry>                
+            </interpolation>
+	    <center>
+                <x-m>-0.316904</x-m>
+                <y-m>0.124468</y-m>
+                <z-m>0</z-m>
+            </center>
+            <axis>
+                <x>0</x>
+                <y>0</y>
+                <z>1</z>
+            </axis>
+        </animation>
+	
+	
+	
+	<animation>
+            <type>rotate</type>	     
+	       <object-name>Main-Droite</object-name>	       
+	    <property>fdm/jsbsim/animation/yoke-aileron</property>
+	    <factor>12</factor>
+	    <center>
+                <x-m>-0.316904</x-m>
+                <y-m>0.124468</y-m>
+                <z-m>0</z-m>
+            </center>
+            <axis>
+                <x>0</x>
+                <y>0</y>
+                <z>1</z>
+            </axis>
+        </animation>
+
+        
+	<animation>
+            <type>rotate</type>	     
+	       <object-name>Main-Droite</object-name>	       
+	    <property>fdm/jsbsim/animation/yoke-elevator</property>	  
+	    <interpolation>
+                <entry>
+                    <ind>-1.0</ind>
+                    <dep>4</dep>
+                </entry>
+                <entry>
+                    <ind>0.0</ind>
+                    <dep>0</dep>
+                </entry>
+                <entry>
+                    <ind>1</ind>
+                    <dep>4</dep>
+                </entry>                
+            </interpolation>
+	    <center>
+                <x-m>0</x-m>
+                <y-m>0.137398</y-m>
+                <z-m>0.304361</z-m>
+            </center>
+            <axis>
+                <x>1</x>
+                <y>0</y>
+                <z>0</z>
+            </axis>
+        </animation>
+	
+	
+	<animation>
+            <type>rotate</type>	     
+	       <object-name>Main-Droite</object-name>	       
+	    <property>fdm/jsbsim/animation/yoke-aileron</property>	    
+	    <interpolation>
+                <entry>
+                    <ind>-1.0</ind>
+                    <dep>-5</dep>
+                </entry>
+                <entry>
+                    <ind>0.0</ind>
+                    <dep>0</dep>
+                </entry>
+                <entry>
+                    <ind>1</ind>
+                    <dep>-16</dep>
+                </entry>                
+            </interpolation>
+	    <center>
+                <x-m>0</x-m>
+                <y-m>0.137398</y-m>
+                <z-m>0.304361</z-m>
+            </center>
+            <axis>
+                <x>1</x>
+                <y>0</y>
+                <z>0</z>
+            </axis>
+        </animation>
+	
+	
+	
+
+</PropertyList>        

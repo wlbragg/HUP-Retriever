@@ -1,0 +1,328 @@
+<?xml version="1.0"?>
+
+<!--
+    Usable with FlightGear
+    Property of Gerard Robin
+    Copyright 
+-->
+
+<PropertyList>
+
+    <path>Models/module-ignition_master.ac</path>
+    <texture-path>Models/Textures</texture-path>
+
+   <!-- <animation>
+            <type>noshadow</type>
+            <object-name></object-name>
+    </animation>-->
+
+    <animation include="Instrument-Light3.xml">
+        <object-name>Cadran</object-name>
+    </animation>
+
+    <animation include="Instrument-Light3.xml">
+        <object-name>Inter</object-name>
+    </animation>
+    
+    <animation>
+                <condition>
+                    <equals>
+                        <property>sim/current-view/view-number</property>
+                        <value>999</value>
+                    </equals>
+            </condition>
+		<type>select</type>
+                <object-name>Gabarit-Pose</object-name>
+ 	</animation>
+
+    <model>
+	<name>Master_Light</name>
+	<path>Aircraft/HUP-Retriever/Instruments/Light-Master.xml</path>
+	    <offsets>
+		<x-m>-0.0437395</x-m>
+		<y-m>0.0</y-m>
+		<z-m>0.00395562</z-m>
+		<pitch-deg>0</pitch-deg>
+	    </offsets>
+    </model>
+
+
+
+       <!-- ========master================-->
+
+    <animation>
+        <type>pick</type>
+        <object-name>Cde-Master-Verrou</object-name>
+        <action>
+            <button>0</button>
+            <binding>
+                <command>property-toggle</command>
+                <property>fdm/jsbsim/animation/master-switch-lock-cmd</property>
+            </binding>
+        </action>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Cde-Master-Inter</object-name>
+        <object-name>Master-Inter-base</object-name>
+        <action>
+            <button>0</button>
+            <binding>
+                <command>property-toggle</command>
+                <property>fdm/jsbsim/animation/master-switch-cmd</property>
+            </binding>
+	    <!-- FIXME temporary  battery also switched on -->
+	    <binding>
+                <command>property-toggle</command>
+                <property>fdm/jsbsim/electrical/switch/battery</property>
+            </binding>
+        </action>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>Cde-Master-Verrou</object-name>
+        <property>fdm/jsbsim/animation/master-switch-lock</property>
+        <factor>-60</factor>
+        <center>
+            <x-m>-0.0536041</x-m>
+            <y-m>0.0</y-m>
+            <z-m>0.00829961</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>Cde-Master-Inter</object-name>
+        <property>fdm/jsbsim/animation/electrical-master-switch</property>
+        <factor>-40</factor>
+        <center>
+            <x-m>-0.0249822</x-m>
+            <y-m>0</y-m>
+            <z-m>0.00520182</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+
+    <!--=========rotor brake========-->
+
+
+    <animation>
+        <type>pick</type>
+        <object-name>Cde-Brake-Verrou</object-name>
+        <action>
+            <button>0</button>
+            <binding>
+                <command>property-toggle</command>
+                <property>fdm/jsbsim/animation/rotor_brake-switch-lock-cmd</property>
+            </binding>
+        </action>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Cde-Brake-Inter</object-name>
+        <object-name>Brake-Inter-base</object-name>
+        <action>
+            <button>0</button>
+            <binding>
+                <command>property-toggle</command>
+                <property>fdm/jsbsim/animation/rotor_brake-switch-cmd</property>
+            </binding>
+        </action>
+    </animation>
+
+
+    <animation>
+        <type>rotate</type>
+        <object-name>Cde-Brake-Verrou</object-name>
+        <property>fdm/jsbsim/animation/rotor_brake-switch-lock</property>
+        <factor>-60</factor>
+        <center>
+            <x-m>-0.0536041</x-m>
+            <y-m>0.0</y-m>
+            <z-m>0.00829961</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>Cde-Brake-Inter</object-name>
+        <property>fdm/jsbsim/animation/rotor_brake-switch-cmd</property>
+        <factor>-30</factor>
+        <center>
+            <x-m>-0.0249822</x-m>
+            <y-m>0</y-m>
+            <z-m>0.00520182</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z></z>
+        </axis>
+    </animation>
+
+
+    <!--===========clutch=============-->
+
+    <animation>
+        <type>pick</type>
+        <object-name>Cde-Clutch-Inter</object-name>
+        <object-name>Cde-Clutch-Inter-base</object-name>
+        <action>
+            <button>0</button>
+            <binding>
+                <command>property-toggle</command>
+                <property>fdm/jsbsim/animation/rotor_clutch-switch</property>
+            </binding>
+        </action>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>Cde-Clutch-Inter</object-name>
+        <property>fdm/jsbsim/animation/rotor_clutch-switch</property>
+        <interpolation>
+            <entry>
+                <ind>0.0</ind>
+                <dep>40</dep>
+            </entry>
+            <entry>
+                <ind>1.0</ind>
+                <dep>-40</dep>
+            </entry>
+        </interpolation>
+        <center>
+            <x-m>0.000844955</x-m>
+            <y-m>0</y-m>
+            <z-m>0.00520182</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+
+    <!--============magnetos=====ignition===============-->
+
+
+    <animation>
+        <type>rotate</type>
+        <object-name>Inter</object-name>
+        <property>fdm/jsbsim/propulsion/engine[0]/magnetos</property>
+        <interpolation>
+            <entry>
+                <ind>0</ind>
+                <dep>0</dep>
+            </entry>
+            <entry>
+                <ind>1</ind>
+                <dep>40</dep>
+            </entry>
+            <entry>
+                <ind>2</ind>
+                <dep>80</dep>
+            </entry>
+            <entry>
+                <ind>3</ind>
+                <dep>120</dep>
+            </entry>
+        </interpolation>
+        <center>
+            <x-m>0.0218349</x-m>
+            <y-m>0</y-m>
+            <z-m>0</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>-1</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>Inter</object-name>
+        <property>fdm/jsbsim/propulsion/engine[0]/starter</property>
+        <factor>40</factor>
+        <center>
+            <x-m>0.0218349</x-m>
+            <y-m>0</y-m>
+            <z-m>0</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>-1</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Inter</object-name>
+        <visible>true</visible>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <command>property-adjust</command>
+                <property>fdm/jsbsim/propulsion/engine[0]/magnetos</property>
+                <value>1</value>
+                <step>1</step>
+                <min>0</min>
+                <max>4</max>
+                <wrap>1</wrap>
+            </binding>
+        </action>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>Eng0-Start-Cmd</object-name>
+        <visible>true</visible>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <command>property-assign</command>
+                <property>fdm/jsbsim/propulsion/engine[0]/starter</property>
+                <value>1</value>
+            </binding>
+            <mod-up>
+                <binding>
+                    <command>property-assign</command>
+                    <property>fdm/jsbsim/propulsion/engine[0]/starter</property>
+                    <value>0</value>
+                </binding>
+            </mod-up>
+        </action>
+        </animation>
+
+
+
+
+
+
+
+
+
+
+</PropertyList>

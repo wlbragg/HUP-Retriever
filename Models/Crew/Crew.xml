@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<!--
+    Usable with FlightGear
+    Property of Gerard Robin (C) 2008-2010
+    Copyright 
+-->
+<PropertyList>
+
+	
+	
+	
+	
+	
+	<model>
+            <name>Pilote-In-Top</name>
+	    <path>Aircraft/HUP-Retriever/Models/Crew/AA_PilotT_v2.xml</path>
+            <offsets>		
+                    <x-m>-3.265</x-m>
+		     <y-m>0</y-m>
+                    <z-m>-0.335</z-m>
+                    <pitch-deg>0</pitch-deg>
+            </offsets>
+        </model>
+	
+	<model>
+            <name>Pilote-Head</name>
+	    <path>Aircraft/HUP-Retriever/Models/Crew/Pilot-Head.xml</path>
+            <offsets>
+		<x-m>-3.265</x-m>
+		 <y-m>0</y-m>
+		<z-m>-0.335</z-m>
+		<pitch-deg>0</pitch-deg>
+            </offsets>
+        </model>
+	
+	
+	
+	<model>
+            <name>Pilote-In-Bot</name>
+	    <path>Aircraft/HUP-Retriever/Models/Crew/AA_PilotB_v2.xml</path>
+            <offsets>
+                    <x-m>-3.265</x-m>
+		     <y-m>0</y-m>
+                    <z-m>-0.347453</z-m>
+                    <pitch-deg>-0</pitch-deg>
+		    <heading-deg>-1</heading-deg>
+            </offsets>
+        </model>
+	
+
+
+    <!--<name>Cockpit_View</name> => 0
+    <name>Wide-cockpit_View</name>  => 99-->
+	<animation>
+            <type>select</type>
+            <object-name>Pilote-In-Top</object-name>
+	    <object-name>Pilote-Head</object-name>
+	    <object-name>Pilote-In-Bot</object-name>
+            <condition>
+                    <and>
+			<greater-than>
+			    <property>fdm/jsbsim/simulation/sim-time-sec</property>
+			    <value>11</value>
+			</greater-than>
+                        <greater-than>
+                            <property>sim/current-view/view-number</property>
+                            <value>0</value>
+                        </greater-than>
+			<not> <property>fdm/jsbsim/propulsion/engine[0]/brake-ctrl-norm</property> </not>
+			<!-- <less-than>
+			    <property>fdm/jsbsim/animation/cockpit-right-door-pos-norm</property>
+			    <value>0.95</value>
+			</less-than>-->
+			<!--<property>fdm/jsbsim/animation/pilot-copilot</property>-->
+                    </and>
+            </condition>
+        </animation>
+	
+	<!--<animation>
+            <type>select</type>
+            <object-name>Co-Pilote-In-Top</object-name>
+	    <object-name>Co-Pilote-Head</object-name>
+	    <object-name>Co-Pilote-In-Bop</object-name>
+            <condition>
+                    <property>fdm/jsbsim/animation/pilot-copilot</property>
+            </condition>
+        </animation>-->
+
+</PropertyList>        

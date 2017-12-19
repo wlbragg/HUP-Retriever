@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<!--
+    Usable with FlightGear
+      =>    Gerard Robin
+    Copyright License:  GPLV2
+-->
+
+<PropertyList>
+
+    <path>hup-Marq_23S4.ac</path>
+	<texture-path>Textures</texture-path>
+
+
+
+</PropertyList>

@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!--
+    Usable with FlightGear
+      =>    Gerard Robin
+    Copyright License:  GPLV2
+-->
+<PropertyList>
+
+        <title>Helicoptere Piasecki HUP Retriever</title>
+            <key>
+            <name>}</name>
+            <desc>Magneto and Electric power ON</desc>
+            </key>
+            <key>
+           <name>s</name>
+            <desc>Start Engines and Rotor Gear ON</desc>
+            </key>
+            <key>
+            <name>{</name>
+            <desc>Shutdown Engines and Electric power OFF</desc>
+            </key>
+            <key>
+            <name>d</name>
+            <desc>Toggle  Trap Door ( bottom door )</desc>
+            </key>
+            <key>
+            <name>N</name>
+            <desc>Toggle rotor brake</desc>
+            </key>
+            <key>
+            <name>B</name>
+            <desc>Toggle Brake-Parking</desc>
+            </key>
+
+        <text>
+            That Helicopter is loaded with:
+                    Electric power OFF
+                    Engines and Rotor Gear OFF (the left door is opened)
+                    Rotor Brake ON
+                    Brake-Parking ON
+
+            START and STOP ROUTINE
+            To start:
+                1  Magneto and Electric Power ON => key "}"
+                2  Start the engine, rotor brake OFF and  rotorgear ON => key "s" (left door will close)
+                3  Brake-Parking OFF => key "B"
+
+            To stop:
+                Electric Power,  Engine and Rotorgear OFF  => key  "{"
+        </text>
+
+</PropertyList>

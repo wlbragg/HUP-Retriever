@@ -1,0 +1,2 @@
+var aircraft_dialog = gui.Dialog.new("/sim/gui/dialogs/HUP-Retriever/aircraft/dialog", "Inputs/aircraft-dialog.xml");
+var aicargo_dialog = gui.Dialog.new("/sim/gui/dialogs/HUP-Retriever/aicargo/dialog", "Inputs/aicargo-dialog.xml");

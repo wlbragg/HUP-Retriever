@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+
+<!--
+
+    Lift Coefficient
+
+    REYNOLDS NUMBER
+
+    ALPHA     160000     360000     700000    1000000    2000000    5000000
+
+
+
+    0     0.0000     0.0000     0.0000     0.0000     0.0000     0.0000
+
+    1     0.1100     0.1100     0.1100     0.1100     0.1100     0.1100
+
+    2     0.2200     0.2200     0.2200     0.2200     0.2200     0.2200
+
+    3     0.3300     0.3300     0.3300     0.3300     0.3300     0.3300
+
+    4     0.4400     0.4400     0.4400     0.4400     0.4400     0.4400
+
+    5     0.5500     0.5500     0.5500     0.5500     0.5500     0.5500
+
+    6     0.6600     0.6600     0.6600     0.6600     0.6600     0.6600
+
+    7     0.7460     0.7700     0.7700     0.7700     0.7700     0.7700
+
+    8     0.8247     0.8542     0.8800     0.8800     0.8800     0.8800
+
+    9     0.8527     0.9352     0.9598     0.9661     0.9900     0.9900
+
+    10     0.1325     0.9811     1.0343     1.0512     1.0727     1.1000
+
+
+-->
+
+
+
+<rotor name="hup_frt-rotor">
+
+    <diameter  unit="M"> 10.67 </diameter>
+    <numblades>  3 </numblades>
+    <gearratio> 7.5987842</gearratio>
+  <nominalrpm> 329</nominalrpm> <!-- shaft gear engine 2500 rpm / -->
+
+  <minrpm>3</minrpm>
+  <maxrpm>300</maxrpm>
+  <chord unit="M">  0.36</chord>
+  <liftcurveslope>  6 </liftcurveslope><!--NACA 0012-->
+  <flappingmoment unit="KG*M2">1400</flappingmoment>  <!--a guess-->
+  <twist> -0.10 </twist>
+  <massmoment>64</massmoment><!--a guess-->
+  <tiplossfactor> 0.96 </tiplossfactor>
+  <!--<polarmoment unit="SLUG*FT2"></polarmoment>--><!--default-->
+  <inflowlag>  0.07 </inflowlag>
+  <hingeoffset unit="FT"> 0.5 </hingeoffset>
+
+
+  <maxbrakepower unit="HP">16</maxbrakepower>
+
+  <groundeffectexp> 0.06 </groundeffectexp>
+  <groundeffectshift unit="M">  1.5 </groundeffectshift>
+
+
+
+
+
+
+
+
+
+
+</rotor>

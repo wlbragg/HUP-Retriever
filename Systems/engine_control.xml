@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+
+<system name="Engine-Ctl">
+
+  <channel name="Trigger-StartStop-Engine">
+
+     
+      
+       <switch name="systems/engine/started">
+          <default value="systems/engine/started"/>
+              <test logic="AND" value="1">
+                  propulsion/engine[0]/starter == 1
+              </test>
+              <test logic="AND" value="0">
+                  propulsion/engine[0]/magnetos  == 0
+                  propulsion/engine[0]/starter == 0
+              </test>
+              <test logic="AND" value="systems/engine/started">
+                  propulsion/engine[0]/starter == 0
+              </test>
+       </switch>
+
+      <switch name="fcs/rpm-governor-active-norm-sw">
+          <default value="fcs/rpm-governor-active-norm"/>
+                <test logic="AND" value="0">
+                    systems/crash-detect/aero-on == 0
+                </test>
+                <test logic="AND" value="1">
+                    propulsion/engine[0]/magnetos  == 3
+                    propulsion/engine[0]/starter == 1
+                </test>
+                <test logic="AND" value="1">
+                    propulsion/engine[0]/magnetos  == 3
+                    propulsion/engine[0]/clutch-ctrl-norm  == 1
+                </test>
+                <output>fcs/rpm-governor-active-norm</output>
+       </switch>
+
+       <kinematic name="systems/engine/throttle-value">
+           <input>systems/engine/started</input>
+           <traverse>
+               <setting>
+                   <position>0</position>
+                   <time>0</time>
+               </setting>
+               <setting>
+                   <position>1</position>
+                   <time>20</time>
+               </setting>
+           </traverse>
+        </kinematic>
+
+       <switch name="systems/engine/throttle-max">
+           <default value="0.6"/>
+           <test logic="AND" value="systems/engine/throttle-value">
+               propulsion/engine[0]/engine-rpm  LE  3000
+               systems/engine/started  == 1
+               propulsion/engine[0]/set-running  == 1
+               systems/rotor/clutch-cmd == 1
+           </test>
+        </switch>
+
+        <switch name="systems/engine/running">
+            <default value="0"/>
+            <test logic="AND" value="1">
+                fcs/rpm-governor-active-norm == 1
+                propulsion/engine[0]/set-running  == 1
+            </test>
+        </switch>
+
+
+    </channel>
+    
+     <channel name="Nominal-RPM">
+	
+	<kinematic name="fcs/fuel-flow-control">
+           <input>systems/engine/throttle-value</input>
+           <traverse>
+               <setting>
+                   <position>0</position>
+                   <time>0</time>
+               </setting>
+               <setting>
+                   <position>1</position>
+                   <time>30</time>
+               </setting>
+           </traverse>
+        </kinematic>
+	
+	<!--value="2500"> fcs/nominal-engine-rpm -->
+	<scheduled_gain name="Nominal RPM Pos">
+            <input>fcs/nominal-engine-rpm </input>
+            <table>
+                <independentVar lookup="row">fcs/fuel-flow-control</independentVar>               
+                <tableData>                                
+                   0.00	0.2
+		   0.25	0.4
+		   0.50	0.6
+		   0.75	1
+                </tableData>
+            </table>
+            <output>fcs/nominal-rpm</output>
+        </scheduled_gain>
+	
+    </channel>
+    
+     <channel name="RPM-Governor">
+        <switch name="fcs/rpm-governor-pid-inhibit">
+            <default logic="OR" value="-1.0"/>
+            <test value="0.0">
+                fcs/rpm-governor-active-norm GT 0.
+                propulsion/engine[0]/engine-rpm  LT  1000
+            </test>
+        </switch>
+        <fcs_function name="fcs/rpm-delta">
+            <function>
+                <product>
+                    <property> fcs/rpm-governor-active-norm </property>
+                    <difference>
+			 <property> fcs/nominal-rpm </property>
+                       <!-- <property> fcs/nominal-engine-rpm </property>-->
+                        <property> propulsion/engine/engine-rpm </property>
+                    </difference>
+                </product>
+            </function>
+            <clipto>
+                <min> -500.0 </min>
+                <max>  500.0 </max>
+            </clipto>
+        </fcs_function>
+        <pid name="fcs/throttle-pid">
+            <input>fcs/rpm-delta</input>
+            <!--<kp> 0.420</kp>
+            <ki> 0.008400 </ki>
+            <kd> 0.1200   </kd>-->
+            <kp>  0.9   </kp>
+            <ki>  0.0012 </ki>
+            <kd> 0.05 </kd>
+            <trigger> fcs/rpm-governor-pid-inhibit </trigger>
+            <clipto>
+                <min>  0.1 </min>
+                <max>systems/engine/throttle-max</max>
+            </clipto>
+            <output>fcs/throttle-pos-norm</output>
+            <output>fcs/throttle-pos-norm[1]</output>
+        </pid>
+
+
+    </channel>
+
+
+
+</system>

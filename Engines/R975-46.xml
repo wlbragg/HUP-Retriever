@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+
+
+
+<!--
+
+
+    Engine
+    Continental R975-46
+    Fuel
+    115/145 or 100/130 minimum grade aviation gasoline
+    Engine limits
+    Normal Maximum (30 minute limit) 2350 RPM and 39 in. Hg. (475 HP)
+    Maximum allowable continuous 2350 RPM  37.5 in.Hg. (450 HP)
+    Rotor limits and engine
+    Power Off (Rotor Tach.)
+    Power On (Engine Tach.)
+    operating speeds
+    Maximum 360 r.p.m.
+    Maximum 2350 r.p.m.
+    Minimum 230 r.p.m.
+        Minimum 2100 r.p.m.
+    -->
+
+<piston_engine name="">
+    <minmp unit="INHG">          6.0 </minmp>
+    <maxmp unit="INHG">         28.5 </maxmp>
+    <displacement unit="IN3"> 988.00</displacement>
+    <maxhp>  450</maxhp>
+    <cycles>         4.0 </cycles>
+    <idlerpm>      250.0 </idlerpm>
+    <maxrpm>      2800.0 </maxrpm>
+    <static-friction> 20 </static-friction>
+    <sparkfaildrop>  1 </sparkfaildrop>
+    <volumetric-efficiency> 0.85 </volumetric-efficiency>
+    <!-- Optional items that affect engine performance -->
+    <!-- Defining <bsfc> over-rides the built-in horsepower calculations -->
+        <bsfc>           0.45 </bsfc>
+        <cylinders>         4.0  </cylinders>
+        <compression-ratio> 8.0 </compression-ratio>
+        <!--to compensate the rotor gear loss (3.5 HP)-->
+        <starter-torque> 18000 </starter-torque>
+        <starter-rpm>300</starter-rpm>
+        <cooling-factor>0.8</cooling-factor>
+</piston_engine>
+

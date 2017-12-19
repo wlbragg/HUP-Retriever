@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<PropertyList>
+
+            <jsbsim>
+		<systems>
+		    <gear>
+			<gear-cmd-norm type="bool">true</gear-cmd-norm>
+			<left-brake-cmd-norm alias="/controls/gear/brake-left"/>
+			<right-brake-cmd-norm alias="/controls/gear/brake-right"/>
+		     </gear>
+                </systems>
+		<fcs>
+		    <rpm-governor-active-norm>1</rpm-governor-active-norm>
+		    <brake-parking-cmd-norm alias="/controls/gear/brake-parking"/>
+		    <tailwheel-lock-cmd-norm alias="/controls/gear/tailwheel-lock"/>
+		    <mixture-cmd-norm  alias="/controls/engines/engine[0]/mixture"/>
+		</fcs>
+		<propulsion>
+		    <engine n='0'>
+			<starter alias="/controls/engines/engine[0]/starter"/>
+			<magnetos alias="/controls/engines/engine[0]/magnetos"/>
+			<throttle  alias="/controls/engines/engine[0]/throttle"/>
+			<propeller-pitch-ctl  alias="/controls/engines/engine[0]/propeller-pitch"/>
+		    </engine>
+		</propulsion>
+		<electrical>
+		    <outputs>
+			<adf alias="/systems/electrical/outputs/adf"/>
+			<hsi alias="/systems/electrical/outputs/hsi"/>
+			<nav n='0' alias="/systems/electrical/outputs/nav[0]"/>
+			<nav n='1' alias="/systems/electrical/outputs/nav[1]"/>
+			<dme alias="/systems/electrical/outputs/dme"/>
+			<tacan alias="/systems/electrical/outputs/tacan"/>
+			<comm n='0' alias="/systems/electrical/outputs/comm[0]"/>
+			<comm n='1' alias="/systems/electrical/outputs/comm[1]"/>
+			<turn-coordinator alias="/systems/electrical/outputs/turn-coordinator"/>
+			<fuel-pump alias="/systems/electrical/outputs/fuel-pump"/>
+			<instrument-lights alias="/systems/electrical/outputs/instrument-lights"/>
+		    </outputs>
+		</electrical>
+		 <systems>
+		    <rotor>
+			<brake-cmd-norm>1</brake-cmd-norm>
+		    </rotor>
+		</systems>
+            </jsbsim>
+	    
+	    
+
+
+</PropertyList>

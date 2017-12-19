@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<!--
+    Usable with FlightGear
+    Property of Gerard Robin (C) 2008-2010
+    Copyright 
+-->
+<PropertyList>
+    
+    
+    
+    
+    
+	<animation>
+            <type>select</type>
+            <object-name>gabarit-pose</object-name>
+            <condition>                   
+		    <equals>
+			<property>sim/current-view/view-number</property>
+                        <value>99</value>
+                    </equals>		
+	    </condition>
+	</animation>
+	
+	<animation></animation>
+	<animation></animation>
+	<animation></animation>
+	<animation></animation>
+	<animation></animation>
+	<animation></animation>
+	<animation></animation>
+	<animation></animation>
+	
+	
+	
+	
+	
+	
+	<animation>
+            <type>rotate</type>
+            <object-name>Jambe-Droite-H</object-name>
+	    <object-name>Jambe-Droite-B</object-name>
+	     <object-name>ChevilleD</object-name>
+	      <object-name>ChaussureD</object-name>
+	    <property>fdm/jsbsim/animation/rudder</property>
+	    <factor>10</factor>
+	    <center>               
+		 <x-m>-0.0963539</x-m>
+                <y-m>0</y-m>                
+		<z-m>0.0796664</z-m>
+            </center>
+            <axis>
+                <x>0</x>
+                <y>-1</y>
+                <z>0</z>
+            </axis>
+        </animation>
+	
+	<animation>
+            <type>rotate</type>
+            <object-name>Jambe-Droite-B</object-name>
+	     <object-name>ChevilleD</object-name>
+	      <object-name>ChaussureD</object-name>
+	    <property>fdm/jsbsim/animation/rudder</property>
+	    <factor>-16</factor>
+	    <center>
+                <x-m>-0.434214</x-m>
+                <y-m>0</y-m>
+                <z-m>0.134777</z-m>
+            </center>
+            <axis>
+                <x>0</x>
+                <y>-1</y>
+                <z>0</z>
+            </axis>
+        </animation>
+	
+	<animation>
+            <type>rotate</type>            
+	     <object-name>ChevilleD</object-name>
+	      <object-name>ChaussureD</object-name>
+	      <property>fdm/jsbsim/animation/rudder</property>    
+	    <offset-deg>8</offset-deg>
+	    <factor>-6</factor>
+	    <center>
+                <x-m>-0.707834</x-m>
+                <y-m>0</y-m>
+                <z-m>-0.0912976</z-m>
+            </center>
+            <axis>
+                <x>0</x>
+                <y>-1</y>
+                <z>0</z>
+            </axis>
+        </animation>
+	
+	
+	<animation>
+            <type>rotate</type>
+            <object-name>Jambe-Gauche-H</object-name>
+	    <object-name>Jambe-Gauche-B</object-name>
+	     <object-name>ChevilleG</object-name>
+	      <object-name>ChaussureG</object-name>
+	    <property>fdm/jsbsim/animation/rudder</property>
+	    <factor>-10</factor>
+	    <center>                
+		 <x-m>-0.0963539</x-m>
+                <y-m>0</y-m>                
+		<z-m>0.0796664</z-m>
+            </center>
+            <axis>
+                <x>0</x>
+                <y>-1</y>
+                <z>0</z>
+            </axis>
+        </animation>
+	
+	<animation>
+            <type>rotate</type>
+            <object-name>Jambe-Gauche-B</object-name>
+	     <object-name>ChevilleG</object-name>
+	      <object-name>ChaussureG</object-name>
+	    <property>fdm/jsbsim/animation/rudder</property>
+	    <factor>16</factor>
+	    <center>
+                <x-m>-0.434214</x-m>
+                <y-m>0</y-m>
+                <z-m>0.134777</z-m>
+            </center>
+            <axis>
+                <x>0</x>
+                <y>-1</y>
+                <z>0</z>
+            </axis>
+        </animation>
+	
+	<animation>
+            <type>rotate</type>            
+	     <object-name>ChevilleG</object-name>
+	      <object-name>ChaussureG</object-name>
+	    <property>fdm/jsbsim/animation/rudder</property>
+	    <offset-deg>8</offset-deg>
+	    <factor>6</factor>
+	    <center>
+                <x-m>-0.707834</x-m>
+                <y-m>0</y-m>
+                <z-m>-0.0912976</z-m>
+            </center>
+            <axis>
+                <x>0</x>
+                <y>-1</y>
+                <z>0</z>
+            </axis>
+        </animation>
+	
+	
+
+</PropertyList>        

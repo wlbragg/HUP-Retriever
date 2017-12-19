@@ -1,0 +1,137 @@
+<PropertyList>
+
+
+    <!--
+    Usable with FlightGear
+    Property of Gerard Robin (C) 2008-2010
+    Copyright 
+    -->
+    
+    <path>rescue-noman.ac</path>
+       
+
+	<offsets>
+            <pitch-deg>0</pitch-deg>
+            <z-m>0</z-m>
+            <x-m>0.0</x-m>
+            <heading-deg>0</heading-deg>
+        </offsets>
+	
+	 <effect>
+            <inherits-from>Aircraft/HUP-Retriever/Models/Effects/reflectHUP</inherits-from>
+		<object-name>Crown</object-name>
+		<object-name>Hook</object-name>
+		<object-name>float</object-name>
+	    </effect>
+	    
+	
+
+        <animation>
+		<type>select</type>
+		<object-name>Rope</object-name>
+		<condition>
+		    <and>
+		    <equals>
+				<property>/sim/model/rescue</property>
+				<value>1</value>
+			</equals>
+			<not-equals>
+			    <property>fdm/jsbsim/animation/rescue/rescue-lift-cmd</property>
+			    <value>0</value>
+			</not-equals>
+		    </and>
+		</condition>
+        </animation>
+	
+	<animation>
+            <type>select</type>	    
+	     <object-name>Hook</object-name>
+	    <object-name>Crown</object-name>
+	    <object-name>sangle</object-name>
+	    <object-name>belt</object-name>
+	    <object-name>float</object-name>
+            <condition>
+		<and>
+		    <equals>
+				<property>/sim/model/rescue</property>
+				<value>1</value>
+			</equals>
+			<not-equals>
+			    <property>fdm/jsbsim/animation/rescue/rescue-lift-cmd</property>
+			    <value>0</value>
+			</not-equals>
+		    </and>
+            </condition>
+        </animation>
+	
+	
+	<!--<animation>
+            <type>select</type>	    
+            <object-name>Rescued-Person</object-name>
+	    <object-name>Casque</object-name>
+	     <object-name>life-jacket</object-name>	   
+            <condition>
+		<and>
+		    <equals>
+				<property>/sim/model/rescue</property>
+				<value>1</value>
+			</equals>
+			<greater-than>
+			    <property>fdm/jsbsim/animation/rescue/rescue-lift-cmd</property>
+			    <value>0.024</value>
+			</greater-than>
+		    </and>
+            </condition>
+        </animation>-->
+
+
+
+	<animation>
+	<type>translate</type>
+	 <object-name>Hook</object-name>
+	<object-name>Crown</object-name>
+	<object-name>sangle</object-name>
+	<object-name>belt</object-name>
+	<object-name>float</object-name>
+	<property>fdm/jsbsim/animation/rescue/rescue-lift-value-m</property>
+	<offset-m>5</offset-m>
+	<factor>-1</factor>
+	<axis>
+              <x>0</x>
+              <y>0</y>
+              <z>1</z>
+        </axis>
+	</animation>
+
+
+	<animation>
+	<type>translate</type>
+	<object-name>Rope</object-name>
+	<property>fdm/jsbsim/animation/rescue/rescue-lift-value-m</property>
+	<factor>-0.5</factor>
+	<axis>
+              <x>0</x>
+              <y>0</y>
+              <z>1</z>
+        </axis>
+	</animation>
+
+	<animation>
+		<type>scale</type>
+		<object-name>Rope</object-name>
+		<property>fdm/jsbsim/animation/rescue/rescue-lift-value-m</property>
+		<x-max>1</x-max>
+		<x-min>1</x-min>
+                <y-max>1</y-max>
+		<y-min>1</y-min>
+		<z-max>1</z-max>
+		<z-min>0.0</z-min>
+		<x-factor>1</x-factor>
+		<y-factor>1</y-factor>
+		<z-factor>0.1</z-factor>
+	</animation>
+
+
+
+
+</PropertyList>

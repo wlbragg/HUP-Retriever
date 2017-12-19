@@ -1,0 +1,461 @@
+<?xml version="1.0"?>
+
+<!--
+Gerard Robin
+    Copyright License:  GPLv2
+-->
+
+<PropertyList>
+
+    <path>hup-cockpit.ac</path>
+    <texture-path>Textures</texture-path>
+    
+    
+    <!--<effect>
+	<inherits-from>Aircraft/HUP-Retriever/Models/Effects/reflectp-shine</inherits-from>
+		
+    </effect>-->
+    
+	<animation>
+		<type>noshadow</type>
+                <object-name>VPanel</object-name>
+ 	</animation>
+    
+    <effect>
+	    <inherits-from>Aircraft/HUP-Retriever/Models/Effects/reflectp-shine</inherits-from>
+	    <object-name>Pedale-GRudder-Pilote</object-name>
+	    <object-name>Base-GRudder-Pilote</object-name>
+	   <object-name>Pedale-DRudder-Pilote</object-name>
+	    <object-name>Base-DRudder-Pilote</object-name>
+	   <object-name>GRudder-Copilote</object-name>
+	    <object-name>Base-GRudder-Copilote</object-name>
+	    <object-name>DRudder-Copilote</object-name>
+	     <object-name>Base-DRudder-Copilote</object-name>
+	</effect>
+	
+	
+	<effect>
+            <inherits-from>Aircraft/HUP-Retriever/Models/Effects/reflecttrain_2</inherits-from>
+	    <object-name>Collective-Pilote</object-name>
+	    <object-name>Manche-Pilote</object-name>
+	    <object-name>Manche-Copilote</object-name>
+	     
+            <!--<object-name></object-name>-->
+        </effect>
+    
+	
+	<model>
+            <name>BPanel</name>
+            <path>Aircraft/HUP-Retriever/Panels/HUP_BPanel.xml</path>
+            <offsets>
+                <x-m>0</x-m>
+                <y-m>0</y-m>
+                <z-m>-0</z-m>
+                <pitch-deg>0</pitch-deg>
+            </offsets>
+        </model>
+	
+	
+	<model>
+            <name>VPanel</name>
+            <path>Aircraft/HUP-Retriever/Panels/HUP_VPanel.xml</path>
+            <offsets>
+                    <x-m>-4.33172</x-m>
+                    <y-m>0.0</y-m>
+                    <z-m>-0.160922</z-m>
+                    <pitch-deg>0</pitch-deg>
+            </offsets>
+        </model>
+	
+	
+	<!--========================================================================-->
+	
+        <animation>
+            <type>rotate</type>
+            <object-name>Pedale-GRudder-Pilote</object-name>
+	    <object-name>Base-GRudder-Pilote</object-name>
+            <property>fdm/jsbsim/fcs/rudder-cmd-norm</property>
+            <factor>16</factor>
+            <center>
+                <x-m>-4.33863</x-m>
+                <y-m>0</y-m>
+                <z-m>-0.926594</z-m>
+            </center>
+            <axis>
+                <x>0</x>
+                <y>1</y>
+                <z>0</z>
+            </axis>
+        </animation>
+	
+	 <animation>
+            <type>rotate</type>
+            <object-name>Pedale-GRudder-Pilote</object-name>
+            <property>fdm/jsbsim/fcs/rudder-cmd-norm</property>
+            <factor>-28</factor>
+            <center>
+                <x-m>-4.327</x-m>
+                <y-m>0</y-m>
+                <z-m>-0.768847</z-m>
+            </center>
+            <axis>
+                <x>0</x>
+                <y>1</y>
+                <z>0</z>
+            </axis>
+        </animation>
+
+        <animation>
+            <type>rotate</type>
+	    <object-name>Pedale-DRudder-Pilote</object-name>
+	    <object-name>Base-DRudder-Pilote</object-name>
+            <property>fdm/jsbsim/fcs/rudder-cmd-norm</property>
+            <factor>-16</factor>
+            <center>
+                <x-m>-4.33863</x-m>
+                <y-m>0</y-m>
+                <z-m>-0.926594</z-m>
+            </center>
+            <axis>
+                <x>0</x>
+                <y>1</y>
+                <z>0</z>
+            </axis>
+        </animation>
+	
+	 <animation>
+            <type>rotate</type>
+            <object-name>Pedale-DRudder-Pilote</object-name>
+            <property>fdm/jsbsim/fcs/rudder-cmd-norm</property>
+            <factor>28</factor>
+            <center>
+                <x-m>-4.327</x-m>
+                <y-m>0</y-m>
+                <z-m>-0.768847</z-m>
+            </center>
+            <axis>
+                <x>0</x>
+                <y>1</y>
+                <z>0</z>
+            </axis>
+        </animation>
+	
+	 
+	
+	<animation>
+	<type>rotate</type>
+	    <object-name>Collective-Pilote</object-name>
+	    <property>fdm/jsbsim/fcs/throttle-cmd-norm</property>
+	    <factor>-15</factor>
+	    <center>
+                <x-m>-3.45069</x-m>
+                <y-m>0</y-m>
+                <z-m>-0.875155</z-m>
+            </center>
+	    <axis>
+                <x>0</x>
+                <y>1</y>
+                <z>0</z>
+            </axis>
+	</animation>
+
+        <animation>
+            <condition>
+                <equals>
+                    <property>fdm/jsbsim/animation/cockpit-hatch-pos-norm</property>
+                    <value>0</value>
+                </equals>
+            </condition>
+            <type>rotate</type>
+            <object-name>GRudder-Copilote</object-name>
+	   <object-name>Base-GRudder-Copilote</object-name>
+            <property>fdm/jsbsim/fcs/rudder-cmd-norm</property>
+            <factor>27</factor>
+            <center>
+                <x-m>-4.33863</x-m>
+                <y-m>0</y-m>
+                <z-m>-0.926594</z-m>
+            </center>
+            <axis>
+                <x>0</x>
+                <y>1</y>
+                <z>0</z>
+            </axis>
+        </animation>
+
+        <animation>
+            <condition>
+                <equals>
+                    <property>fdm/jsbsim/animation/cockpit-hatch-pos-norm</property>
+                    <value>0</value>
+                </equals>
+            </condition>
+            <type>rotate</type>
+            <object-name>DRudder-Copilote</object-name>
+	    <object-name>Base-DRudder-Copilote</object-name>
+            <property>fdm/jsbsim/fcs/rudder-cmd-norm</property>
+            <factor>-27</factor>
+            <center>
+                <x-m>-4.33863</x-m>
+                <y-m>0</y-m>
+                <z-m>-0.926594</z-m>
+            </center>
+            <axis>
+                <x>0</x>
+                <y>1</y>
+                <z>0</z>
+            </axis>
+        </animation>
+
+        <!--==========  ============================-->
+        <animation>
+            <type>rotate</type>
+            <object-name>Manche-Pilote</object-name>
+	   <object-name>Pilot-Yoke-sock</object-name>
+            <property>fdm/jsbsim/animation/yoke-elevator</property>
+            <factor>-10</factor>
+            <center>
+                <x-m>-3.96906</x-m>
+                <y-m>-0.351078</y-m>
+                <z-m>-0.921946</z-m>
+            </center>
+            <axis>
+                <x>0.0</x>
+                <y>1.0</y>
+                <z>0.0</z>
+            </axis>
+        </animation>
+
+        <animation>
+            <type>rotate</type>
+            <object-name>Manche-Pilote</object-name>
+	     <object-name>Pilot-Yoke-sock</object-name>
+            <property>fdm/jsbsim/animation/yoke-aileron</property>
+            <factor>-10</factor>
+            <center>
+                <x-m>-3.96906</x-m>
+                <y-m>-0.351078</y-m>
+                <z-m>-0.921946</z-m>
+            </center>
+            <axis>
+                <x>1.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+            </axis>
+        </animation>
+
+        <animation>
+            <condition>
+                <equals>
+                    <property>fdm/jsbsim/animation/cockpit-hatch-pos-norm</property>
+                    <value>0</value>
+                </equals>
+            </condition>
+            <type>rotate</type>
+            <object-name>Manche-Copilote</object-name>
+	     <object-name>Copilot-Yoke-sock</object-name>
+            <property>fdm/jsbsim/animation/yoke-elevator</property>
+            <factor>-10</factor>
+            <center>
+                <x-m>-3.96906</x-m>
+                <y-m>0.355308</y-m>
+                <z-m>-0.921946</z-m>
+            </center>
+            <axis>
+                <x>0.0</x>
+                <y>1.0</y>
+                <z>0.0</z>
+            </axis>
+        </animation>
+
+        <animation>
+            <condition>
+                <equals>
+                    <property>fdm/jsbsim/animation/cockpit-hatch-pos-norm</property>
+                    <value>0</value>
+                </equals>
+            </condition>
+            <type>rotate</type>
+            <object-name>Manche-Copilote</object-name>
+	    <object-name>Copilot-Yoke-sock</object-name>
+            <property>fdm/jsbsim/animation/yoke-aileron</property>
+            <factor>-10</factor>
+            <center>
+                <x-m>-3.96906</x-m>
+                <y-m>0.355308</y-m>
+                <z-m>-0.921946</z-m>
+            </center>
+            <axis>
+                <x>1.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+            </axis>
+        </animation>
+       
+
+        <!--===========SIEGE COPILOTE ============================-->
+	
+	
+	
+	
+
+        <animation>
+            <type>rotate</type>
+             <object-name>DSiege-Base</object-name>
+             <object-name>DSiege-H</object-name>
+             <object-name>DSiege-Bras</object-name>
+             <object-name>DSiege-V</object-name>
+            <property>fdm/jsbsim/animation/cockpit-hatch-pos-norm</property>
+            <interpolation>
+                    <entry>
+                    <ind>0.0</ind>
+                    <dep>0</dep>
+                    </entry>
+                    <entry>
+                    <ind>0.33</ind>
+                    <dep>0</dep>
+                    </entry>
+                    <entry>
+                    <ind>0.66</ind>
+                    <dep>-90</dep>
+                    </entry>
+                    <entry>
+                    <ind>1.0</ind>
+                    <dep>-90</dep>
+                    </entry>
+            </interpolation>
+            <center>
+                <x-m>-3.88295</x-m>
+                <y-m>0</y-m>
+                <z-m>-0.85784</z-m>
+            </center>
+            <axis>
+              <x>0</x>
+              <y>1</y>
+              <z>0</z>
+            </axis>
+        </animation>
+
+        <animation>
+            <type>rotate</type>
+             <object-name>DSiege-Bras</object-name>
+             <object-name>DSiege-V</object-name>
+            <property>fdm/jsbsim/animation/cockpit-hatch-pos-norm</property>
+            <interpolation>
+                    <entry>
+                    <ind>0.0</ind>
+                    <dep>0</dep>
+                    </entry>
+                    <entry>
+                    <ind>0.33</ind>
+                    <dep>30</dep>
+                    </entry>
+                    <entry>
+                    <ind>0.66</ind>
+                    <dep>30</dep>
+                    </entry>
+                    <entry>
+                    <ind>1.0</ind>
+                    <dep>30</dep>
+                    </entry>
+            </interpolation>
+            <center>
+                <x-m>-3.73441</x-m>
+                <y-m>0</y-m>
+                <z-m>-0.60264</z-m>
+            </center>
+            <axis>
+              <x>0</x>
+              <y>1</y>
+              <z>0</z>
+            </axis>
+        </animation>
+
+        <animation>
+            <type>rotate</type>
+             <object-name>DSiege-V</object-name>
+            <property>fdm/jsbsim/animation/cockpit-hatch-pos-norm</property>
+            <interpolation>
+                    <entry>
+                    <ind>0.0</ind>
+                    <dep>0</dep>
+                    </entry>
+                    <entry>
+                    <ind>0.33</ind>
+                    <dep>-30</dep>
+                    </entry>
+                    <entry>
+                    <ind>0.66</ind>
+                    <dep>-130</dep>
+                    </entry>
+                    <entry>
+                    <ind>1.0</ind>
+                    <dep>-130</dep>
+                    </entry>
+            </interpolation>
+            <center>
+                <x-m>-3.34322</x-m>
+                <y-m>0</y-m>
+                <z-m>-0.353252</z-m>
+            </center>
+            <axis>
+              <x>0</x>
+              <y>1</y>
+              <z>0</z>
+            </axis>
+        </animation>
+
+        <animation>
+	     <condition>
+                <not-equals>
+                    <property>fdm/jsbsim/animation/cockpit-hatch-pos-norm</property>
+                    <value>0</value>
+                </not-equals>
+            </condition>
+            <type>rotate</type>
+             <object-name>Manche-Copilote</object-name>
+	      <object-name>Copilot-Yoke-sock</object-name>
+            <property>fdm/jsbsim/animation/cockpit-hatch-pos-norm</property>
+            <interpolation>
+                    <entry>
+                    <ind>0.0</ind>
+                    <dep>0</dep>
+                    </entry>
+                    <entry>
+                    <ind>0.33</ind>
+                    <dep>-80</dep>
+                    </entry>
+                    <entry>
+                    <ind>0.66</ind>
+                    <dep>-80</dep>
+                    </entry>
+                    <entry>
+                    <ind>1.0</ind>
+                    <dep>-80</dep>
+                    </entry>
+            </interpolation>
+            <center>
+                <x-m>-3.96916</x-m>
+                <y-m>0</y-m>
+                <z-m>-0.87</z-m>
+            </center>
+            <axis>
+              <x>0</x>
+              <y>1</y>
+              <z>0</z>
+            </axis>
+        </animation>
+	
+	
+
+
+ 
+    
+
+
+
+
+
+
+
+</PropertyList>

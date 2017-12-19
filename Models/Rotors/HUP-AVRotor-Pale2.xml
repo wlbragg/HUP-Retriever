@@ -1,0 +1,606 @@
+<PropertyList>
+
+
+    <!--
+    Usable with FlightGear
+      =>    Gerard Robin
+    Copyright License:  GPLV2
+    -->
+    <!--                   Auteur :      Gerard ROBIN            GPLV2  COPYRIGHT-->
+    
+	<params>
+		<flapD0>
+			<factor>1</factor>
+		</flapD0>
+		<flapD1>
+			<factor>0.32</factor>
+		</flapD1>
+		<flapD2>
+			<factor>0.27</factor>
+		</flapD2>
+		<flapD3>
+			<factor>0.22</factor>
+		</flapD3>
+		<flapD4>
+			<factor>0.18</factor>
+		</flapD4>
+		<flapD5>
+			<factor>0.15</factor>
+		</flapD5>
+		<flapD6>
+			<factor>0.13</factor>
+		</flapD6>
+		<flapD7>
+			<factor>0.11</factor>
+		</flapD7>
+		<flapD8>
+			<factor>0.0</factor>
+		</flapD8>		          
+	</params>
+
+        <model>
+            <name>AVRotor</name>
+            <path>Aircraft/HUP-Retriever/Models/Rotors/HUP-AVRotor-Base.xml</path>
+            <offsets>
+                    <x-m>0</x-m>
+                    <y-m>0</y-m>
+                    <z-m>0</z-m>
+                    <pitch-deg>0</pitch-deg>
+            </offsets>
+        </model>
+
+        <!--ROTATE===============-->
+
+        <animation>
+		<type>rotate</type>
+                <object-name>Rotor-Pale</object-name>
+                <property>sim/multiplay/generic/float[2]</property>
+		<factor>-1</factor>
+		<center>
+			<x-m>0</x-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>0</y>
+			<z>1</z>
+		</axis>
+	</animation>
+
+       
+        <animation>
+		<type>rotate</type>
+                <object-name>Rotor-Pale-Base</object-name>
+                <object-name>Rotor-Pale-Fix</object-name>
+                <property>sim/multiplay/generic/float[2]</property>
+		<factor>-1</factor>
+		<center>
+			<x-m>0</x-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>0</y>
+			<z>1</z>
+		</axis>
+	</animation>
+
+        <animation>
+		<type>rotate</type>
+                <object-name>Rotor-Pale-Rot</object-name>
+                <property>sim/multiplay/generic/float[2]</property>
+		<factor>-1</factor>
+		<center>
+			<x-m>0</x-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>0</y>
+			<z>1</z>
+		</axis>
+	</animation>
+
+        <animation>
+		<type>rotate</type>
+                <object-name>Rotor-Disc_M-Pale</object-name>
+                <property>sim/multiplay/generic/float[2]</property>
+		<factor>-1</factor>
+		<center>
+			<x-m>0</x-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>0</y>
+			<z>1</z>
+		</axis>
+	</animation>
+
+
+        <!--FLAP=================-->
+	
+	<animation>
+	    <condition>
+		<equal>
+		    <property>fdm/jsbsim/fcs/blade-fold-pos-norm</property>
+		    <value>0</value>
+		</equal>
+	    </condition>
+		<type>rotate</type>
+		<object-name>Rotor-Pale-Rot</object-name>
+                <property>fdm/jsbsim/systems/rotor/pale2flap-deg</property>
+		<factor alias="../../params/flapD0/factor"/>
+		<center>
+                        <x-m>-0.1049</x-m>
+			<y-m>0</y-m>
+			<z-m>1.0925</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+        <animation>
+	    <condition>
+		<equal>
+		    <property>fdm/jsbsim/fcs/blade-fold-pos-norm</property>
+		    <value>0</value>
+		</equal>
+	    </condition>
+		<type>rotate</type>
+                <object-name>Rotor-Pale-Base</object-name>
+		<object-name>Rotor-Pale-Fix</object-name>
+                <property>fdm/jsbsim/systems/rotor/pale2flap-deg</property>
+		<factor alias="../../params/flapD0/factor"/>
+		<center>
+                        <x-m>-0.1049</x-m>
+			<y-m>0</y-m>
+			<z-m>1.0925</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	
+	
+	 <!--Blade  FLAP  CONTINUED=================-->
+	
+	
+	<animation>
+	    <condition>
+		<equal>
+		    <property>fdm/jsbsim/fcs/blade-fold-pos-norm</property>
+		    <value>0</value>
+		</equal>
+	    </condition>
+		<type>rotate</type>		   
+		    <object-name>Rotor-Pale-S0</object-name>
+		    <object-name>Rotor-Pale-S1</object-name>
+		    <object-name>Rotor-Pale-S2</object-name>
+		    <object-name>Rotor-Pale-S3</object-name>
+		    <object-name>Rotor-Pale-S4</object-name>
+		    <object-name>Rotor-Pale-S5</object-name>
+		    <object-name>Rotor-Pale-S6</object-name>
+		    <object-name>Rotor-Pale-S7</object-name>
+		<property>fdm/jsbsim/systems/rotor/pale2flap-deg</property>
+		<factor alias="../../params/flapD0/factor"/>
+		<center>
+			<x-m>-0.1049</x-m>
+			<y-m>0</y-m>
+			<z-m>1.0925</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	
+	
+	<animation>
+		<type>rotate</type>
+		    
+		    <object-name>Rotor-Pale-S1</object-name>
+		    <object-name>Rotor-Pale-S2</object-name>
+		    <object-name>Rotor-Pale-S3</object-name>
+		    <object-name>Rotor-Pale-S4</object-name>
+		    <object-name>Rotor-Pale-S5</object-name>
+		    <object-name>Rotor-Pale-S6</object-name>
+		    <object-name>Rotor-Pale-S7</object-name>
+		<property>fdm/jsbsim/systems/rotor/pale2flap-deg</property>
+		<factor alias="../../params/flapD1/factor"/>
+		<center>
+			<x-m>-1.76694</x-m>
+			<y-m>0</y-m>
+			<z-m>1.0925</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	
+	
+	
+	<animation>
+		<type>rotate</type>
+		   
+		    <object-name>Rotor-Pale-S2</object-name>
+		    <object-name>Rotor-Pale-S3</object-name>
+		    <object-name>Rotor-Pale-S4</object-name>
+		    <object-name>Rotor-Pale-S5</object-name>
+		    <object-name>Rotor-Pale-S6</object-name>
+		    <object-name>Rotor-Pale-S7</object-name>
+		<property>fdm/jsbsim/systems/rotor/pale2flap-deg</property>
+		<factor alias="../../params/flapD2/factor"/>
+		<center>
+			<x-m>-2.33156</x-m>
+			<y-m>0</y-m>
+			<z-m>1.0925</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	
+	
+	<animation>
+		<type>rotate</type>
+		    
+		    <object-name>Rotor-Pale-S3</object-name>
+		    <object-name>Rotor-Pale-S4</object-name>
+		    <object-name>Rotor-Pale-S5</object-name>
+		    <object-name>Rotor-Pale-S6</object-name>
+		    <object-name>Rotor-Pale-S7</object-name>
+		<property>fdm/jsbsim/systems/rotor/pale2flap-deg</property>
+		<factor alias="../../params/flapD3/factor"/>
+		<center>
+			<x-m>-2.92193</x-m>
+			<y-m>0</y-m>
+			<z-m>1.0925</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>rotate</type>
+		   
+		    <object-name>Rotor-Pale-S4</object-name>
+		    <object-name>Rotor-Pale-S5</object-name>
+		    <object-name>Rotor-Pale-S6</object-name>
+		    <object-name>Rotor-Pale-S7</object-name>
+		<property>fdm/jsbsim/systems/rotor/pale2flap-deg</property>
+		<factor alias="../../params/flapD4/factor"/>
+		<center>
+			<x-m>-3.44105</x-m>
+			<y-m>0</y-m>
+			<z-m>1.0925</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	
+	<animation>
+		<condition>
+                    <property>fdm/jsbsim/systems/crash-detect/aero-on</property>
+		</condition>
+		<type>select</type>
+		 <object-name>Rotor-Pale-S3</object-name>
+		 <object-name>Rotor-Pale-S4</object-name>
+		<object-name>Rotor-Pale-S5</object-name>
+		<object-name>Rotor-Pale-S6</object-name>
+		<object-name>Rotor-Pale-S7</object-name>	    
+ 	</animation>
+	
+	<animation>
+		<type>rotate</type>
+		    
+		    <object-name>Rotor-Pale-S5</object-name>
+		    <object-name>Rotor-Pale-S6</object-name>
+		    <object-name>Rotor-Pale-S7</object-name>
+		<property>fdm/jsbsim/systems/rotor/pale2flap-deg</property>
+		<factor alias="../../params/flapD5/factor"/>
+		<center>
+			<x-m>-4.84414</x-m>
+			<y-m>0</y-m>
+			<z-m>1.0925</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	
+	
+	
+	
+	
+	<animation>
+		<type>rotate</type>
+		    
+		    <object-name>Rotor-Pale-S6</object-name>
+		    <object-name>Rotor-Pale-S7</object-name>
+		<property>fdm/jsbsim/systems/rotor/pale2flap-deg</property>
+		<factor alias="../../params/flapD6/factor"/>
+		<center>
+			<x-m>-4.41207</x-m>
+			<y-m>0</y-m>
+			<z-m>1.0925</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>rotate</type>
+		    
+		    <object-name>Rotor-Pale-S7</object-name>
+		<property>fdm/jsbsim/systems/rotor/pale2flap-deg</property>
+		<factor alias="../../params/flapD7/factor"/>
+		<center>
+			<x-m>-4.85464</x-m>
+			<y-m>0</y-m>
+			<z-m>1.0925</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	
+	
+	<!--Disc_M   FLAP  CONTINUED=================-->
+	
+	
+	<animation>
+	    <condition>
+		<equal>
+		    <property>fdm/jsbsim/fcs/blade-fold-pos-norm</property>
+		    <value>0</value>
+		</equal>
+	    </condition>
+		<type>rotate</type>		   
+		    <object-name>Rotor-Pale-MS0</object-name>
+		    <object-name>Rotor-Pale-MS1</object-name>
+		    <object-name>Rotor-Pale-MS2</object-name>
+		    <object-name>Rotor-Pale-MS3</object-name>
+		    <object-name>Rotor-Pale-MS4</object-name>
+		    <object-name>Rotor-Pale-MS5</object-name>
+		    <object-name>Rotor-Pale-MS6</object-name>
+		    <object-name>Rotor-Pale-MS7</object-name>
+		<property>fdm/jsbsim/systems/rotor/pale2flap-deg</property>
+		<factor alias="../../params/flapD0/factor"/>
+		<center>
+			<x-m>-0.1049</x-m>
+			<y-m>0</y-m>
+			<z-m>1.0925</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	
+	
+	<animation>
+		<type>rotate</type>
+		    
+		    <object-name>Rotor-Pale-MS1</object-name>
+		    <object-name>Rotor-Pale-MS2</object-name>
+		    <object-name>Rotor-Pale-MS3</object-name>
+		    <object-name>Rotor-Pale-MS4</object-name>
+		    <object-name>Rotor-Pale-MS5</object-name>
+		    <object-name>Rotor-Pale-MS6</object-name>
+		    <object-name>Rotor-Pale-MS7</object-name>
+		<property>fdm/jsbsim/systems/rotor/pale2flap-deg</property>
+		<factor alias="../../params/flapD1/factor"/>
+		<center>
+			<x-m>-1.76694</x-m>
+			<y-m>0</y-m>
+			<z-m>1.0925</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	
+	
+	
+	<animation>
+		<type>rotate</type>
+		   
+		    <object-name>Rotor-Pale-MS2</object-name>
+		    <object-name>Rotor-Pale-MS3</object-name>
+		    <object-name>Rotor-Pale-MS4</object-name>
+		    <object-name>Rotor-Pale-MS5</object-name>
+		    <object-name>Rotor-Pale-MS6</object-name>
+		    <object-name>Rotor-Pale-MS7</object-name>
+		<property>fdm/jsbsim/systems/rotor/pale2flap-deg</property>
+		<factor alias="../../params/flapD2/factor"/>
+		<center>
+			<x-m>-2.33156</x-m>
+			<y-m>0</y-m>
+			<z-m>1.0925</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	
+	
+	<animation>
+		<type>rotate</type>
+		    
+		    <object-name>Rotor-Pale-MS3</object-name>
+		    <object-name>Rotor-Pale-MS4</object-name>
+		    <object-name>Rotor-Pale-MS5</object-name>
+		    <object-name>Rotor-Pale-MS6</object-name>
+		    <object-name>Rotor-Pale-MS7</object-name>
+		<property>fdm/jsbsim/systems/rotor/pale2flap-deg</property>
+		<factor alias="../../params/flapD3/factor"/>
+		<center>
+			<x-m>-2.92193</x-m>
+			<y-m>0</y-m>
+			<z-m>1.0925</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>rotate</type>
+		   
+		    <object-name>Rotor-Pale-MS4</object-name>
+		    <object-name>Rotor-Pale-MS5</object-name>
+		    <object-name>Rotor-Pale-MS6</object-name>
+		    <object-name>Rotor-Pale-MS7</object-name>
+		<property>fdm/jsbsim/systems/rotor/pale2flap-deg</property>
+		<factor alias="../../params/flapD4/factor"/>
+		<center>
+			<x-m>-3.44105</x-m>
+			<y-m>0</y-m>
+			<z-m>1.0925</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	
+	<animation>
+		<condition>
+                    <property>fdm/jsbsim/systems/crash-detect/aero-on</property>
+		</condition>
+		<type>select</type>
+		 <object-name>Rotor-Pale-S3</object-name>
+		 <object-name>Rotor-Pale-S4</object-name>
+		<object-name>Rotor-Pale-S5</object-name>
+		<object-name>Rotor-Pale-S6</object-name>
+		<object-name>Rotor-Pale-S7</object-name>	    
+ 	</animation>
+	
+	<animation>
+		<type>rotate</type>
+		    
+		    <object-name>Rotor-Pale-MS5</object-name>
+		    <object-name>Rotor-Pale-MS6</object-name>
+		    <object-name>Rotor-Pale-MS7</object-name>
+		<property>fdm/jsbsim/systems/rotor/pale2flap-deg</property>
+		<factor alias="../../params/flapD5/factor"/>
+		<center>
+			<x-m>-3.93936</x-m>
+			<y-m>0</y-m>
+			<z-m>1.0925</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	
+	
+	
+	
+	
+	<animation>
+		<type>rotate</type>
+		    
+		    <object-name>Rotor-Pale-MS6</object-name>
+		    <object-name>Rotor-Pale-MS7</object-name>
+		<property>fdm/jsbsim/systems/rotor/pale2flap-deg</property>
+		<factor alias="../../params/flapD6/factor"/>
+		<center>
+			<x-m>-4.41207</x-m>
+			<y-m>0</y-m>
+			<z-m>1.0925</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>rotate</type>
+		    
+		    <object-name>Rotor-Pale-MS7</object-name>
+		<property>fdm/jsbsim/systems/rotor/pale2flap-deg</property>
+		<factor alias="../../params/flapD7/factor"/>
+		<center>
+			<x-m>-4.85464</x-m>
+			<y-m>0</y-m>
+			<z-m>1.0925</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+
+
+        <!--======FOLD======-->
+	
+	
+<animation>
+            <type>rotate</type>
+            <object-name>Rotor-Pale-Base</object-name>
+            <object-name>Rotor-Pale</object-name>
+            <property>sim/multiplay/generic/float[6]</property>
+            <factor>118</factor>
+            <center>
+                <x-m>-0.387646</x-m>
+                <y-m>0</y-m>
+                <z-m>0</z-m>
+            </center>
+            <axis>
+                <x>0</x>
+                <y>0</y>
+                <z>1</z>
+            </axis>
+        </animation>
+
+        
+
+
+
+
+
+
+</PropertyList>

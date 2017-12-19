@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!--
+    Usable with FlightGear
+      =>    Gerard Robin
+    Copyright License:  GPLV2
+-->
+<PropertyList>
+
+    <keyboard>
+			<key n="123">
+				<name>{</name>
+				<desc>Shutdown Engines</desc>
+				<binding>
+					<command>nasal</command>
+					<script>hup.engines(-1)</script>
+				</binding>
+			</key>
+                        <key n="115">
+				<name>s</name>
+				<desc>Start Engines</desc>
+				<binding>
+					<command>nasal</command>
+					<script>hup.engines(1)</script>
+				</binding>
+			</key>
+
+                        <key n="100">
+                                <name>d</name>
+                                <desc>Toggle Left Door</desc>
+                                <binding>
+                                        <command>property-toggle</command>
+                                        <property>/controls/doors/trapdoor</property>
+                                </binding>
+                        </key>
+                        <key n="78">
+				<name>N</name>
+				<desc>Toggle rotor brake</desc>
+				<binding>
+					<command>nasal</command>
+					<script>
+						var p = "/controls/rotor/brake";
+						setprop(p, !getprop(p));
+					</script>
+				</binding>
+			</key>
+
+			<key n="114">
+                                <name>r</name>
+                                <desc>Toggle Rescue</desc>
+                                <binding>
+                                        <command>property-toggle</command>
+                                        <property>/sim/model/rescue</property>
+                                </binding>
+                        </key>
+                        <key n="109">
+                                <name>m</name>
+                                <desc>Lift Winch</desc>
+                                <repeatable type="bool">true</repeatable>
+                                <binding>
+                                        <command>property-adjust</command>
+                                        <property>/sim/model/rescue-lift</property>
+                                        <step type="double">-0.01</step>
+                                        <min>0.0</min>
+                                        <max>1</max>
+                                </binding>
+                        </key>
+                        <key n="77">
+                                <name>M</name>
+                                <desc>Down Winch</desc>
+                                <repeatable type="bool">true</repeatable>
+                                <binding>
+                                        <command>property-adjust</command>
+                                        <property>/sim/model/rescue-lift</property>
+                                        <step type="double">0.01</step>
+                                        <min>0.0</min>
+                                        <max>1</max>
+                                </binding>
+                        </key>
+		</keyboard>
+</PropertyList>

@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+
+<!--
+Gerard Robin
+    Copyright License:  GPLv2
+-->
+
+<PropertyList>
+
+    <path>Models/hup-bpanel.ac</path>
+    <texture-path>Models/Textures</texture-path>
+    
+    
+    <!--<effect>
+	<inherits-from>Aircraft/HUP-Retriever/Models/Effects/reflectp-shine</inherits-from>
+		
+    </effect>-->
+    
+    
+    <model>
+            <name>Ignition</name>
+            <path>Aircraft/HUP-Retriever/Instruments/Module-Ignition_Master.xml</path>
+            <offsets>
+                <x-m>-4.27362</x-m>
+                <y-m>0</y-m>
+                <z-m>-0.441389</z-m>
+                <pitch-deg>35</pitch-deg>
+            </offsets>
+        </model>
+	
+	<model>
+            <name>Engine-cmd</name>
+            <path>Aircraft/HUP-Retriever/Instruments/Module-Command.xml</path>
+            <offsets>
+                <x-m>-4.04294</x-m>
+                <y-m>0.0265688</y-m>
+                <z-m>-0.543789</z-m>
+                <pitch-deg>0</pitch-deg>
+            </offsets>
+        </model>
+	
+	
+	<model>
+            <name>Autopilot</name>
+            <path>Aircraft/HUP-Retriever/Instruments/Module-Navigation.xml</path>
+            <offsets>
+		<pitch-deg>-55</pitch-deg>
+		
+                <x-m>-4.1664</x-m>
+                <y-m>0</y-m>
+                <z-m>-0.512923</z-m>
+		
+            </offsets>
+        </model>
+
+
+   <!-- <animation>
+            <type>noshadow</type>
+            <object-name></object-name>
+    </animation>-->
+
+
+   <!-- <animation>
+        <type>rotate</type>
+        <object-name></object-name>
+        <property></property>
+        <factor></factor>
+
+        <center>
+            <x-m></x-m>
+            <y-m></y-m>
+            <z-m></z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+
+    <animation>
+        <type>pick</type>
+        <object-name></object-name>
+        <action>
+            <button>0</button>
+            <binding>
+                <command>property-toggle</command>
+                <property></property>
+            </binding>
+        </action>
+    </animation>-->
+
+   <!-- <model>
+        <name></name>
+        <path></path>
+        <offsets>
+            <x-m></x-m>
+            <y-m></y-m>
+            <z-m></z-m>
+        </offsets>
+    </model>-->
+
+
+    
+
+
+
+
+
+
+
+</PropertyList>

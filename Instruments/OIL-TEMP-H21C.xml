@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+
+<!--
+    Usable with FlightGear
+    Property of Gerard Robin
+    Copyright License:  
+
+-->
+
+<PropertyList>
+
+ <path>Models/oil-temp-h21c.ac</path>
+ <texture-path>Models/Textures</texture-path>
+
+
+	<animation include="Instrument-Light4.xml">
+		<object-name>AiguilleOilTemp</object-name>
+	</animation>
+
+	<animation include="Instrument-Light3.xml">
+		<object-name>Cadran1</object-name>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>AiguilleOilTemp</object-name>
+		<property>/engines/engine[0]/oil-temperature-degf</property>
+		<min>-70</min>
+		<max>150</max>
+		<interpolation>
+			<entry>
+			<ind>-58</ind>
+			<dep>8</dep>
+			</entry>
+			<entry>
+			<ind>302</ind>
+			<dep>118</dep>
+			</entry>
+		</interpolation>
+		<center>
+			<x-m>0</x-m>
+			<y-m>0</y-m>
+                        <z-m>-0.00753263</z-m>
+		</center>
+		<axis>
+			<x>-1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+
+
+
+
+</PropertyList>

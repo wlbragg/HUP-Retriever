@@ -1,0 +1,1289 @@
+<?xml version="1.0"?>
+
+
+<system name="Addon-anim">
+    
+     <property value="0">animation/cockpit-left-window-cmd-norm</property>
+     <property value="0">animation/cockpit-right-window-cmd-norm</property>
+    
+    <property value="1">systems/rotor/cone-blade-k</property>
+     <property value="1">systems/rotor_m2/cone-blade-k</property>
+     <!-- just a guess for animation  nothing real,  coeff to calculate cone when running-->
+     <property value="10">systems/rotor/cone-blade-k_t</property>
+      <property value="10">systems/rotor_m2/cone-blade-k_t</property>
+      
+    <property>systems/rotor/pos-deg</property>
+    <property value="1">systems/rotor/sw-first</property>
+    <property value="5">systems/rotor/minx-rpm</property>
+    <property value="1">animation/variable-rpm</property>
+    
+    
+    
+    
+    <property value="0">systems/rotor/raw-pos-deg</property>
+    <property value="0.005">animation/rotor/main/blade/k_flap-deg-lon</property>
+    <property value="0.005">animation/rotor/main/blade/k_flap-deg-lat</property>
+    <property value="0.005">animation/rotor/main2/blade/k_flap-deg-lon</property>
+    <property value="0.005">animation/rotor/main2/blade/k_flap-deg-lat</property>
+    <property value="1">systems/rotor/blade-deployed</property>
+    <property value="0">fcs/wing-fold-cmd</property>
+    <property value="-3.5">systems/rotor/flap-deg-at-rest</property>
+    <property value="-3.5">systems/rotor_m2/flap-deg-at-rest</property>    
+    
+
+    
+    <property value="0">animation/start-smoke-looptimer</property>
+    <property value="0">animation/start-smoke-loop</property>
+    
+    <property value="0">fcs/elevator-stick-pos</property>
+
+
+
+    <channel name="Animation">
+        <!--<documentation>Only for 3D model animation</documentation>-->
+
+        <switch name="animation/start-smoke-sw">
+            <default value="animation/start-smoke-loop"/>
+            <test logic="AND" value="1">
+                systems/engine/started == 1
+            </test>
+            <test logic="AND" value="0">
+                propulsion/engine/engine-rpm  GT 1150
+                animation/start-smoke-looptimer == 1
+                /controls/engines/engine[0]/starter  == 0
+            </test>
+            <output>animation/start-smoke-loop</output>
+        </switch>
+
+
+        <kinematic name="animation/start-smoke-LoopTimer">
+            <input>animation/start-smoke-loop</input>
+            <traverse>
+                <setting>
+                    <position>0</position>
+                    <time>0</time>
+                </setting>
+                <setting>
+                    <position>1</position>
+                    <time>40</time>
+                </setting>
+            </traverse>
+            <output>animation/start-smoke-looptimer</output>
+        </kinematic>
+
+        <switch name="animation/start-smoke">
+            <default value="0"/>
+            <test logic="AND" value="1">
+                animation/start-smoke-looptimer GT 0
+                animation/start-smoke-looptimer LT 0.200
+                propulsion/engine/engine-rpm  GT 10
+                propulsion/engine/engine-rpm  LT 1150
+            </test>
+            <test logic="AND" value="1">
+                animation/start-smoke-looptimer GE 0.250
+                animation/start-smoke-looptimer LT 0.450
+                propulsion/engine/engine-rpm  GT 10
+                propulsion/engine/engine-rpm  LT 1150
+            </test>
+            <test logic="AND" value="1">
+                animation/start-smoke-looptimer GE 0.500
+                animation/start-smoke-looptimer LT 0.700
+                propulsion/engine/engine-rpm  GT 10
+                propulsion/engine/engine-rpm  LT 1150
+            </test>
+            <test logic="AND" value="1">
+                animation/start-smoke-looptimer GE 0.750
+                animation/start-smoke-looptimer LT 0.800
+                propulsion/engine/engine-rpm  GT 10
+                propulsion/engine/engine-rpm  LT 1150
+            </test>
+        </switch>
+
+        <kinematic name="animation/start-smoke-timer">
+            <input>animation/start-smoke</input>
+            <traverse>
+                <setting>
+                    <position>0</position>
+                    <time>0</time>
+                </setting>
+                <setting>
+                    <position>1</position>
+                    <time>40</time>
+                </setting>
+            </traverse>
+            <output>animation/start-smoke-out</output>
+        </kinematic>
+
+        <kinematic name="animation/start-smoke-trans">
+            <input>animation/start-smoke</input>
+            <traverse>
+                <setting>
+                    <position>0</position>
+                    <time>0</time>
+                </setting>
+                <setting>
+                    <position>1</position>
+                    <time>6</time>
+                </setting>
+            </traverse>
+            <output>animation/start-smoke-alpha-out</output>
+        </kinematic>
+
+        <fcs_function name="animation/start-smoke-alpha">
+            <function>
+                <product>
+                    <property>animation/start-smoke-alpha-out</property>
+                    <value>0.14</value>
+                </product>
+            </function>
+	</fcs_function>
+	
+	<summer name="animation/yoke-elevator_limiter">
+            <input>fcs/elevator-cmd-norm</input>	    
+	     <input>fcs/elevator-stick-pos</input>
+	     <clipto>
+                <min> -0.5 </min>
+                <max>  0.5 </max>
+            </clipto>
+	     <output>animation/yoke-elevator</output>
+	</summer>
+	
+	<summer name="animation/yoke-aileron_limiter">
+            <input>fcs/aileron-cmd-norm</input>	    
+	     <clipto>
+                <min> -0.5 </min>
+                <max>  0.5 </max>
+            </clipto>
+	     <output>animation/yoke-aileron</output>
+	</summer>
+	
+	
+	<pure_gain name="animation/rudder">
+           <input>fcs/rudder-cmd-norm</input>
+           <gain>1</gain> 
+       </pure_gain>
+	
+	
+	
+	
+	
+
+        <kinematic name="LeftDoor Surface Position">
+            <input>animation/cabine-left-door-cmd-norm</input>
+            <traverse>
+                <setting>
+                    <position>0</position>
+                    <time>0</time>
+                </setting>
+                <setting>
+                    <position>1</position>
+                    <time>5</time>
+                </setting>
+            </traverse>
+            <output>animation/cabine-left-door-pos-norm</output>
+        </kinematic>
+
+        <kinematic name="Trap Surface Position">
+            <input>animation/cockpit-hatch-cmd-norm</input>
+            <traverse>
+                <setting>
+                    <position>0</position>
+                    <time>0</time>
+                </setting>
+                <setting>
+                    <position>1</position>
+                    <time>5</time>
+                </setting>
+            </traverse>
+            <output>animation/cockpit-hatch-pos-norm</output>
+        </kinematic>
+
+        <kinematic name="animation/cockpit-left-window-surface-position">
+            <input>animation/cockpit-left-window-cmd-norm</input>
+            <traverse>
+                <setting>
+                    <position>0</position>
+                    <time>0</time>
+                </setting>
+                <setting>
+                    <position>1</position>
+                    <time>5</time>
+                </setting>
+            </traverse>
+            <output>animation/cockpit-left-window-pos-norm</output>
+        </kinematic>
+	
+	 <kinematic name="animation/cockpit-right-window-surface-osition">
+            <input>animation/cockpit-right-window-cmd-norm</input>
+            <traverse>
+                <setting>
+                    <position>0</position>
+                    <time>0</time>
+                </setting>
+                <setting>
+                    <position>1</position>
+                    <time>5</time>
+                </setting>
+            </traverse>
+            <output>animation/cockpit-right-window-pos-norm</output>
+        </kinematic>
+
+
+        <switch name="animation/master-switch-lock">
+            <default value="0"/>
+            <test logic="OR" value="1">
+                animation/master-switch-lock-cmd == 1
+            </test>
+        </switch>
+
+       <!-- <switch name="animation/electrical-master-switch">
+            <default value="0"/>
+            <test logic="AND" value="1">
+                animation/master-switch-lock  == 1
+                animation/master-switch-cmd == 1
+            </test>
+            <output>animation/master-switch-cmd</output>
+        </switch>-->
+
+
+        <!--FIXME should be placed in electrical-fdm-->
+        <kinematic name="electrical/master-switch">
+            <input>animation/electrical-master-switch</input>
+            <traverse>
+                <setting>
+                    <position>0</position>
+                    <time>0</time>
+                </setting>
+                <setting>
+                    <position>1</position>
+                    <time>0.5</time>
+                </setting>
+            </traverse>
+            <output>electrical/switch/master</output>
+        </kinematic>
+
+
+        <!--====================Rotor  Folding================-->
+	
+	<switch name="systems/rotor_m2/blade-folding-cmd_sw">
+            <default value="systems/rotor_m2/blade-folding-cmd"/>
+            <test logic="AND" value="1">
+		fcs/wing-fold-cmd == 1
+                propulsion/engine[0]/brake-ctrl-norm  == 1
+		systems/rotor/raw_pos-deg LE 1
+            </test>
+	     <test logic="AND" value="0">
+		fcs/wing-fold-cmd == 0
+		fcs/blade-fold-pos-norm  == 0
+                propulsion/engine[0]/brake-ctrl-norm  == 1
+		systems/rotor/raw_pos-deg LE 1
+            </test>
+	    <output>systems/rotor_m2/blade-folding-cmd</output>
+        </switch>
+	
+	
+	<kinematic name="systems/rotor_m2/ready-for-fold">
+            <input>systems/rotor_m2/blade-folding-cmd</input>
+            <traverse>
+                <setting>
+                    <position>0</position>
+                    <time>0</time>
+                </setting>
+                <setting>
+                    <position>1</position>
+                    <time>2</time>
+                </setting>
+            </traverse>
+        </kinematic>
+	
+	<switch name="systems/rotor/blade-fold-cmd-norm_sw">
+            <default value="systems/rotor/blade-fold-cmd-norm"/>
+            <test logic="AND" value="1">
+		fcs/wing-fold-cmd == 1
+		systems/rotor_m2/ready-for-fold  == 1
+                propulsion/engine[0]/brake-ctrl-norm  == 1
+		systems/rotor/raw_pos-deg LE 1
+            </test>
+	    <test logic="AND" value="0">
+		fcs/wing-fold-cmd == 0
+		systems/rotor_m2/ready-for-fold  == 1
+                propulsion/engine[0]/brake-ctrl-norm  == 1
+		systems/rotor/raw_pos-deg LE 1
+            </test>
+	    <output>systems/rotor/blade-fold-cmd-norm</output>
+        </switch>
+
+	<kinematic name="fcs/blade-fold-pos">
+            <input>systems/rotor/blade-fold-cmd-norm</input>
+            <traverse>
+                <setting>
+                    <position>0</position>
+                    <time>0</time>
+                </setting>
+                <setting>
+                    <position>1</position>
+                    <time>4</time>
+                </setting>
+            </traverse>
+	     <output>fcs/blade-fold-pos-norm</output>
+        </kinematic>
+	
+	
+	<fcs_function name="systems/rotor/flap-eff">
+            <function>
+		<difference>
+		     <property>systems/rotor/cone-blade-k</property>
+		     <property>fcs/blade-fold-pos-norm</property>
+		</difference>
+	    </function>
+	</fcs_function>
+	
+	<!--contact_point-->
+	
+	<!--<switch name="systems/rotor/blade-cp-cmd-norm">
+            <default value="1"/>
+            <test logic="AND" value="0">
+                fcs/blade-fold-pos-norm  == 1
+            </test>
+		<output>gear/unit[8]/pos-norm</output>
+                <output>gear/unit[9]/pos-norm</output>
+		<output>gear/unit[10]/pos-norm</output>
+	</switch>-->
+
+        <!--====================Rotor  Positon================-->
+     <fcs_function name="systems/cone-rotor-at_rest">
+		<function>		    
+			<product>
+<!-- 			     -->
+			       <property>systems/rotor/flap-deg-at-rest</property>
+			</product>
+		</function>
+	</fcs_function>
+	
+	
+	<switch name="systems/rotor/running-cmd-norm">
+            <default value="0"/>
+            <test logic="AND" value="1">
+		propulsion/engine[0]/rotor-rpm GT 50
+		propulsion/engine[0]/clutch-ctrl-norm  GT  0.9
+            </test>	    
+        </switch>
+
+	<kinematic name="systems/rotor/running-pos-norm">
+            <input>systems/rotor/running-cmd-norm</input>
+            <traverse>
+                <setting>
+                    <position>0</position>
+                    <time>0</time>
+                </setting>
+                <setting>
+                    <position>1</position>
+                    <time>10</time>
+                </setting>
+            </traverse>	     
+        </kinematic>
+	
+	
+	<fcs_function name="systems/cone-rotor-running-min">
+		<function>		    
+			<product>
+			    <value>-1</value>
+			    <property>systems/rotor/running-pos-norm</property>
+			    <property>systems/rotor/flap-deg-at-rest</property>
+			</product>
+		</function>
+	</fcs_function>
+	
+	<fcs_function name="systems/cone-rotor-running">
+		<function>			    
+		    <quotient>
+			<product>
+				<sqrt>
+				<abs><property>propulsion/engine[0]/thrust-lbs</property></abs>
+				</sqrt>
+			</product>
+			<property>systems/rotor/cone-blade-k_t</property>
+		    </quotient>
+		</function>
+		<clipto>
+		<min>systems/cone-rotor-running-min</min>
+		<max>9999</max>
+		</clipto>
+	</fcs_function>
+	
+	<fcs_function name="Rotor0 Cone">
+		<function>
+		    <sum>
+			<property>systems/cone-rotor-at_rest</property>
+			<property>systems/cone-rotor-running</property>
+		    </sum>
+		</function>
+		<output>systems/rotor/flap-deg</output>
+		<output>animation/rotor/main/blade/flap-deg-rel</output>
+	</fcs_function>	
+	
+	
+	
+	
+	<fcs_function name="animation/rotor/main/blade/flap-deg-lat">
+	    <function>
+		<product>
+			<property>propulsion/engine[0]/lateral-ctrl-rad</property>
+			<property>propulsion/engine[0]/thrust-lbs</property>
+			<property>animation/rotor/main/blade/k_flap-deg-lat</property>
+		</product>
+	    </function>
+	</fcs_function>
+	
+	
+	
+	<fcs_function name="animation/rotor/main/blade/flap-deg-lon">
+	    <function>
+		<product>
+			<property>propulsion/engine/longitudinal-ctrl-rad</property>
+			<property>propulsion/engine[0]/thrust-lbs</property>
+			<property>animation/rotor/main/blade/k_flap-deg-lon</property>	
+		</product>
+	    </function>
+	</fcs_function>
+	
+	<!--ANIMATION blades pos at fold   or blades broken at crash   -->	
+	
+	<fcs_function name="animation/rotor/main/blade/flap-at-folding">
+	    <function>
+		<product>
+			<property>systems/rotor/flap-eff</property>
+			<property>animation/rotor/main/blade/flap-deg-rel</property>	
+		</product>
+	    </function>
+	</fcs_function>
+
+        <switch name="animation/rotor/main/blade/flap-deg">
+            <default value="animation/rotor/main/blade/flap-deg-rel"/>
+	     <test logic="OR" value="-10">
+		 systems/crash-detect/crashed == 1
+		<!--systems/behaviour/steady-crashed-onwater  == 1   -->
+            </test>            
+	    <test logic="OR" value="animation/rotor/main/blade/flap-at-folding">
+		 systems/rotor/blade-fold-cmd-norm == 1
+            </test>    
+        </switch>
+	
+	
+	<!--convert pale position to RAD-->
+	
+	<fcs_function name="animation/rotor/main/pale0pos-rad">
+	    <function>
+		<toradians>
+		    <property>animation/rotor/main/pale0pos-deg</property>
+		</toradians>
+	    </function>
+	</fcs_function>
+	
+	<fcs_function name="animation/rotor/main/pale1pos-rad">
+	    <function>
+		<toradians>
+		    <property>animation/rotor/main/pale1pos-deg</property>
+		</toradians>
+	    </function>
+	</fcs_function>
+	
+	<fcs_function name="animation/rotor/main/pale2pos-rad">
+	    <function>
+		<toradians>
+		    <property>animation/rotor/main/pale2pos-deg</property>
+		</toradians>
+	    </function>
+	</fcs_function>
+	
+	
+	<fcs_function name="animation/rotor/main/blade0/flap-deg">
+            <function>
+                <sum>
+		    <product>
+			<cos>
+			    <property>animation/rotor/main/pale0pos-rad</property>	
+			</cos>    
+			<property>animation/rotor/main/blade/flap-deg-lon</property>	
+		    </product>
+		    <product>
+			<sin>
+			    <property>animation/rotor/main/pale0pos-rad</property>
+			</sin>		    
+			<property>animation/rotor/main/blade/flap-deg-lat</property>
+		    </product>
+		    <property>animation/rotor/main/blade/flap-deg</property>
+                </sum>
+            </function>
+	    <output>systems/rotor/pale0flap-deg</output>
+        </fcs_function>
+	
+	<fcs_function name="animation/rotor/main/blade1/flap-deg">
+            <function>
+                <sum>
+		     <product>
+			<cos>
+			    <property>animation/rotor/main/pale1pos-rad</property>	
+			</cos>		    
+			<property>animation/rotor/main/blade/flap-deg-lon</property>
+		    </product>
+		    <product>
+			<sin>
+			    <property>animation/rotor/main/pale1pos-rad</property>
+			</sin>		    
+			<property>animation/rotor/main/blade/flap-deg-lat</property>
+		    </product>
+		    <property>animation/rotor/main/blade/flap-deg</property>
+                </sum>
+            </function>
+	    <output>systems/rotor/pale1flap-deg</output>
+        </fcs_function>
+	
+	<fcs_function name="animation/rotor/main/blade2/flap-deg">
+            <function>
+                <sum>
+		     <product>
+			<cos>
+			    <property>animation/rotor/main/pale2pos-rad</property>
+			</cos>		
+			<property>animation/rotor/main/blade/flap-deg-lon</property>	
+		    </product>
+		    <product>
+		    <sin>
+			<property>animation/rotor/main/pale2pos-rad</property>
+		    </sin>		    
+                    <property>animation/rotor/main/blade/flap-deg-lat</property>	
+		    </product>
+		    <property>animation/rotor/main/blade/flap-deg</property>
+                </sum>
+            </function>
+	    <output>systems/rotor/pale2flap-deg</output>
+        </fcs_function>
+	
+	
+	
+	
+	
+	 <switch name="animation/blade-ready-sw">
+            <default value="1"/>
+            <test logic="OR" value="0">
+                systems/crash-detect/crashed == 1
+		systems/rotor/blade-deployed  == 0
+            </test>
+	    <output>systems/rotor/blade-ready</output>
+        </switch>
+	
+	<!--===============================================
+	BEGIN  fake rpm animation :  rotor main and main2 based on same engine  [0] 
+	
+	-->
+	
+
+        <scheduled_gain name="animation/rotor0-rotation_sg">
+            <input>systems/rotor/blade-ready</input>
+            <table>
+                <independentVar>propulsion/engine[0]/rotor-rpm</independentVar>
+                <tableData>
+		    0		8
+                    10      10
+                    20      20
+                    40      40
+                    160     160
+                    400     400
+                </tableData>
+            </table>
+	    <output>animation/rotor0-rotation</output>
+	    <output>/sim/multiplay/generic/float[7]</output>
+	     <output>/sim/multiplay/generic/float[8]</output>
+        </scheduled_gain>
+	
+	
+	<fcs_function name="systems/rotor/velocity-deg-s_func">
+            <function>
+		 <product>
+		    <value>6</value>
+		    <property>systems/crash-detect/aero-on</property>
+                    <property>animation/rotor0-rotation</property>
+		</product>
+            </function>
+	    <output>systems/rotor/velocity-deg-s</output>
+        </fcs_function>
+	
+	
+	
+	
+	
+	<!--BEWARE /rotors/main/blade/position-deg is not the real value , it is only an animation value-->
+	
+	<switch name="animation/delta-sec">
+            <default value="sim-delta-sec"/>
+	    <test logic="AND" value="0">                
+		 simulation/sim-time-sec LT 5.0
+            </test>
+            <test logic="AND" value="0">
+                propulsion/engine[0]/brake-ctrl-norm  == 1
+                propulsion/engine[0]/rotor-rpm LE systems/rotor/minx-rpm
+		systems/rotor/raw_pos-deg LE 1
+            </test>
+	</switch>
+	
+	
+	
+	<fcs_function name="systems/raw_pos-deg_func">	    
+	    <function>	      
+		<min>
+		    <value>360</value>
+		<sum>
+		    <product>
+			<property>systems/rotor/velocity-deg-s</property>
+			<property>animation/delta-sec</property>
+		    </product>
+		    <property>systems/rotor/pos-deg</property>
+		</sum>
+	       </min>
+	       </function>	       
+	    <output>systems/rotor/raw_pos-deg</output>
+        </fcs_function>
+	
+	
+	
+	
+	
+	<switch name="systems/rotor/raw_pos-deg_sw">
+		<default value="systems/rotor/raw_pos-deg"/>
+		<test logic="OR" value="0">
+			systems/rotor/raw_pos-deg == 360
+		</test>
+		<output>systems/rotor/pos-deg</output>
+	</switch>
+	
+	
+	
+	<!-- END fake rpm animation=======================-->
+	 
+	 
+	<!-- ===NN==========================================-->
+	
+	
+	<fcs_function name="systems/rotor/pale0pos-deg_func">
+            <function>
+                <sum>
+                    <property>systems/rotor/pos-deg</property>
+                    <value>0</value>
+                </sum>
+            </function>
+	    <output>systems/rotor/pale0pos-deg</output>
+	    <output>animation/rotor/main/pale0pos-deg</output>
+        </fcs_function>
+	
+	
+	 <fcs_function name="systems/rotor/pale1pos-deg_func">
+            <function>
+                <sum>
+                    <property>systems/rotor/pale0pos-deg</property>
+                    <value>240</value>
+                </sum>
+            </function>
+	    <output>systems/rotor/pale1pos-deg</output>
+	    <output>animation/rotor/main/pale1pos-deg</output>
+        </fcs_function>
+
+        <fcs_function name="systems/rotor/pale2pos-deg_func">
+            <function>
+                <sum>
+                    <property>systems/rotor/pale0pos-deg</property>
+                    <value>120</value>
+                </sum>
+            </function>
+	    <output>systems/rotor/pale2pos-deg</output>
+	    <output>animation/rotor/main/pale2pos-deg</output>
+        </fcs_function>
+	
+	
+	<!--====================================-->
+	
+	
+	
+	
+	
+	
+	
+	<pure_gain name="systems/rotor_m2/rotate-for-fold-deg_value">
+	    <input>systems/rotor_m2/ready-for-fold</input>
+	    <gain>180</gain>
+	    <output>systems/rotor_m2/init-pos-for-fold-deg</output>
+	</pure_gain>
+	
+	<!--<switch name="systems/rotor_m2/init-pos-for-fold-deg_sw">
+		<default value="0"/>
+		<test logic="OR" value="systems/rotor_m2/init-pos-for-fold-deg_value">
+			fcs/wing-fold-cmd  == 1
+		</test>
+	    <output>systems/rotor_m2/init-pos-for-fold-deg</output>
+	</switch>-->
+	
+	   <!--===========Rotor _m2  Positon================-->
+        
+	
+	<fcs_function name="systems/cone-rotor_m2-at_rest">
+		<function>		    
+			<product>
+<!-- 			     -->
+			       <property>systems/rotor_m2/flap-deg-at-rest</property>
+			</product>
+		</function>
+	</fcs_function>
+	
+	
+	
+	<switch name="systems/rotor_m2/running-cmd-norm">
+            <default value="0"/>
+            <test logic="AND" value="1">
+		propulsion/engine[1]/rotor-rpm GT 50
+		propulsion/engine[1]/clutch-ctrl-norm  GT  0.9
+            </test>	    
+        </switch>
+
+	<kinematic name="systems/rotor_m2/running-pos-norm">
+            <input>systems/rotor_m2/running-cmd-norm</input>
+            <traverse>
+                <setting>
+                    <position>0</position>
+                    <time>0</time>
+                </setting>
+                <setting>
+                    <position>1</position>
+                    <time>5</time>
+                </setting>
+            </traverse>	     
+        </kinematic>
+	
+	
+	<fcs_function name="systems/cone-rotor_m2-running-min">
+		<function>		    
+			<product>
+			    <value>-1</value>
+			    <property>systems/rotor_m2/running-pos-norm</property>
+			    <property>systems/rotor_m2/flap-deg-at-rest</property>
+			</product>
+		</function>
+	</fcs_function>
+	
+	
+	
+	<fcs_function name="systems/cone-rotor_m2-running">
+		<function>	
+		    <quotient>
+			<product>
+<!-- 			     -->
+				<sqrt>
+				<abs><property>propulsion/engine[1]/thrust-lbs</property></abs>
+				</sqrt>
+			</product>
+			<property>systems/rotor_m2/cone-blade-k_t</property>
+		    </quotient>
+		</function>
+		<clipto>
+		<min>systems/cone-rotor_m2-running-min</min>
+		<max>9999</max>
+		</clipto>
+	</fcs_function>
+	
+	<fcs_function name="Rotor1 Cone">
+		<function>
+		    <sum>
+			<property>systems/cone-rotor_m2-at_rest</property>
+			<property>systems/cone-rotor_m2-running</property>
+		    </sum>
+		</function>
+		<output>systems/rotor_m2/flap-deg</output>
+		<output>animation/rotor/main2/blade/flap-deg-rel</output>
+	</fcs_function>	
+	
+	    
+	    <!--Only a guess ANIMATION estimate flap relative value due to ctrl ( lon lat ) and engine thrust-->
+	
+	<fcs_function name="animation/rotor/main2/blade/flap-deg-lat">
+	    <function>
+		<product>
+			<property>propulsion/engine[1]/lateral-ctrl-rad</property>
+			<property>propulsion/engine[1]/thrust-lbs</property>
+			<property>animation/rotor/main2/blade/k_flap-deg-lat</property>
+		</product>
+	    </function>
+	</fcs_function>
+	
+	
+	
+	<fcs_function name="animation/rotor/main2/blade/flap-deg-lon">
+	    <function>
+		<product>
+			<property>propulsion/engine[1]/longitudinal-ctrl-rad</property>
+			<property>propulsion/engine[1]/thrust-lbs</property>
+			<property>animation/rotor/main2/blade/k_flap-deg-lon</property>	
+		</product>
+	    </function>
+	</fcs_function>
+	
+	<!--ANIMATION blades pos at fold   or blades broken at crash   -->	
+	
+	<fcs_function name="animation/rotor/main2/blade/flap-at-folding">
+	    <function>
+		<product>
+			<property>systems/rotor/flap-eff</property>
+			<property>animation/rotor/main2/blade/flap-deg-rel</property>	
+		</product>
+	    </function>
+	</fcs_function>
+
+        <switch name="animation/rotor/main2/blade/flap-deg">
+            <default value="animation/rotor/main2/blade/flap-deg-rel"/>
+	     <test logic="OR" value="-10">
+		 systems/crash-detect/crashed == 1
+		<!--systems/behaviour/steady-crashed-onwater  == 1   -->
+            </test>            
+	    <test logic="OR" value="animation/rotor/main2/blade/flap-at-folding">
+		 systems/rotor/blade-fold-cmd-norm == 1
+            </test>    
+        </switch>
+	
+	
+	<!--convert pale position to RAD-->
+	
+	<fcs_function name="animation/rotor/main2/pale0pos-rad">
+	    <function>
+		<toradians>
+		    <property>animation/rotor/main2/pale0pos-deg</property>
+		</toradians>
+	    </function>
+	</fcs_function>
+	
+	<fcs_function name="animation/rotor/main2/pale1pos-rad">
+	    <function>
+		<toradians>
+		    <property>animation/rotor/main2/pale1pos-deg</property>
+		</toradians>
+	    </function>
+	</fcs_function>
+	
+	<fcs_function name="animation/rotor/main2/pale2pos-rad">
+	    <function>
+		<toradians>
+		    <property>animation/rotor/main2/pale2pos-deg</property>
+		</toradians>
+	    </function>
+	</fcs_function>
+	
+	
+	<fcs_function name="animation/rotor/main2/blade0/flap-deg">
+            <function>
+                <sum>
+		    <product>
+			<cos>
+			    <property>animation/rotor/main2/pale0pos-rad</property>	
+			</cos>    
+			<property>animation/rotor/main2/blade/flap-deg-lon</property>	
+		    </product>
+		    <product>
+			<sin>
+			    <property>animation/rotor/main2/pale0pos-rad</property>
+			</sin>		    
+			<property>animation/rotor/main2/blade/flap-deg-lat</property>
+		    </product>
+		    <property>animation/rotor/main2/blade/flap-deg</property>
+                </sum>
+            </function>
+	    <output>systems/rotor_m2/pale0flap-deg</output>
+        </fcs_function>
+	
+	<fcs_function name="animation/rotor/main2/blade1/flap-deg">
+            <function>
+                <sum>
+		     <product>
+			<cos>
+			    <property>animation/rotor/main2/pale1pos-rad</property>	
+			</cos>		    
+			<property>animation/rotor/main2/blade/flap-deg-lon</property>
+		    </product>
+		    <product>
+			<sin>
+			    <property>animation/rotor/main2/pale1pos-rad</property>
+			</sin>		    
+			<property>animation/rotor/main2/blade/flap-deg-lat</property>
+		    </product>
+		    <property>animation/rotor/main2/blade/flap-deg</property>
+                </sum>
+            </function>
+	    <output>systems/rotor_m2/pale1flap-deg</output>
+        </fcs_function>
+	
+	<fcs_function name="animation/rotor/main2/blade2/flap-deg">
+            <function>
+                <sum>
+		     <product>
+			<cos>
+			    <property>animation/rotor/main2/pale2pos-rad</property>
+			</cos>		
+			<property>animation/rotor/main2/blade/flap-deg-lon</property>	
+		    </product>
+		    <product>
+		    <sin>
+			<property>animation/rotor/main2/pale2pos-rad</property>
+		    </sin>		    
+                    <property>animation/rotor/main2/blade/flap-deg-lat</property>	
+		    </product>
+		    <property>animation/rotor/main2/blade/flap-deg</property>
+                </sum>
+            </function>
+	    <output>systems/rotor_m2/pale2flap-deg</output>
+        </fcs_function>
+	
+	
+	
+	 
+	
+	
+	
+	 
+	<!-- ===NN==========================================-->
+	
+	
+	<fcs_function name="systems/rotor_m2/pale0pos-deg_func">
+            <function>
+                <sum>
+                    <property>systems/rotor/pos-deg</property>
+                    <value>0</value>
+		    <property>systems/rotor_m2/init-pos-for-fold-deg</property>
+                </sum>
+            </function>	    
+	    <output>animation/rotor/main2/pale0pos-deg</output>
+        </fcs_function>
+	
+	
+	 <fcs_function name="systems/rotor_m2/pale1pos-deg_func">
+            <function>
+                <sum>
+                    <property>animation/rotor/main2/pale0pos-deg</property>
+                    <value>120</value>
+                </sum>
+            </function>	    
+	    <output>animation/rotor/main2/pale1pos-deg</output>
+        </fcs_function>
+
+        <fcs_function name="systems/rotor_m2/pale2pos-deg_func">
+            <function>
+                <sum>
+                    <property>animation/rotor/main2/pale0pos-deg</property>
+                    <value>240</value>
+                </sum>
+            </function>	    
+	    <output>animation/rotor/main2/pale2pos-deg</output>
+        </fcs_function>  
+       
+    </channel>
+	
+	
+	
+   
+	
+	 <!-- rotation des axes de référence selon modèle 3D-->
+     <property value="0">animation/gear0main_rotation</property>
+    <!-- pour placer les roues selon le dessin original-->
+      <property value="0.253">animation/gear0main_k-position</property>   
+      
+    <property value="0.4">animation/gear0extend-value</property>      
+    <!--FIXME extend value  shoulde be zero since compression is zero in air -->
+
+
+
+    
+   <!-- longueur bras virtuel     aprox
+   longueur de la jambe  1.15424  m  3.7868766 ft -->
+    
+ <channel name="gears 0">
+	
+	<switch name="animation/gear0extend_sw">
+            <default value="0"/>
+            <test logic="OR" value="animation/gear0extend-value">
+                position/h-agl-ft  GT 30
+		gear/gear-cp-cmd-norm == 0
+            </test>
+	</switch>
+	
+	<kinematic name="animation/gear0extend-sim">
+            <input>animation/gear0extend_sw</input>
+            <traverse>
+                <setting>
+                    <position>0</position>
+                    <time>0</time>
+                </setting>
+                <setting>
+                    <position>1</position>
+                    <time>10</time>
+                </setting>
+            </traverse>
+        </kinematic>
+	
+	
+	<switch name="animation/gear0extend">
+            <default value="animation/gear0extend-sim"/>
+	    <test logic="OR" value="-55">  
+                systems/crash-detect/crashed-cmd  == 1
+            </test>
+	</switch>	
+		
+	
+	<!--Calcul de base en ft et rad      x  e t y en cordonnées   2D -->
+	
+	<!--calcul deg selon x purement horizontal-->
+	<!--enfoncement sur sol dû à compression =  -2.86  deg -->
+	<fcs_function name="animation/gear0main_pos-rad">
+            <function>
+		<sum>
+                    <asin>
+			<quotient>
+			    <sum>
+				<difference>
+				 <property>animation/gear0main_k-position</property>
+				<property>gear/unit[0]/compression-ft</property>
+				</difference>
+				<property>animation/gear0extend</property>
+			    </sum>
+			    <value>3.7868766</value>
+			 </quotient>                        
+                    </asin>		    
+		    <property>animation/gear0main_rotation</property>	    
+		    </sum>
+            </function>
+        </fcs_function>
+	
+	<fcs_function name="animation/gear0main_pos-deg">
+            <function>		
+		<todegrees>
+		    <property>animation/gear0main_pos-rad</property>
+		</todegrees>
+	    </function>
+	    <output>animation/gear/unit0-compression-deg</output>
+        </fcs_function>	
+	
+	</channel>
+	
+	
+	 <property value="0.253">animation/gear1main_k-position</property>
+	 
+	<property value="0.4">animation/gear1extend-value</property>    
+	<!--FIXME extend value  shoulde be zero since compression is zero in air -->
+	 <property value="0">animation/gear1main_rotation</property>
+	 
+	
+	 <channel name="gears 1">
+	
+	<switch name="animation/gear1extend_sw">
+            <default value="0"/>
+            <test logic="OR" value="animation/gear1extend-value">  
+                position/h-agl-ft  GT 30
+		gear/gear-cp-cmd-norm == 0
+            </test>
+	</switch>
+	
+	<kinematic name="animation/gear1extend-sim">
+            <input>animation/gear1extend_sw</input>
+            <traverse>
+                <setting>
+                    <position>0</position>
+                    <time>0</time>
+                </setting>
+                <setting>
+                    <position>1</position>
+                    <time>10</time>
+                </setting>
+            </traverse>
+        </kinematic>
+	
+	<switch name="animation/gear1extend">
+            <default value="animation/gear1extend-sim"/>
+	    <test logic="OR" value="-25">  
+                systems/crash-detect/crashed-cmd  == 1
+            </test>
+	</switch>	
+	
+	<!--Calcul de base en ft et rad      x  e t y en cordonnées   2D -->
+	
+	<!--calcul deg selon x purement horizontal-->
+	<!--enfoncement sur sol dû à compression -->
+	<fcs_function name="animation/gear1main_pos-rad">
+            <function>
+		<sum>
+                    <asin>
+			<quotient>
+			    <sum>
+				<difference>
+				 <property>animation/gear1main_k-position</property>
+				<property>gear/unit[1]/compression-ft</property>
+				</difference>
+				<property>animation/gear1extend</property>
+			    </sum>
+			    <value>3.7868766</value>
+			 </quotient>                        
+                    </asin>		    
+		    <property>animation/gear1main_rotation</property>	    
+		    </sum>
+            </function>
+        </fcs_function>
+	
+	<fcs_function name="animation/gear1main_pos-deg">
+            <function>		
+		<todegrees>
+		    <property>animation/gear1main_pos-rad</property>
+		</todegrees>
+	    </function>
+	    <output>animation/gear/unit1-compression-deg</output>
+        </fcs_function>	
+	
+      </channel>
+      
+      
+      <channel name="Pilot">
+	  
+        <switch name="animation/pilot-sunglass_sw">
+            <default value="0"/>
+            <test logic="OR" value="1">  
+                position/h-agl-ft  GT 30
+		
+            </test>
+	</switch>
+	
+	<kinematic name="animation/pilot-sunglass">
+            <input>animation/pilot-sunglass_sw</input>
+            <traverse>
+                <setting>
+                    <position>0</position>
+                    <time>0</time>
+                </setting>
+                <setting>
+                    <position>1</position>
+                    <time>3</time>
+                </setting>
+            </traverse>
+        </kinematic>
+	
+    </channel>
+      
+    
+    <property value="0"> animation/rescue/rescue-lift-sim</property>
+    <property value="0"> animation/rescue/rescue-lift-cmd</property>
+    <property value="10">animation/rescue/rescue-lift-Kscale</property>
+    <property value="0">animation/mission-winch-pos-norm</property>
+    <property value="1.46211">animation/rescue/rescuer-high-m</property>
+     <property value="0.416377">animation/rescue/winch-pos-m</property>
+     <property value="0.7">animation/rescue/k-adjustement_solid</property>
+      <property value="2.3">animation/rescue/k-adjustement_water</property>
+    
+    <channel name="rescue-op">
+	
+	
+	
+	 <switch name="animation/rescue/rescue-lift-sw">
+            <default value="animation/rescue/rescue-lift-cmd"/>
+            <test logic="AND" value="0">
+	      animation/mission-winch-pos-norm != 1
+            </test>
+	    <output>animation/rescue/rescue-lift-cmd</output>
+        </switch>
+	
+	
+	<switch name="animation/rescue/k-adjustement">
+            <default value="animation/rescue/k-adjustement_solid"/>
+            <test logic="AND" value="animation/rescue/k-adjustement_water">
+	      ground/solid == 0
+            </test>
+        </switch>
+	
+	
+	<pure_gain name="animation/rescue/rescue-lift-m">
+	    <input>animation/rescue/rescue-lift-cmd</input>
+	   <gain>animation/rescue/rescue-lift-Kscale</gain>
+	</pure_gain>
+	
+	<fcs_function name="animation/rescue/rescue-lift-value_func">
+            <function>
+		<sum>
+		    <property>animation/rescue/rescue-lift-m</property>
+		    <property>animation/rescue/rescuer-high-m</property>
+		</sum>
+            </function>
+	    <output>animation/rescue/rescue-lift-value</output>
+	</fcs_function>
+	
+	
+	<pure_gain name="animation/rescue/rescue-lift-ft">
+	    <input>animation/rescue/rescue-lift-value</input>
+	     <gain>3.2808399</gain>
+	</pure_gain>
+	
+	
+	<fcs_function name="animation/rescue/winch-pos-agl-ft">
+            <function>
+		<sum>
+		    <property>position/h-agl-ft</property>
+		    <product>
+			<property>animation/rescue/winch-pos-m</property>
+			<value>3.2808399</value>
+		    </product>
+		    <property>animation/rescue/k-adjustement</property>
+		</sum>
+            </function>
+	</fcs_function>
+	
+	
+	<!--((h-agl-ft)x3.2808399  + 1.46211) - animation/rescue/rescue-lift-value doit etre  > 0-->
+	
+	<switch name="animation/rescue/rescue-lift-value-ft_sw">
+	    <default value="0"/>
+	    <test logic="AND" value="animation/rescue/rescue-lift-ft">
+		animation/rescue/rescue-lift-ft LE animation/rescue/winch-pos-agl-ft
+		animation/rescue/rescue-lift-sim == 1
+	    </test>
+	    <test logic="AND" value="animation/rescue/winch-pos-agl-ft">
+		animation/rescue/rescue-lift-ft GT animation/rescue/winch-pos-agl-ft
+		animation/rescue/rescue-lift-sim == 1
+	    </test>
+	    <output>animation/rescue/rescue-lift-value-ft</output>
+	</switch>
+	
+	<fcs_function name="animation/rescue/rescue-lift-value-m">
+            <function>
+		    <difference>
+			<product>
+			    <property>animation/rescue/rescue-lift-value-ft</property>
+			    <value>0.3048</value>
+			</product>	
+			    <property>animation/rescue/rescuer-high-m</property>
+		    </difference>
+            </function>
+	</fcs_function>	
+	
+	<fcs_function name="animation/rescue/pitch-deg">
+            <function>
+		<todegrees>
+			<property>attitude/pitch-rad</property>
+                   </todegrees>
+            </function>
+	</fcs_function>	
+	
+	<fcs_function name="animation/rescue/roll-deg">
+            <function>
+		<todegrees>
+			<property>attitude/roll-rad</property>
+                   </todegrees>
+            </function>
+	</fcs_function>
+	
+	
+    </channel>
+
+    
+   
+
+
+</system>

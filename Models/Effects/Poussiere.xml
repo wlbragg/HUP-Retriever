@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+<!--
+    Usable with FlightGear
+    property gerard robin
+    Copyright 
+-->
+   
+
+
+
+<!--<paramsx></paramsx>-->
+
+ <path>poussiere.osg</path>
+
+
+ <offsets>
+    <x-m> 0 </x-m>
+   <!-- <y-m> 00 </y-m>
+    <z-m> 00 </z-m>-->
+    <pitch-deg>90</pitch-deg>
+    <roll-deg>0</roll-deg>
+ </offsets>
+
+
+
+
+
+
+
+
+</PropertyList>

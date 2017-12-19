@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!--
+    Usable with FlightGear
+    Property of Gerard Robin (C) 2008-2010
+    Copyright 
+-->
+<PropertyList include="PilotT-Anim.xml">
+
+	<path>Models/pilot-tV2.ac</path>
+	<texture-path>Models/</texture-path>
+
+	<offsets>
+            <pitch-deg>0</pitch-deg>
+            <z-m>0.0</z-m>
+            <x-m>0</x-m>
+        </offsets>
+	
+	
+	<animation>
+            <type>select</type>
+            <object-name>gabarit-pose</object-name>
+            <condition>                   
+			<equals>
+			<property>sim/current-view/view-number</property>
+                        <value>99</value>
+                    </equals>		
+	    </condition>
+	</animation>
+
+   
+	
+	
+	
+	
+	<effect>
+	    <inherits-from>Aircraft/HUP-Retriever/Models/Effects/reflectp-shine</inherits-from>
+	    <object-name>Casque</object-name>	    
+	</effect>
+	
+	
+	<animation>
+            <type>rotate</type>            
+	     <object-name>Lunette-Sangle</object-name>
+	     <object-name>Lunette</object-name>
+	    <property>fdm/jsbsim/animation/pilot-sunglass</property>
+	    <factor>-18</factor>
+	    <center>
+                <x-m>0.029927</x-m>
+                <y-m>0</y-m>
+		<z-m>0.759247</z-m>
+            </center>
+            <axis>
+                <x>0</x>
+                <y>1</y>
+                <z>0</z>
+            </axis>
+        </animation>
+	
+
+</PropertyList>        

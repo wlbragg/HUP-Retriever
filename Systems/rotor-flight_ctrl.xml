@@ -1,0 +1,147 @@
+<?xml version="1.0"?>
+
+
+<system name="fcs">
+    <property value="1">systems/damp-on</property>
+
+    <channel name="longitudinal-frt">
+	
+	 <!--<pure_gain name="fcs/elevator-stick-pos">
+            <input>fcs/pitch-trim-cmd-norm</input>
+            <gain>1</gain>
+	</pure_gain>-->
+	
+        <summer name="fcs/longitudinal-cmd-trim-sum">
+            <input> fcs/elevator-cmd-norm </input>
+            <input> fcs/pitch-trim-cmd-norm </input>
+            <clipto>
+                <min> -1.0 </min>
+                <max>  1.0 </max>
+            </clipto>
+        </summer>
+        <lag_filter name="fcs/longitudinal-lag">
+            <input> fcs/longitudinal-cmd-trim-sum </input>
+            <c1>   20.0 </c1>
+        </lag_filter>
+        <pure_gain name="fcs/longitudinal-gain">
+            <input>  fcs/longitudinal-lag </input>
+            <gain>   0.20 </gain>
+            <output> fcs/x-lon </output>
+        </pure_gain>
+
+        <summer name="fcs/longitudinal_main-ctrl-rad">
+            <input> fcs/x-lon </input>
+            <input> ap/elevator-cmd </input>
+            <bias>  0.04 </bias>
+            <clipto>
+                <min> -0.7 </min>
+                <max>  0.7 </max>
+            </clipto>
+            <output> propulsion/engine[0]/longitudinal-ctrl-rad </output>
+        </summer>
+
+        <summer name="fcs/longitudinal_tandem-ctrl-rad">
+            <input> fcs/x-lon </input>
+            <input> ap/elevator-cmd </input>
+            <bias>  0.04 </bias>
+            <clipto>
+                <min> -0.7 </min>
+                <max>  0.7 </max>
+            </clipto>
+            <output> propulsion/engine[1]/longitudinal-ctrl-rad </output>
+        </summer>
+
+    </channel>
+
+    <channel name="pedal">
+        <summer name="fcs/pedal-cmd-trim-sum">
+            <input> fcs/rudder-cmd-norm </input>
+            <input> fcs/yaw-trim-cmd-norm </input>
+            <clipto>
+                <min> -1.0 </min>
+                <max>  1.0 </max>
+            </clipto>
+        </summer>
+        <lag_filter name="fcs/pedal-lag">
+            <input> fcs/pedal-cmd-trim-sum </input>
+            <c1>    20.0 </c1>
+        </lag_filter>
+        <pure_gain name="fcs/pedal-gain">
+            <input>  fcs/pedal-lag </input>
+            <gain>  0.0800 </gain>
+            <output> fcs/x-ped </output>
+        </pure_gain>
+        <pure_gain name="fcs/pedal-col-mix">
+            <input>  fcs/x-col </input>
+            <gain> -0.15</gain>
+        </pure_gain>
+        <summer name="fcs/pedal-ctrl-rad">
+            <input> fcs/x-ped </input>
+            <input> fcs/pedal-col-mix </input>
+            <input> ap/rudder-cmd </input>
+            <bias>0.0</bias>
+            <clipto>
+                <min> -0.7 </min>
+                <max>  0.7 </max>
+            </clipto>
+        </summer>
+    </channel>
+
+    <channel name="lateral">
+        <summer name="fcs/lateral_main-cmd-trim-sum">
+            <input> fcs/aileron-cmd-norm </input>
+            <input> fcs/roll-trim-cmd-norm </input>
+            <clipto>
+                <min> -1.0 </min>
+                <max>  1.0 </max>
+            </clipto>
+        </summer>
+        <lag_filter name="fcs/lateral-lag">
+            <input> fcs/lateral_main-cmd-trim-sum </input>
+            <c1>   20.0 </c1>
+        </lag_filter>
+        <pure_gain name="fcs/lateral-gain">
+            <input>  fcs/lateral-lag </input>
+            <gain>   0.080 </gain>
+            <output> fcs/x-lat </output>
+        </pure_gain>
+
+
+        <pure_gain name="fcs/lateral-col-mix">
+            <input>  fcs/x-col </input>
+            <gain>   0.0 </gain>
+        </pure_gain>
+
+
+
+        <summer name="fcs/lateral_main-ctrl-rad">
+            <input> fcs/x-lat </input>
+            <input> fcs/lateral-col-mix </input>
+            <input> ap/aileron-cmd </input>
+            <input>-fcs/pedal-ctrl-rad</input>
+            <bias>  -0.0080</bias>
+            <clipto>
+                <min> -0.7 </min>
+                <max>  0.7 </max>
+            </clipto>
+            <output> propulsion/engine[0]/lateral-ctrl-rad </output>
+        </summer>
+
+        <summer name="fcs/lateral_tandem-ctrl-rad">
+            <input> fcs/x-lat </input>
+            <input> fcs/lateral-col-mix </input>
+            <input> ap/aileron-cmd </input>
+            <input> fcs/pedal-ctrl-rad</input>
+            <bias>  -0.0080</bias>
+            <clipto>
+                <min> -0.7 </min>
+                <max>  0.7 </max>
+            </clipto>
+            <output> propulsion/engine[1]/lateral-ctrl-rad </output>
+        </summer>
+    </channel>
+
+
+
+
+</system>

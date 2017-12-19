@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<!--
+    usable with flightgear or JSBSim stand-alone
+    COPYRIGHT gerard robin  23-03-2010
+    
+
+    Replace FlightGear_generic-electric.xml file
+-->
+
+<system name="electrical-custom">
+
+    <property value="0">electrical/supplier/emergency-on</property>
+     <property value="0">electrical/supplier/external-power</property>
+     <property value="0">electrical/ignition/master-switch</property>
+     <property value="0">electrical/propulsion/engine[0]/fuel-pump</property>
+     
+    
+    <property value="0">electrical/switch/battery</property>
+   
+
+<channel name="electrical-custom">
+
+
+	
+	<!--<switch name="electric master switch">
+            <default value="0"/>
+            <test  logic="OR" value="1">
+		electrical/switch/master == 1
+            </test>
+        </switch>-->
+       <!-- =====================================-->
+
+<!--temporary goes with magneto switch == 3  -->
+       <!--switches-->
+       <switch name="electrical/supplier/battery-on">
+           <default value="0"/>
+           <test  logic="OR" value="1">
+              electrical/switch/battery   == 1
+           </test>
+           <output>electrical/propulsion/engine[0]/master-bat</output>
+        </switch>
+
+        <switch name="electrical/supplier/alternator-on">
+            <default value="0"/>
+            <test  logic="AND" value="1">
+               propulsion/engine/set-running == 1
+	       propulsion/engine[0]/magnetos == 3
+               systems/crash-detect/crashed != 1
+            </test>
+            <output>electrical/propulsion/engine[0]/master-alt</output>
+        </switch>
+	
+	<!--<summer name="propulsion/magneto_cmd">
+            <input>electrical/magneto/left</input>
+            <input>electrical/magneto/right</input>
+        </summer>-->
+	
+	<!--Main Alternators Amperes   a guess-->
+	<scheduled_gain name="electrical/supplier/alternator/amp0">
+            <input>electrical/propulsion/engine[0]/master-alt</input>
+            <table>
+		<independentVar>propulsion/engine[0]/engine-rpm</independentVar>
+                <tableData>
+                    0.00	        0.00
+		    400		0.00
+                    1000              20
+                    2500	        120
+                </tableData>
+            </table>
+        </scheduled_gain>
+	
+	
+	
+
+        <switch name="electrical/supplier/external-on">
+            <default value="0"/>
+            <test  logic="AND" value="1">
+                electrical/supplier/external-power  == 1
+                electrical/supplier/alternator-on == 0
+                electrical/supplier/emergency-on == 0
+            </test>
+        </switch>
+
+    </channel>
+
+</system>

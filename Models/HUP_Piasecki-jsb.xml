@@ -1,0 +1,1291 @@
+<PropertyList>
+
+  <!--
+  Usable with FlightGear
+   =>    Gerard Robin
+    License:  GPLV2
+  -->
+
+	<path>piasecki_hup-v2.ac</path>
+
+	<texture-path>Textures</texture-path>
+
+    <offsets>
+        <pitch-deg>0</pitch-deg>
+        <z-m>0.06</z-m>
+        <x-m>0</x-m>
+    </offsets>
+
+    <effect>
+        <inherits-from>Aircraft/HUP-Retriever/Models/Effects/reflectHUP</inherits-from>
+        <object-name>Fuselage</object-name>
+        <object-name>AR-Rotor-Cap</object-name>
+        <object-name>GPorte</object-name>
+        <object-name>Trappe</object-name>
+        <object-name>Moteur-Echap</object-name>
+        <object-name>Cockpit-Bulle-Struct</object-name>
+
+        <!--<object-name></object-name>-->
+    </effect>
+
+	  <effect>
+      <inherits-from>Aircraft/HUP-Retriever/Models/Effects/reflecttrain_2</inherits-from>
+	    <object-name>ARTrain-JambeFixe</object-name>
+	    <object-name>ARTrain-Piston</object-name>
+	    <object-name>ARTrain-Bielle</object-name> 
+	    <object-name>Train-Jambe-hinge</object-name>
+      <object-name>GTrain-Jambe</object-name>
+      <object-name>DTrain-Jambe</object-name>
+      <object-name>GTrain-Jambe_piston</object-name>
+      <object-name>DTrain-Jambe_piston</object-name>
+	    <object-name>GTrain-etrier</object-name>
+	    <object-name>DTrain-etrier</object-name>
+      <object-name>GTrain-AR-tri</object-name>
+      <object-name>DTrain-AR-tri</object-name>
+	    <object-name>GTrain-AR-tri-hinge</object-name>
+	    <object-name>DTrain-AR-tri-hinge</object-name>
+      <object-name>GTRain-AV-tri</object-name>
+	    <object-name>GTRain-AV-tri-hinge</object-name>
+	    <object-name>DTRain-AV-tri</object-name>
+	    <object-name>DTRain-AV-tri-hinge</object-name>
+	    <!--<object-name>GRudder-Pilote</object-name>
+	    <object-name>DRudder-Pilote</object-name>
+	    <object-name>GRudder-Copilote</object-name>
+	     <object-name>DRudder-Copilote</object-name>-->
+	    <object-name>Collective-Pilote</object-name>
+	    <object-name>Manche-Pilote</object-name>
+	    <object-name>Manche-Copilote</object-name>
+      <!--<object-name></object-name>-->
+    </effect>
+
+    <effect>
+      <inherits-from>Aircraft/HUP-Retriever/Models/Effects/reflectp-shine</inherits-from>
+      <object-name>Pedale-GRudder-Pilote</object-name>
+      <object-name>Base-GRudder-Pilote</object-name>
+      <object-name>Pedale-DRudder-Pilote</object-name>
+      <object-name>Base-DRudder-Pilote</object-name>
+      <object-name>GRudder-Copilote</object-name>
+      <object-name>Base-GRudder-Copilote</object-name>
+      <object-name>DRudder-Copilote</object-name>
+      <object-name>Base-DRudder-Copilote</object-name>
+    </effect>
+
+    <animation>
+      <type>shader</type>
+      <shader>chrome</shader>
+      <texture>Aircraft/HUP-Retriever/Models/Textures/shader.png</texture>
+      <object-name>Cockpit-Bulle-Vitrage</object-name>
+      <object-name>GPorte-Vitrage</object-name>
+      <object-name>Cockpit-left-window</object-name>
+      <object-name>Cockpit-right-window</object-name>
+      <object-name>Cockpit-Vitrage</object-name>
+      <object-name>Fuselage-Vitrage</object-name>
+      <!--<object-name></object-name>-->
+    </animation>
+
+    <effect>
+      <inherits-from>Effects/model-transparent</inherits-from>           
+      <object-name>Phare-vitre</object-name>
+      <object-name>Collision-Light</object-name>
+    </effect>
+
+	<!--======================FX=================================-->
+	
+	  <model>
+      <name>DFlux0-Engine</name>
+      <path>Aircraft/HUP-Retriever/Fx/pipe.xml</path>
+      <offsets>
+        <x-m>0.907025</x-m>
+        <y-m>0.790298</y-m>
+        <z-m>-0.94704</z-m>
+        <pitch-deg>8 </pitch-deg>
+        <heading-deg>40</heading-deg>
+      </offsets>
+    </model>
+
+    <model>
+      <name>GFlux0-Engine</name>
+      <path>Aircraft/HUP-Retriever/Fx/pipe.xml</path>
+      <offsets>
+        <x-m>0.907025</x-m>
+        <y-m>-0.790298</y-m>
+        <z-m>-0.94704</z-m>
+        <pitch-deg>8</pitch-deg>
+        <heading-deg>-40</heading-deg>
+      </offsets>
+    </model>
+
+    <!-- Long Line Cargo Unchained -->
+    <model>
+      <path>Aircraft/HUP-Retriever/Models/Cargo-Hauling/long-line-uc.xml</path>
+      <offsets>
+        <x-m>0</x-m>
+        <y-m>0</y-m>
+        <z-m>2</z-m>
+      </offsets>
+    </model>
+
+    <model>	
+      <path>Aircraft/HUP-Retriever/Models/Effects/particles/rotorwashidle.xml</path>
+      <offsets>
+        <x-m> -2.900 </x-m>
+        <y-m>  0.000 </y-m>
+        <z-m> -0.900 </z-m>
+        <roll-deg> 90 </roll-deg>
+      </offsets>
+    </model>
+
+    <model>
+      <path>Aircraft/HUP-Retriever/Models/Effects/particles/rotorwashpower.xml</path>
+      <offsets>
+        <x-m> -2.606 </x-m>
+        <y-m>  0.000 </y-m>
+        <z-m> -1.500 </z-m>
+     </offsets>
+    </model>
+
+        <!--======================RESCUE=================================-->
+
+	  <model>
+      <name>Winch</name>
+      <path>Aircraft/HUP-Retriever/Models/HUP-Winch.xml</path>
+      <offsets>
+        <x-m>0</x-m>
+        <y-m>0</y-m>
+        <z-m>0</z-m>
+      </offsets>
+    </model>
+
+	  <model>
+      <name>Rescue-Op</name>
+      <path>Aircraft/HUP-Retriever/Models/Rescue/Rescue-Op.xml</path>
+      <offsets>
+        <x-m>-3.21071</x-m>
+        <y-m>0.249688</y-m>
+        <z-m>0.416377</z-m>
+        <pitch-deg>0</pitch-deg>
+        <heading-deg>0</heading-deg>
+      </offsets>
+    </model>
+
+    <model>
+      <name>Rescue-noman</name>
+      <path>Aircraft/HUP-Retriever/Models/Rescue/Rescue-noman.xml</path>
+      <offsets>
+        <x-m>-3.21071</x-m>
+        <y-m>0.249688</y-m>
+        <z-m>0.416377</z-m>
+        <pitch-deg>0</pitch-deg>
+        <heading-deg>0</heading-deg>
+      </offsets>
+    </model>
+
+    <animation>
+      <type>select</type>
+      <object-name>Rescue-Op</object-name>
+      <condition>
+	      <and>
+		      <property>fdm/jsbsim/animation/rescue/rescuer</property>
+          <equals>			
+            <property>fdm/jsbsim/animation/cockpit-hatch-pos-norm</property>
+            <value>1</value>
+          </equals>
+        </and>
+      </condition>
+    </animation>
+
+	<animation>
+            <type>select</type>
+            <object-name>Rescue-noman</object-name>
+            <condition>
+		    <and>
+			<not><property>fdm/jsbsim/animation/rescue/rescuer</property></not>
+                    <equals>
+                        <property>fdm/jsbsim/animation/cockpit-hatch-pos-norm</property>
+                        <value>1</value>
+                    </equals>
+		    </and>
+            </condition>
+        </animation>
+	
+	
+	<animation>
+            <type>rotate</type>
+	    <object-name>Rescue-Op</object-name>
+            <property>jsbsim/fdm/animation/rescue/pitch-deg</property>
+            <factor>1</factor>
+            <center>
+                <x-m>-3.3219</x-m>
+                <y-m>0.200305</y-m>
+                <z-m>0.485714</z-m>
+            </center>
+            <axis>
+                <x>0</x>
+                <y>-1</y>
+                <z>0</z>
+            </axis>
+        </animation>
+	
+	<animation>
+            <type>rotate</type>
+             <object-name>Rescue-Op</object-name>
+           <property>fdm/jsbsim/animation/rescue/roll-deg</property>
+            <factor>1</factor>
+            <center>
+                <x-m>-3.3219</x-m>
+                <y-m>0.200305</y-m>
+                <z-m>0.485714</z-m>
+            </center>
+            <axis>
+                <x>1</x>
+                <y>0</y>
+                <z>0</z>
+            </axis>
+        </animation>
+	
+	<animation>
+            <type>rotate</type>
+	    <object-name>Rescue-noman</object-name>
+            <property>jsbsim/fdm/animation/rescue/pitch-deg</property>
+            <factor>1</factor>
+            <center>
+                <x-m>-3.3219</x-m>
+                <y-m>0.200305</y-m>
+                <z-m>0.485714</z-m>
+            </center>
+            <axis>
+                <x>0</x>
+                <y>-1</y>
+                <z>0</z>
+            </axis>
+        </animation>
+	
+	<animation>
+            <type>rotate</type>
+             <object-name>Rescue-noman</object-name>
+           <property>fdm/jsbsim/animation/rescue/roll-deg</property>
+            <factor>1</factor>
+            <center>
+                <x-m>-3.3219</x-m>
+                <y-m>0.200305</y-m>
+                <z-m>0.485714</z-m>
+            </center>
+            <axis>
+                <x>1</x>
+                <y>0</y>
+                <z>0</z>
+            </axis>
+        </animation>
+	
+	
+	<model>
+            <name>Light_Rescue-Op</name>
+            <path>Aircraft/HUP-Retriever/Models/Remb/Hup-sar-Rembrandt_Lights.xml</path>
+	    <!--<path>Aircraft/HUP-Retriever/Models/Remb/Al3-Rembrandt_Lights.xml</path>-->
+            <offsets>
+                    <x-m>-2.43567</x-m>
+                    <y-m>0.222528</y-m>
+                    <z-m>0</z-m>
+                    <pitch-deg>0</pitch-deg>
+            </offsets>
+        </model>
+	
+	
+	<animation>
+            <type>select</type>
+            <object-name>Light_Rescue-Op</object-name>
+            <condition>
+                    <equals>
+                        <property>fdm/jsbsim/animation/cockpit-hatch-pos-norm</property>
+                        <value>1</value>
+                    </equals>
+            </condition>
+        </animation>
+	
+	
+	<model>
+            <name>Crew</name>
+            <path>Aircraft/HUP-Retriever/Models/Crew/Crew.xml</path>
+            <offsets>
+                <pitch-deg>0</pitch-deg>
+                <x-m>-0.2</x-m>		
+                <y-m>-0.356598</y-m>		
+                <z-m>-0.24</z-m>		
+            </offsets>
+        </model>     
+	
+	
+	<model>
+            <name>HUP-DBeacon</name>
+            <path>Aircraft/HUP-Retriever/Models/Lights/Beacon.xml</path>
+            <offsets>
+		<x-m>-0.22658</x-m>
+                <y-m>-0</y-m>
+                <z-m>-1.50204-</z-m>
+                <pitch-deg>0</pitch-deg>
+            </offsets>
+        </model>
+	
+	<model>
+            <name>HUP-AftBeacon</name>
+            <path>Aircraft/HUP-Retriever/Models/Lights/BBeacon.xml</path>
+            <offsets>
+		<x-m>4.83631</x-m>
+                <y-m>0</y-m>
+                <z-m>-0.748259-</z-m>
+                <pitch-deg>0</pitch-deg>
+            </offsets>
+        </model>
+	
+	<model>
+            <name>DFVert</name>
+            <path>Aircraft/HUP-Retriever/Models/Lights/FVert.xml</path>
+            <offsets>
+                <x-m>-2.40928</x-m>
+                <y-m>0.789459</y-m>
+                <z-m>-0.45864</z-m>
+                <heading-deg>0</heading-deg>
+            </offsets>
+        </model>
+	
+	<model>
+            <name>GFRouge</name>
+            <path>Aircraft/HUP-Retriever/Models/Lights/FRouge.xml</path>
+            <offsets>
+                <x-m>-2.40928</x-m>
+                <y-m>-0.789459</y-m>
+                <z-m>-0.45864</z-m>
+                <heading-deg>0</heading-deg>
+            </offsets>
+        </model>
+	
+	
+	
+	<animation>
+            <type>select</type>
+            <object-name>GFRouge</object-name>
+	    <object-name>DFVert</object-name>
+            <condition>
+		<not>
+		<or>
+                    <equals>
+                        <property>sim/current-view/view-number</property>
+                        <value>0</value>
+                    </equals>
+		    <equals>
+                        <property>sim/current-view/view-number</property>
+                        <value>9</value>
+                    </equals>
+		    <equals>
+                        <property>sim/current-view/view-number</property>
+                        <value>8</value>
+                    </equals>
+		</or>
+		</not>
+            </condition>
+        </animation>
+	
+	
+	
+	<model>
+            <name>Phare</name>
+            <path>Aircraft/HUP-Retriever/Models/Lights/Flash-eff.xml</path>
+            <offsets>
+                <x-m>0</x-m>
+                <y-m>0</y-m>
+                <z-m>0</z-m>
+            </offsets>
+        </model>
+	
+	<model>
+            <name>Lumiere</name>
+            <path>Aircraft/HUP-Retriever/Models/Lights/Lumiere.xml</path>
+            <offsets>
+                <x-m>-3</x-m>
+                <y-m>0</y-m>
+                <z-m>-0.55</z-m>
+		<pitch-deg>-0.60</pitch-deg>
+            </offsets>
+        </model>
+	
+	<model>
+            <name>Rbdt_Phare</name>
+            <path>Aircraft/HUP-Retriever/Models/Remb/Al3-Rembrandt_Lights.xml</path>
+            <offsets>
+                <x-m>-3</x-m>
+                <y-m>-0.324619</y-m>
+                <z-m>0</z-m>
+            </offsets>
+        </model>
+
+
+    <!--==========================MODEL================================-->
+	
+	
+	<model>
+        <name>HUP-Cockpit</name>
+        <path>Aircraft/HUP-Retriever/Models/HUP-Cockpit.xml</path>
+        <offsets>
+            <x-m>0</x-m>
+            <y-m>-0</y-m>
+            <z-m>0</z-m>
+            <pitch-deg>0</pitch-deg>
+        </offsets>
+    </model>
+	
+
+
+    <model>
+        <name>HUP-Marquage</name>
+        <path>Aircraft/HUP-Retriever/Models/HUP-Marquage.xml</path>
+        <offsets>
+            <x-m>0</x-m>
+            <y-m>-0</y-m>
+            <z-m>0</z-m>
+            <pitch-deg>0</pitch-deg>
+        </offsets>
+    </model>
+	
+	
+
+        <model>
+            <name>AVRotor-Tete</name>
+            <path>Aircraft/HUP-Retriever/Models/Rotors/HUP-AVRotor-Tete.xml</path>
+            <offsets>
+                    <x-m>-3.74806</x-m>
+                    <y-m>0</y-m>
+                    <z-m>0</z-m>
+                    <pitch-deg>0</pitch-deg>
+            </offsets>
+        </model>
+
+        <model>
+            <name>AVRotor-Pale0</name>
+            <path>Aircraft/HUP-Retriever/Models/Rotors/HUP-AVRotor-Pale0.xml</path>
+            <offsets>
+                    <x-m>-3.74806</x-m>
+                    <y-m>0</y-m>
+                    <z-m>0</z-m>
+                    <pitch-deg>0</pitch-deg>
+            </offsets>
+        </model>
+
+        <model>
+            <name>AVRotor-Pale1</name>
+            <path>Aircraft/HUP-Retriever/Models/Rotors/HUP-AVRotor-Pale1.xml</path>
+            <offsets>
+                    <x-m>-3.74806</x-m>
+                    <y-m>0</y-m>
+                    <z-m>0</z-m>
+                    <pitch-deg>0</pitch-deg>
+            </offsets>
+        </model>
+
+        <model>
+            <name>AVRotor-Pale2</name>
+            <path>Aircraft/HUP-Retriever/Models/Rotors/HUP-AVRotor-Pale2.xml</path>
+            <offsets>
+                    <x-m>-3.74806</x-m>
+                    <y-m>0</y-m>
+                    <z-m>0</z-m>
+                    <pitch-deg>0</pitch-deg>
+            </offsets>
+        </model>
+
+        <model>
+            <name>ARRotor-Tete</name>
+            <path>Aircraft/HUP-Retriever/Models/Rotors/HUP-ARRotor-Tete.xml</path>
+            <offsets>
+                    <x-m>2.89148</x-m>
+                    <y-m>0</y-m>
+                    <z-m>0</z-m>
+                    <pitch-deg>0</pitch-deg>
+            </offsets>
+        </model>
+
+        <model>
+            <name>ARRotor-Pale0</name>
+            <path>Aircraft/HUP-Retriever/Models/Rotors/HUP-ARRotor-Pale0.xml</path>
+            <offsets>
+                    <x-m>2.89148</x-m>
+                    <y-m>0</y-m>
+                    <z-m>0</z-m>
+                    <pitch-deg>0</pitch-deg>
+            </offsets>
+        </model>
+
+        <model>
+            <name>ARRotor-Pale1</name>
+            <path>Aircraft/HUP-Retriever/Models/Rotors/HUP-ARRotor-Pale1.xml</path>
+            <offsets>
+                    <x-m>2.89148</x-m>
+                    <y-m>0</y-m>
+                    <z-m>0</z-m>
+                    <pitch-deg>0</pitch-deg>
+            </offsets>
+        </model>
+
+        <model>
+            <name>ARRotor-Pale2</name>
+            <path>Aircraft/HUP-Retriever/Models/Rotors/HUP-ARRotor-Pale2.xml</path>
+            <offsets>
+                    <x-m>2.89148</x-m>
+                    <y-m>0</y-m>
+                    <z-m>0</z-m>
+                    <pitch-deg>0</pitch-deg>
+            </offsets>
+        </model>
+	
+	
+
+    <!--<animation>
+            <type>select</type>
+            <object-name>Pilote</object-name>
+            <condition>
+                <not>
+                    <equals>
+                        <property>sim/current-view/view-number</property>
+                        <value>0</value>
+                    </equals>
+                </not>
+            </condition>
+        </animation>-->
+		    
+		    
+
+        <animation>
+            <type>rotate</type>
+             <object-name>Trappe</object-name>
+             <object-name>Trappe-Doublage</object-name>
+	      <object-name>Hatch-Lock</object-name>
+	    <object-name>Hatch-Lock-handle</object-name>
+            <property>fdm/jsbsim/animation/cockpit-hatch-pos-norm</property>
+            <interpolation>
+                    <entry>
+                    <ind>0.0</ind>
+                    <dep>0</dep>
+                    </entry>
+                    <entry>
+                    <ind>0.33</ind>
+                    <dep>0</dep>
+                    </entry>
+                    <entry>
+                    <ind>0.70</ind>
+                    <dep>0</dep>
+                    </entry>
+                    <entry>
+                    <ind>1.0</ind>
+                    <dep>98</dep>
+                    </entry>
+            </interpolation>
+            <axis>
+                <x1-m>-3.83861</x1-m>
+                <y1-m>0.6</y1-m>
+                <z1-m>-0.96062</z1-m>
+                <x2-m>-2.67732</x2-m>
+                <y2-m>0.6</y2-m>
+                <z2-m>-1.03321</z2-m>
+            </axis>
+        </animation>
+	
+	
+	<animation>
+            <type>rotate</type>
+	    <object-name>Hatch-Lock-handle</object-name>
+            <property>fdm/jsbsim/animation/cockpit-hatch-pos-norm</property>
+            <interpolation>
+                    <entry>
+                    <ind>0.0</ind>
+                    <dep>0</dep>
+                    </entry>
+                    <entry>
+                    <ind>0.33</ind>
+                    <dep>0</dep>
+                    </entry>
+		    <entry>
+                    <ind>0.66</ind>
+                    <dep>0</dep>
+                    </entry>
+		    <entry>
+                    <ind>0.70</ind>
+                    <dep>-60</dep>
+                    </entry>
+		    <entry>
+                    <ind>1.0</ind>
+                    <dep>-60</dep>
+                    </entry>
+	    </interpolation>    
+	    <axis>
+                <x1-m>-3.53266</x1-m>
+                <y1-m>0.099466</y1-m>
+                <z1-m>-0.922287</z1-m>
+                <x2-m>-3.53413</x2-m>
+                <y2-m>0.099466</y2-m>
+                <z2-m>-0.9504</z2-m>
+            </axis>
+	</animation>
+	
+	
+	 <animation>
+            <type>pick</type>
+            <object-name>Hatch-Lock-handle</object-name>
+            <action>
+                <button>0</button>
+                <binding>
+                    <command>property-toggle</command>
+                    <property>fdm/jsbsim/animation/cockpit-hatch-cmd-norm</property>
+                </binding>
+            </action>
+	</animation>
+	
+	
+<!--=============PORTE GAUCHE=============================-->
+
+        <animation>
+        <type>rotate</type>
+        <object-name>GPorte</object-name>
+        <object-name>GPorte-Vitrage</object-name>
+        <object-name>GPorte-Doublage</object-name>
+	<object-name>GPorte-hinge</object-name>
+	<object-name>GPorte-Lock</object-name>
+        <property>fdm/jsbsim/animation/cabine-left-door-pos-norm</property>
+        <interpolation>
+            <entry>
+                    <ind>0</ind>
+                    <dep>0</dep>
+            </entry>
+            <entry>
+                    <ind>1</ind>
+                    <dep>-170</dep>
+            </entry>
+        </interpolation>
+        <center>
+            <x-m>-1.86109</x-m>
+            <y-m>-0.762985</y-m>
+            <z-m>0</z-m>
+        </center>
+        <axis>
+              <x>0.06291466725364975521</x>
+              <y>0</y>
+              <z>1</z>
+        </axis>
+ 	</animation>
+	
+	 <animation>
+            <type>pick</type>
+            <object-name>GPorte-Lock</object-name>
+            <action>
+                <button>0</button>
+                <binding>
+                    <command>property-toggle</command>
+                    <property>fdm/jsbsim/animation/cabine-left-door-cmd-norm</property>
+                </binding>
+            </action>
+	</animation>
+	
+	
+	  <animation>
+	    <type>translate</type>
+	    <object-name>Cockpit-left-window</object-name>
+	    <object-name>Cockpit-left-window-inside</object-name>
+	    <object-name>Cockpit-left-window-frame</object-name>	  
+	    <object-name>Cockpit-left-window-Lock</object-name>
+	    <property>fdm/jsbsim/animation/cockpit-left-window-pos-norm</property>
+	    <factor>0.50</factor>
+	    <axis>
+		<x>1</x>
+		<y>-0.0</y>
+		<z>-0.090428568129</z>
+	    </axis>
+	</animation>
+	
+	<effect>
+            <inherits-from>Effects/model-transparent</inherits-from>           
+	    <object-name>Cockpit-left-window-inside</object-name>	    
+        </effect>
+	
+	
+	 <animation>
+            <type>pick</type>
+            <object-name>Cockpit-left-window-Lock</object-name>
+            <action>
+                <button>0</button>
+                <binding>
+                    <command>property-toggle</command>
+                    <property>fdm/jsbsim/animation/cockpit-left-window-cmd-norm</property>
+                </binding>
+            </action>
+	</animation>
+	
+	
+	
+	
+	
+	<animation>
+	    <type>translate</type>
+	    <object-name>Cockpit-right-window</object-name>
+	    <object-name>Cockpit-right-window-inside</object-name>
+	     <object-name>Cockpit-right-window-frame</object-name>
+	     <object-name>Cockpit-right-window-Lock</object-name>
+	    <property>fdm/jsbsim/animation/cockpit-right-window-pos-norm</property>
+	    <factor>0.50</factor>
+	    <axis>
+		<x>1</x>
+		<y>0.0</y>
+		<z>-0.090428568129</z>
+	    </axis>
+	</animation>
+	
+	<effect>
+            <inherits-from>Effects/model-transparent</inherits-from>           
+	    <object-name>Cockpit-right-window-inside</object-name>	    
+        </effect>
+	
+	
+	 <animation>
+            <type>pick</type>
+            <object-name>Cockpit-right-window-Lock</object-name>
+            <action>
+                <button>0</button>
+                <binding>
+                    <command>property-toggle</command>
+                    <property>fdm/jsbsim/animation/cockpit-right-window-cmd-norm</property>
+                </binding>
+            </action>
+	</animation>
+	
+	
+	
+	
+	
+	<animation>
+        <type>rotate</type>
+        <object-name>ARTrain-JambeFixe</object-name>
+	<object-name>ARTrain-Piston</object-name>
+	<object-name>ARTrain-Bielle</object-name> 
+	<object-name>ARTrain-Roue</object-name>
+	 <property>fdm/jsbsim/gear/unit[2]/steering-angle-deg</property>
+	 <factor>-1</factor>
+	<center>
+            <x-m>3.18771</x-m>
+            <y-m>0</y-m>
+            <z-m>-1.44233</z-m>
+        </center>
+        <axis>
+              <x>0</x>
+              <y>0</y>
+              <z>1</z>
+        </axis>
+ 	</animation>
+	
+	
+	<animation>
+            <type>translate</type>
+	    <object-name>ARTrain-Piston</object-name>
+            <object-name>ARTrain-Roue</object-name>            
+	    <property>fdm/jsbsim/animation/gear/unit2-compression-meter</property>
+	    <factor>1</factor>
+	    <offset-m>-0.08</offset-m>
+            <axis>
+		<x>0.0149479</x>
+                <y>0</y>
+                <z>0.225077</z>
+            </axis>
+        </animation>
+	
+	
+	<animation>
+	    <type>locked-track</type>	     
+	    <object-name>ARTrain-Bielle</object-name> 
+	    <center>
+	    <x-m>3.21248</x-m>   
+	    <y-m>0</y-m>
+	    <z-m>-1.45234</z-m>  
+	    </center>
+	    <lock-axis>
+	    <x>0</x>
+	    <y>-1</y>
+	    <z>0</z>
+	    </lock-axis>
+	    <track-axis>
+	    <x>0.0149479</x>
+	    <y>0</y>
+	    <z>0.225077</z>
+	    </track-axis>
+	    
+	    <target-name>ARTrain-Piston</target-name>
+	    <target-center>	
+		<x-m>3.20476</x-m>  
+		<y-m>0</y-m>
+		<z-m>-1.56654</z-m> 
+	    </target-center>
+	    
+	    <slave-name>ARTrain-BielleInf</slave-name>
+	    <slave-center>
+		<x-m>3.32957</x-m>
+		<y-m>0</y-m>
+		<z-m>-1.51776</z-m> 
+	    </slave-center> 
+	</animation>
+	
+	
+	<!--================================================LEFT===========================================-->
+	
+	
+	<animation>
+	    <type>rotate</type>
+	    <object-name>GTrain-Roue</object-name>
+	    <object-name>GTrain-etrier</object-name>
+	    <object-name>GTrain-AR-tri</object-name>  
+	    <object-name>GTrain-AR-tri-hinge</object-name>  
+	    <object-name>GTRain-AV-tri</object-name>
+	    <object-name>GTRain-AV-tri-hinge</object-name>
+	    <property>fdm/jsbsim/animation/gear/unit0-compression-deg</property>
+	    <factor>1</factor>
+	    <axis>
+		<x1-m>-1.92237</x1-m>
+		<y1-m>-0.4464</y1-m>
+		<z1-m>-1.21383</z1-m>
+		
+		<x2-m>-1.67742</x2-m>
+		<y2-m>-0.07</y2-m>
+		<z2-m>-1.29807</z2-m>
+	    </axis>  
+	</animation>
+	
+	
+	<animation>
+	    <type>rotate</type>
+	    <object-name>GTrain-Jambe</object-name>
+	    <object-name>GTrain-Verin-Pointeur</object-name>
+	   <!-- <object-name>GTrain-Jambe-Pointeur</object-name>-->
+	    <property>fdm/jsbsim/animation/gear/unit0-compression-deg</property>
+	    <factor>1</factor>
+	     <axis>
+		<x1-m>-1.92237</x1-m>
+		<y1-m>-0.4464</y1-m>
+		<z1-m>-1.21383</z1-m>
+		
+		<x2-m>-1.67742</x2-m>
+		<y2-m>-0.07</y2-m>
+		<z2-m>-1.29807</z2-m>
+	    </axis>  
+	</animation>
+	
+	
+	<animation>
+	    <type>rotate</type>
+	    <object-name>GTrain-Jambe</object-name>
+	    <property>fdm/jsbsim/animation/gear/unit0-compression-deg</property>
+	    <factor>-0.3</factor>
+	     <center>
+		<x-m>-1.49601</x-m>
+		<y-m>-1.28599</y-m>
+		<z-m>-1.62455</z-m>		
+	    </center>
+	    <axis>
+		<x>0.287457</x>
+		<y>0.229052</y>
+		<z>0.144199</z>
+	    </axis>
+	    </animation>
+	
+	<animation>
+	    <type>translate</type>
+	    <object-name>GTrain-Jambe-Pointeur</object-name>
+	    <property>fdm/jsbsim/animation/gear/unit0-compression-deg</property>
+	    <factor>0.0</factor>
+            <axis>
+		<x>0</x>
+                <y>1</y>
+                <z>0</z>
+            </axis>
+        </animation>
+	
+	
+	
+	
+	<animation>
+	    <type>rotate</type>
+	    <object-name>GTrain-Jambe_piston</object-name>     
+	    <property>fdm/jsbsim/animation/gear/unit0-compression-deg</property>
+	    <factor>1</factor>
+	     <axis>
+		<x1-m>-1.92237</x1-m>
+		<y1-m>-0.4464</y1-m>
+		<z1-m>-1.21383</z1-m>
+		
+		<x2-m>-1.67742</x2-m>
+		<y2-m>-0.07</y2-m>
+		<z2-m>-1.29807</z2-m>
+	    </axis>  	    
+	</animation>
+	
+	
+	
+	
+	
+	<animation>
+	    <type>rotate</type>
+	    <object-name>GTrain-Jambe_piston</object-name>
+	    <property>fdm/jsbsim/animation/gear/unit0-compression-deg</property>
+	    <factor>-0.360</factor>
+	     <center>
+		<x-m>-1.49601</x-m>
+		<y-m>-1.28599</y-m>
+		<z-m>-1.62455</z-m>		
+	    </center>
+	    <axis>
+		<x>0.287457</x>
+		<y>0.229052</y>
+		<z>0.144199</z>
+	    </axis>
+	</animation>
+	    
+	<animation>
+	    <type>locked-track</type>    
+	   <object-name>GTrain-Jambe</object-name>
+	   
+	    <center>
+	    <x-m>-1.49601</x-m>
+	    <y-m>-1.28599</y-m>
+	    <z-m>-1.62455</z-m>
+	    </center>
+	    
+	    <!--does nor work that way    so added a specific rotation see above-->
+	    <!--<lock-axis>
+		<x>0.287457</x>
+		<y>0.229052</y>
+		<z>0.144199</z>
+	    </lock-axis>-->
+	    
+	    <track-axis>
+		<x>0.646623</x>
+		<y>0.562158</y>
+		<z>1.0628</z>
+	    </track-axis>
+	    
+	    <target-name>GTrain-Jambe-Pointeur</target-name>	
+	    
+	    <target-center>	
+		<x-m>-0.849387</x-m>
+		<y-m>-0.742205</y-m>
+		<z-m>-0.561751</z-m>
+	    </target-center>
+	    
+	</animation>
+	
+	<animation>
+	    <type>locked-track</type>    
+	   <object-name>GTrain-Jambe_piston</object-name>     
+	   
+	    <center>
+	    <x-m>-1.49601</x-m>
+	    <y-m>-1.28599</y-m>
+	    <z-m>-1.62455</z-m>
+	    </center>
+	    
+	   
+	    
+	    <track-axis>
+		<x>0.646623</x>
+		<y>0.562158</y>
+		<z>1.0628</z>
+	    </track-axis>
+	    
+	    <target-name>GTrain-Jambe-Pointeur</target-name>	
+	    
+	    <target-center>	
+		<x-m>-0.849387</x-m>
+		<y-m>-0.742205</y-m>
+		<z-m>-0.561751</z-m>
+	    </target-center>
+	</animation>
+	
+	
+	
+	<animation>
+	    <type>translate</type>
+	    <object-name>GTrain-Jambe_piston</object-name>     
+	    <property>fdm/jsbsim/animation/gear/unit0-compression-deg</property>
+	    <factor>0.014</factor>
+	    <axis>
+		<x>0.646623</x>
+		<y>0.562158</y>
+		<z>1.0628</z>
+	    </axis>
+	</animation>
+	
+	<!--does not work that way -->
+	<!--<animation>
+	    <type>rotate</type>
+	    <object-name>GTrain-Jambe_piston</object-name>
+	    <property>fdm/jsbsim/animation/gear/unit0-compression-deg</property>
+	    <factor>1</factor>
+	     <center>
+		<x-m>-0.849387</x-m>
+		<y-m>-0.742205</y-m>
+		<z-m>-0.561751</z-m>
+	    </center>
+	    <axis>
+		<x>0.287457</x>
+		<y>0.229052</y>
+		<z>0.144199</z>
+	    </axis>
+	</animation>
+	
+	<animation>
+	    <type>locked-track</type>    
+	    <object-name>GTrain-Jambe_piston</object-name>     
+	    <center>
+		<x-m>-0.849387</x-m>
+		<y-m>-0.742205</y-m>
+		<z-m>-0.561751</z-m>
+	    </center>
+	    <lock-axis>
+		
+	    </lock-axis>
+	    <track-axis>
+		<x>-0.646623</x>
+		<y>-0.562158</y>
+		<z>-1.0628</z>
+	    </track-axis>
+	    <target-name>GTrain-Verin-Pointeur</target-name>
+	    <target-center>
+		<x-m>-1.49601</x-m>
+		<y-m>-1.28599</y-m>
+		<z-m>-1.62455</z-m>
+	    </target-center>
+	</animation>
+	-->
+	
+	
+	<!--================================================RIGHT===========================================-->
+	
+	
+	<animation>
+	    <type>rotate</type>
+	    <object-name>DTrain-Roue</object-name>
+	    <object-name>DTrain-etrier</object-name>
+	    <object-name>DTrain-AR-tri</object-name>  
+	    <object-name>DTrain-AR-tri-hinge</object-name>   
+	    <object-name>DTRain-AV-tri</object-name>
+	    <object-name>DTRain-AV-tri-hinge</object-name>
+	    <property>fdm/jsbsim/animation/gear/unit1-compression-deg</property>
+	    <factor>-1</factor>
+	     <axis>
+		<x1-m>-1.92237</x1-m>
+		<y1-m>0.4464</y1-m>
+		<z1-m>-1.21383</z1-m>
+		
+		<x2-m>-1.67742</x2-m>
+		<y2-m>0.07</y2-m>
+		<z2-m>-1.29807</z2-m>
+	    </axis>  
+	</animation>
+	
+	
+	<animation>
+	    <type>rotate</type>
+	    <object-name>DTrain-Jambe</object-name>
+	    <object-name>DTrain-Verin-Pointeur</object-name>
+	   <!-- <object-name>GTrain-Jambe-Pointeur</object-name>-->
+	    <property>fdm/jsbsim/animation/gear/unit1-compression-deg</property>
+	    <factor>-1</factor>
+	     <axis>
+		<x1-m>-1.92237</x1-m>
+		<y1-m>0.4464</y1-m>
+		<z1-m>-1.21383</z1-m>
+		
+		<x2-m>-1.67742</x2-m>
+		<y2-m>0.07</y2-m>
+		<z2-m>-1.29807</z2-m>
+	    </axis>  
+	</animation>
+	
+	
+	<animation>
+	    <type>rotate</type>
+	    <object-name>DTrain-Jambe</object-name>
+	    <property>fdm/jsbsim/animation/gear/unit1-compression-deg</property>
+	    <factor>0.30</factor>
+	     <center>
+		<x-m>-1.49601</x-m>
+		<y-m>1.28599</y-m>
+		<z-m>-1.62455</z-m>		
+	    </center>
+	    <axis>
+		<x>0.287457</x>
+		<y>-0.229052</y>
+		<z>0.144199</z>
+	    </axis>
+	    </animation>
+	
+	<animation>
+	    <type>translate</type>
+	    <object-name>DTrain-Jambe-Pointeur</object-name>
+	    <property>fdm/jsbsim/animation/gear/unit1-compression-deg</property>
+	    <factor>0.0</factor>
+            <axis>
+		<x>0</x>
+                <y>-1</y>
+                <z>0</z>
+            </axis>
+        </animation>
+	
+	
+	<animation>
+	    <type>rotate</type>
+	    <object-name>DTrain-Jambe_piston</object-name>     
+	    <property>fdm/jsbsim/animation/gear/unit1-compression-deg</property>
+	    <factor>-1</factor>
+	     <axis>
+		<x1-m>-1.92237</x1-m>
+		<y1-m>0.4464</y1-m>
+		<z1-m>-1.21383</z1-m>
+		
+		<x2-m>-1.67742</x2-m>
+		<y2-m>0.07</y2-m>
+		<z2-m>-1.29807</z2-m>
+	    </axis>  
+	</animation>
+	
+	
+	<animation>
+	    <type>rotate</type>
+	    <object-name>DTrain-Jambe_piston</object-name>
+	    <property>fdm/jsbsim/animation/gear/unit1-compression-deg</property>
+	    <factor>0.30</factor>
+	     <center>
+		<x-m>-1.49601</x-m>
+		<y-m>1.28599</y-m>
+		<z-m>-1.62455</z-m>		
+	    </center>
+	    <axis>
+		<x>0.287457</x>
+		<y>-0.229052</y>
+		<z>0.144199</z>
+	    </axis>
+	</animation>
+	    
+	<animation>
+	    <type>locked-track</type>    
+	   <object-name>DTrain-Jambe</object-name>
+	   
+	    <center>
+	    <x-m>-1.49601</x-m>
+	    <y-m>1.28599</y-m>
+	    <z-m>-1.62455</z-m>
+	    </center>
+	    
+	    <!--part emoved -->
+	     <!--does nor work that way    so added a specific rotation see above-->
+	    
+	    <track-axis>
+		<x>0.646623</x>
+		<y>-0.562158</y>
+		<z>1.0628</z>
+	    </track-axis>
+	    
+	    <target-name>DTrain-Jambe-Pointeur</target-name>	
+	    
+	    <target-center>	
+		<x-m>-0.849387</x-m>
+		<y-m>0.742205</y-m>
+		<z-m>-0.561751</z-m>
+	    </target-center>
+	    
+	</animation>
+	
+	<animation>
+	    <type>locked-track</type>    
+	   <object-name>DTrain-Jambe_piston</object-name>     
+	   
+	    <center>
+	    <x-m>-1.49601</x-m>
+	    <y-m>1.28599</y-m>
+	    <z-m>-1.62455</z-m>
+	    </center>
+	    
+	   
+	    
+	    <track-axis>
+		<x>0.646623</x>
+		<y>-0.562158</y>
+		<z>1.0628</z>
+	    </track-axis>
+	    
+	    <target-name>DTrain-Jambe-Pointeur</target-name>	
+	    
+	    <target-center>	
+		<x-m>-0.849387</x-m>
+		<y-m>0.742205</y-m>
+		<z-m>-0.561751</z-m>
+	    </target-center>
+	</animation>
+	
+	
+	<animation>
+	    <type>translate</type>
+	    <object-name>DTrain-Jambe_piston</object-name>     
+	    <property>fdm/jsbsim/animation/gear/unit0-compression-deg</property>
+	    <factor>0.02</factor>
+	    <axis>
+		<x>0.646623</x>
+		<y>-0.562158</y>
+		<z>1.0628</z>
+	    </axis>
+	</animation>
+	
+	
+	
+	<!--does not work that way -->
+	<!--<animation>
+	    <type>locked-track</type>    
+	    <object-name>DTrain-Jambe_piston</object-name>     
+	    <center>
+		<x-m>-0.849387</x-m>
+		<y-m>0.742205</y-m>
+		<z-m>-0.561751</z-m>
+	    </center>
+	    <lock-axis>
+		<x>0.287457</x>
+		<y>-0.229052</y>
+		<z>0.144199</z>
+	    </lock-axis>
+	    <track-axis>
+		<x>-0.646623</x>
+		<y>0.562158</y>
+		<z>-1.0628</z>
+	    </track-axis>
+	    <target-name>DTrain-Verin-Pointeur</target-name>
+	    <target-center>
+		<x-m>-1.49601</x-m>
+		<y-m>1.28599</y-m>
+		<z-m>-1.62455</z-m>
+	    </target-center>
+	</animation>
+	-->
+	
+
+	
+	
+	    
+	<!--
+	    <object-name>GTrain-Jambe</object-name>            
+            <object-name>GTrain-Jambe_piston</object-name>           
+            <object-name>GTrain-AR-tri</object-name>           
+            <object-name>GTRain-AV-tri</object-name>
+	  
+	    
+	    
+	    
+            <object-name>DTrain-Jambe</object-name>            
+            <object-name>DTrain-Jambe_piston</object-name>            
+            <object-name>DTrain-AR-tri</object-name>            
+	    <object-name>DTRain-AV-tri</object-name>
+	-->
+	
+
+
+</PropertyList>

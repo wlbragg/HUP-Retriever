@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+
+<!--
+    Usable with FlightGear
+      =>    Gerard Robin
+    Copyright License:  GPLV2
+-->
+
+<PropertyList>
+
+    <path>hup-winch-v2.ac</path>
+	<texture-path>Textures</texture-path>
+	
+	
+	
+	<effect>
+            <inherits-from>Aircraft/HUP-Retriever/Models/Effects/reflectHUP</inherits-from>
+	    <object-name>W_Crown</object-name>
+	     <object-name>W_Hook</object-name>
+	     <object-name>cockpit-winch-frame0</object-name>
+	      <object-name>cockpit-winch-frame1</object-name>
+	</effect>
+	
+	<!--======palonnier==================================================================-->
+        
+	 <animation>
+            <type>rotate</type>
+	    <object-name>W_Spring</object-name>
+            <property>jsbsim/fdm/animation/rescue/pitch-deg</property>
+            <factor>1</factor>
+            <center>
+                <x-m></x-m>
+                <y-m></y-m>
+                <z-m></z-m>
+            </center>
+            <axis>
+                <x>0</x>
+                <y>-1</y>
+                <z>0</z>
+            </axis>
+        </animation>
+	
+	<animation>
+            <type>rotate</type>
+	    <object-name>W_Spring</object-name>
+           <property>fdm/jsbsim/animation/rescue/roll-deg</property>
+            <factor>1</factor>
+            <center>
+                <x-m></x-m>
+                <y-m></y-m>
+                <z-m></z-m>
+            </center>
+            <axis>
+                <x>1</x>
+                <y>0</y>
+                <z>0</z>
+            </axis>
+        </animation>
+	
+	<animation>
+            <type>rotate</type>
+	    <object-name>W_Crown</object-name>
+	    <object-name>W_Hook</object-name>
+            <property>jsbsim/fdm/animation/rescue/pitch-deg</property>
+            <factor>1</factor>
+            <center>
+                <x-m></x-m>
+                <y-m></y-m>
+                <z-m></z-m>
+            </center>
+            <axis>
+                <x>0</x>
+                <y>-1</y>
+                <z>0</z>
+            </axis>
+        </animation>
+	
+	<animation>
+            <type>rotate</type>
+            <object-name>W_Crown</object-name>
+	    <object-name>W_Hook</object-name>
+           <property>fdm/jsbsim/animation/rescue/roll-deg</property>
+            <factor>1</factor>
+            <center>
+                <x-m></x-m>
+                <y-m></y-m>
+                <z-m></z-m>
+            </center>
+            <axis>
+                <x>1</x>
+                <y>0</y>
+                <z>0</z>
+            </axis>
+        </animation>
+	
+	
+	<animation>
+            <type>select</type>
+	     <object-name>W_Hook</object-name>
+	    <object-name>W_Crown</object-name>
+            <condition>
+		<or>
+		    <equals>
+			<property>sim/model/rescue</property>
+			<value>0</value>
+		    </equals>
+		    <equals>
+			<property>fdm/jsbsim/animation/rescue/rescue-lift-cmd</property>
+			<value>0</value>
+		    </equals>
+		</or>
+            </condition>
+        </animation>
+	
+	
+	 <animation>
+            <type>pick</type>
+            <object-name>winch</object-name>
+            <action>
+                <button>0</button>                
+                <binding>
+                    <command>property-toggle</command>
+		    <property>fdm/jsbsim/animation/rescue/rescuer</property>
+		</binding>
+	    </action>
+	</animation>
+	
+
+
+
+</PropertyList>

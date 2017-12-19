@@ -1,0 +1,260 @@
+<?xml version="1.0"?>
+<!--
+    Usable with FlightGear
+      =>    Gerard Robin
+    Copyright License: GPLV2 -      
+-->
+<PropertyList>
+
+  <keyboard>
+    <key n="100">
+            <name>d</name>
+            <desc>Toggle Left Door</desc>
+            <binding>
+                    <command>property-toggle</command>
+                    <property>fdm/jsbsim/animation/cabine-left-door-cmd-norm</property>
+            </binding>
+    </key>
+    <key n="68">
+        <name>D</name>
+        <desc>Toggle Trap Door</desc>
+        <binding>
+            <command>property-toggle</command>
+            <property>fdm/jsbsim/animation/cockpit-trap-cmd-norm</property>
+        </binding>
+    </key>
+    <key n="99">
+        <name>c</name>
+        <desc>Cockpit Windows</desc>
+        <binding>
+            <command>property-toggle</command>
+            <property>fdm/jsbsim/animation/cockpit-window-cmd-norm</property>
+        </binding>
+    </key>
+
+    <key n="102">
+        <name>f</name>
+        <desc>Blades extended.</desc>
+				<binding>
+				    <command>property-assign</command>
+				    <property>fdm/jsbsim/fcs/wing-fold-cmd</property>
+				    <value>0</value>
+				</binding>
+        <binding>
+            <command>property-assign</command>
+            <property>fdm/jsbsim/systems/rotor/brake-cmd-norm</property>
+            <value>0</value>
+        </binding>
+    </key>
+
+    <key n="70">
+        <name>F</name>
+        <desc>Blades  folded.</desc>
+        <binding>
+            <command>property-assign</command>
+            <property>fdm/jsbsim/fcs/wing-fold-cmd</property>
+            <value>1</value>
+        </binding>
+        <binding>
+            <command>property-assign</command>
+            <property>fdm/jsbsim/systems/rotor/brake-cmd-norm</property>
+            <value>1</value>
+        </binding>
+    </key>
+
+    <!--key n="114">
+      <name>r</name>
+      <desc>Toggle Rescue</desc>
+      <binding>
+          <command>property-toggle</command>
+          <property>sim/model/rescue</property>
+      </binding>
+      <binding>
+          <command>property-toggle</command>
+          <property>fdm/jsbsim/animation/rescue/rescue-lift-sim</property>
+      </binding>
+      <binding>
+          <command>property-toggle</command>
+          <property>fdm/jsbsim/animation/mission-winch-pos-norm</property>
+      </binding>
+      </key>
+
+      <key n="119">
+      <name>w</name>
+      <desc>Lift Winch</desc>
+      <repeatable type="bool">true</repeatable>
+      <binding>
+          <command>property-adjust</command>
+          <property>fdm/jsbsim/animation/rescue/rescue-lift-cmd</property>
+          <step type="double">-0.01</step>
+          <min>0.0</min>
+          <max>1</max>
+      </binding>
+      </key>
+      <key n="87">
+      <name>W</name>
+      <desc>Down Winch</desc>
+      <repeatable type="bool">true</repeatable>
+      <binding>
+          <command>property-adjust</command>
+          <property>fdm/jsbsim/animation/rescue/rescue-lift-cmd</property>
+          <step type="double">0.01</step>
+          <min>0.0</min>
+          <max>1</max>
+      </binding>
+    </key-->
+
+    <key n="15">
+      <name>Ctrl-O</name>
+      <desc>Auto Attach Cargo</desc>
+      <binding>
+        <command>property-toggle</command>
+        <property>/sim/cargo/cargo-auto-hook</property>
+      </binding>
+    </key>
+
+    <key n="79">
+      <name>O</name>
+      <desc>Attach Cargo</desc>
+      <binding>
+        <command>property-assign</command>
+        <property>sim/cargo/cargo-hook</property>
+        <value type="bool">true</value>
+      </binding>
+    </key>
+
+    <key n="111">
+      <name>o</name>
+      <desc>Release Cargo</desc>
+      <binding>
+        <command>property-assign</command>
+        <property>controls/cargo-release</property>
+        <value type="bool">true</value>
+      </binding>
+    </key>
+
+    <key n="87"> 
+      <name>W</name>
+      <desc>Winch down</desc>
+      <repeatable type="bool">true</repeatable>
+      <binding>
+        <command>nasal</command>
+        <script>
+          var connector = getprop("/sim/gui/dialogs/aicargo-dialog/connector");
+          if (connector == 1)
+            {
+              var segments = getprop("/sim/cargo/rope/segments-reeled-in");
+              if (segments > 0)
+                setprop("/sim/cargo/rope/segments-reeled-in", segments - 1);
+            }
+          else
+            screen.log.write("Winch required!");
+        </script>
+      </binding>
+    </key>
+
+    <key n="119"> 
+      <name>w</name>
+      <desc>Winch up</desc>
+      <repeatable type="bool">true</repeatable>
+      <binding>
+        <command>nasal</command>
+        <script>
+          var connector = getprop("/sim/gui/dialogs/aicargo-dialog/connector");
+          if (connector == 1)
+            {
+              var segments = getprop("/sim/cargo/rope/segments-reeled-in");
+              if (87 > segments)
+                setprop("/sim/cargo/rope/segments-reeled-in", segments + 1);
+            }
+          else
+            screen.log.write("Winch required!");
+        </script>
+      </binding>
+    </key>
+			
+    <key n="106">
+        <name>j</name>
+        <desc>Toggle rotor clutch</desc>
+        <binding>
+            <command>property-toggle</command>
+            <property>fdm/jsbsim/systems/rotor/clutch-cmd</property>                                
+        </binding>
+    </key>
+    <key n="107">
+        <name>k</name>
+        <desc>Toggle rotor brake</desc>
+        <binding>
+            <command>property-toggle</command>
+            <property>fdm/jsbsim/systems/rotor/brake-cmd-norm</property>                                
+        </binding>
+    </key>
+    <key n="117">
+        <name>u</name>
+        <desc>Toggle autothrottle</desc>
+        <binding>
+            <command>property-toggle</command>
+            <property>fdm/jsbsim/fcs/rpm-governor-active-norm</property>
+        </binding>
+    </key>
+    <key n="6">
+        <name>Ctrl-F</name>
+        <desc>Reset after crash detect</desc>
+        <binding>
+            <command>property-assign</command>
+            <property>fdm/jsbsim/systems/crash-detect/crashed-cmd</property>
+            <value>0</value>
+        </binding>
+        <binding>
+            <command>property-assign</command>
+            <property>fdm/jsbsim/systems/crash-detect/recover</property>
+            <value>1</value>
+        </binding>
+        <binding>
+            <command>property-assign</command>
+            <property>fdm/jsbsim/systems/crash-detect/aero-on</property>
+            <value>1</value>
+        </binding>
+        <binding>
+            <command>property-assign</command>
+            <property>fdm/jsbsim/simulation/integrator/position/rotational</property>
+            <value>1</value>
+        </binding>
+        <binding>
+            <command>property-assign</command>
+            <property>fdm/jsbsim/simulation/integrator/rate/rotational</property>
+            <value>1</value>
+        </binding>
+        <mod-up>
+            <binding>
+                <command>property-assign</command>
+                <property>fdm/jsbsim/systems/crash-detect/recover</property>
+                <value>0</value>
+            </binding>
+        </mod-up>
+    </key>
+
+        <key n="43">
+            <name>+</name>
+            <desc></desc>
+            <repeatable type="bool">true</repeatable>
+            <binding>
+                <command>property-adjust</command>
+                <property>fdm/jsbsim/propulsion/engine/pitch-angle-rad</property>
+                <step type="double">0.001</step>
+                <max>1.6406095</max>
+            </binding>
+        </key>
+        <key n="45">
+            <name>-</name>
+            <desc></desc>
+            <repeatable type="bool">true</repeatable>
+            <binding>
+                <command>property-adjust</command>
+                <property>fdm/jsbsim/propulsion/engine/pitch-angle-rad</property>
+                <step type="double">-0.001</step>
+                <min>1.5009832</min>
+            </binding>
+    </key>
+  </keyboard>
+</PropertyList>

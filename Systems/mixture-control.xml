@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+
+
+<system name="Engine_Mixture">
+
+    
+
+    <channel name="Mixture Control">
+	
+	
+	<switch name="propulsion/eng0_mixture_auto">
+            <!-- AUTO RICH: VERY RICH  -->
+            <test value="1.18">
+                fcs/mixture-cmd-norm[0] ge 1
+            </test>
+            <!-- AUTO LEAN: RICH BEST POWER -->
+            <test logic="AND" value="0.95">
+                fcs/mixture-cmd-norm[0] lt 1
+                propulsion/engine[0]/engine-rpm ge 2500
+            </test>
+            <!-- AUTO LEAN: BEST POWER -->
+            <test logic="AND" value="0.87">
+                fcs/mixture-cmd-norm[0] lt 1
+                propulsion/engine[0]/engine-rpm ge 2200
+            </test>
+            <!-- AUTO LEAN: LEANING-->
+            <test logic="AND" value="0.68">
+                fcs/mixture-cmd-norm[0] lt 1
+                propulsion/engine[0]/engine-rpm lt 2200
+            </test>
+        </switch>
+
+
+        <scheduled_gain name="propulsion/mixture-value-eng0">
+            <input>propulsion/eng0_mixture_auto</input>
+            <table>
+                <independentVar>position/h-sl-ft</independentVar>
+                <tableData>
+		    0                   1
+                    5000              0.83
+                    10000           0.69
+                    15000           0.564
+                    20000           0.46
+                    25000           0.372
+                    30000           0.297
+                    35000           0.236
+                    40000           0.186
+                   <!-- 0                   1
+                    5000              0.94
+                    10000           0.78
+                    15000           0.64
+                    20000           0.52
+                    25000           0.41
+                    30000           0.34
+                    35000           0.28
+                    40000           0.21-->
+                </tableData>
+            </table>
+            <output>propulsion/engine[0]/mixture</output>
+        </scheduled_gain>
+
+        
+
+    </channel>
+
+</system>

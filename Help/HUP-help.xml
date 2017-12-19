@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!--
+    Usable with FlightGear
+      =>    Gerard Robin
+    Copyright License: GPLV2 -      
+-->
+<PropertyList>
+
+        <title>Helicoptere Piasecki HUP</title>
+            <key>
+                <name>}</name>
+                <desc>Electric power ON magnetos 1,2,3</desc>
+            </key>
+            <key>
+                <name>s</name>
+                <desc>Start Engines and Rotor Gear ON</desc>
+            </key>
+            <key>
+                <name>{</name>
+            <desc>Shutdown Engines and Electric power OFF</desc>
+            </key>
+            <key>
+           <name>j</name>
+           <desc>Toggle rotor clutch</desc>
+            </key>
+            <name>k</name>
+            <desc>Toggle rotor brake</desc>
+            <key>
+            <name>d</name>
+            <desc>Toggle  Passengers Door ( left door )</desc>
+            </key>
+            <key>
+                <name>D</name>
+                <desc>Toggle  Open/Close Rescue Trap (cockpit)</desc>
+            </key>
+            <key>
+            <name>B</name>
+            <desc>Toggle Brake-Parking</desc>
+            </key>
+            <key>
+                <name>Ctrl-F</name>
+                <desc>Reset after "crash low level"</desc>
+            </key>
+
+    <text>
+
+
+            That Helicopter is loaded with:
+                    Engines and Rotor Gear OFF
+                    Rotor Brake ON
+                    Brake-Parking ON (the Left  door is opened)
+                    Blades Folded
+
+
+            START and STOP ROUTINE
+            To start:
+
+                    1  Deploy the blades => key "f"  (not yet))
+                    2  Rotor Brake OFF => key "k", (toggle)
+                    3   rotor clutch ON  key "j" (toggle)
+                    4  Start the engine =>  key "}" thrice  and "s"
+                    5  Brake-Parking OFF => key "B" optionnal (the pilot door will close)
+
+        BTW: You may want the "Easy START" within the menu "HUP-Retriever"
+
+            To stop:
+                    engine OFF => key "{" thrice ( magnetos = 0 )
+                    rotor clutch => OFF  key "j" (toggle)
+
+
+            CRASH DETECTION
+                     There is a low level crash detection, with rotor blade removed (broken).
+                     You may want to reset it  => key "ctrl-f"  ON at least 10 seconds
+    </text>
+
+</PropertyList>
