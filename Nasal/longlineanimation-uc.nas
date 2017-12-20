@@ -21,17 +21,25 @@ var segment_length = getprop("/sim/cargo/rope/factor");
 
 var longline_animation = func (reset) {
 
-	#var overland = getprop("gear/gear/ground-is-solid");
 	var overland = getprop("fdm/jsbsim/ground/solid");
   #if (getprop("sim/gui/dialogs/aicargo-dialog/alt-origin"))
   #  var altitude = getprop("/position/altitude-agl-ft") - 13.3;
   #else
   #  var altitude = getprop("position/true-agl-ft");
-  if (getprop("sim/gui/dialogs/aicargo-dialog/alt-origin"))
-    var altitude = getprop("/position/altitude-agl-ft") - 6.6;
+
+  var ropeoffset = 0;
+  if (getprop("sim/gui/dialogs/aicargo-dialog/connector") == 1)
+    ropeoffset = -.64;
   else
-    var altitude = getprop("position/true-agl-ft") + 6.7;
-	var alt_agl = altitude * 0.3048 + getprop("/sim/cargo/rope/offset");
+    ropeoffset = getprop("sim/cargo/rope/offset");
+
+  var altitude = 0;
+  if (getprop("sim/gui/dialogs/aicargo-dialog/alt-origin"))
+    altitude = getprop("/position/altitude-agl-ft") + 1.79;
+  else
+    altitude = getprop("position/true-agl-ft") + 6.7;
+
+	var alt_agl = altitude * 0.3048 + ropeoffset;
   var cargo_on_hook = getprop("sim/cargo/cargo-on-hook");
   var cargo_height = getprop("/sim/cargo/cargoheight");
   var cargo_harness = getprop("/sim/cargo/cargoharness");
@@ -44,6 +52,7 @@ var longline_animation = func (reset) {
 	var dt = getprop("/sim/time/delta-sec");
   var bend_force = getprop("/sim/cargo/rope/bendforce");
 	var angle_correction = getprop("/sim/cargo/rope/correction");
+
 setprop("/sim/weight[3]/weight-lb", 500);
 var cargoWeight = getprop("sim/weight[3]/weight-lb");
 

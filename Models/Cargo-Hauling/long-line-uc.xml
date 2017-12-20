@@ -498,6 +498,7 @@
   </model>
 
   <model>
+    <name>ropeh</name>
     <path>rope-uc.ac</path>
     <offsets>
       <x-m>  0.0 </x-m>
@@ -505,13 +506,61 @@
       <z-m>-1.379</z-m>
     </offsets>
     <condition>
-      <not>
-        <property>/sim/gui/dialogs/aicargo-dialog/longline</property>
-      </not>
+      <and>
+        <not>
+          <property>/sim/gui/dialogs/aicargo-dialog/longline</property>
+        </not>
+        <not>
+          <property>sim/gui/dialogs/aicargo-dialog/connector</property>
+        </not>
+      </and>
     </condition>
   </model>
+  <animation>
+    <type>scale</type>
+    <object-name>ropeh</object-name>
+    <x-offset>0.7</x-offset>
+    <y-offset>0.7</y-offset>
+    <z-offset>1.0</z-offset>
+    <center>
+      <x-m>  0.0 </x-m>
+      <y-m>  0.0 </y-m>
+      <z-m>-3.1</z-m>
+    </center>
+  </animation>
 
   <model>
+    <name>ropew</name>
+    <path>rope-uc.ac</path>
+    <offsets>
+      <x-m> -1.93 </x-m>
+      <y-m>  0.9 </y-m>
+      <z-m> -0.95</z-m>
+    </offsets>
+    <condition>
+      <and>
+        <not>
+          <property>/sim/gui/dialogs/aicargo-dialog/longline</property>
+        </not>
+        <property>sim/gui/dialogs/aicargo-dialog/connector</property>
+      </and>
+    </condition>
+  </model>
+  <animation>
+    <type>scale</type>
+    <object-name>ropew</object-name>
+    <x-offset>0.7</x-offset>
+    <y-offset>0.7</y-offset>
+    <z-offset>1.0</z-offset>
+    <center>
+      <x-m> -1.93 </x-m>
+      <y-m>  0.9 </y-m>
+      <z-m> -0.95</z-m>
+    </center>
+  </animation>
+
+  <model>
+    <name>cableh</name>
     <path>cable-uc.ac</path>
     <offsets>
       <x-m>  0.0 </x-m>
@@ -519,9 +568,54 @@
       <z-m>-1.379</z-m>
     </offsets>
     <condition>
-      <property>/sim/gui/dialogs/aicargo-dialog/longline</property>
+      <and>
+        <property>/sim/gui/dialogs/aicargo-dialog/longline</property>
+        <not>
+          <property>sim/gui/dialogs/aicargo-dialog/connector</property>
+        </not>
+      </and>
     </condition>
   </model>
+  <animation>
+    <type>scale</type>
+    <object-name>cableh</object-name>
+    <x-offset>0.7</x-offset>
+    <y-offset>0.7</y-offset>
+    <z-offset>1.0</z-offset>
+    <center>
+      <x-m>  0.0 </x-m>
+      <y-m>  0.0 </y-m>
+      <z-m>-3.1</z-m>
+    </center>
+  </animation>
+
+  <model>
+    <name>cablew</name>
+    <path>cable-uc.ac</path>
+    <offsets>
+      <x-m> -1.93 </x-m>
+      <y-m>  0.9 </y-m>
+      <z-m> -0.95</z-m>
+    </offsets>
+    <condition>
+      <and>
+        <property>/sim/gui/dialogs/aicargo-dialog/longline</property>
+        <property>sim/gui/dialogs/aicargo-dialog/connector</property>
+      </and>
+    </condition>
+  </model>
+  <animation>
+    <type>scale</type>
+    <object-name>cablew</object-name>
+    <x-offset>0.7</x-offset>
+    <y-offset>0.7</y-offset>
+    <z-offset>1.0</z-offset>
+    <center>
+      <x-m> -1.93 </x-m>
+      <y-m>  0.9 </y-m>
+      <z-m> -0.95</z-m>
+    </center>
+  </animation>
 
   <model>
     <path>hitch.ac</path>
@@ -535,9 +629,9 @@
   <model>
     <path>winch.ac</path>
     <offsets>
-      <x-m>  0.0 </x-m>
-      <y-m>  0.0 </y-m>
-      <z-m> -1.0 </z-m>
+      <x-m> -1.3 </x-m>
+      <y-m>  0.9 </y-m>
+      <z-m>  0.38 </z-m>
     </offsets>
   </model>
 

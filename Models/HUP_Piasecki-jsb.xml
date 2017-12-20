@@ -144,7 +144,19 @@
      </offsets>
     </model>
 
-        <!--======================RESCUE=================================-->
+    <!--model>
+      <name>Rescue</name>
+      <path>Aircraft/HUP-Retriever/Models/Rescue/Rescue.xml</path>
+      <offsets>
+        <x-m>-3.38 </x-m>
+        <y-m> 0.92 </y-m>
+        <z-m> 0.28 </z-m>
+        <pitch-deg>0</pitch-deg>
+        <heading-deg>0</heading-deg>
+      </offsets>
+    </model-->
+
+    <!--======================RESCUE=================================-->
 
 	  <model>
       <name>Winch</name>

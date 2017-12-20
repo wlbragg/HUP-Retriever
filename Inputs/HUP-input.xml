@@ -62,7 +62,7 @@
         </binding>
     </key>
 
-    <!--key n="114">
+    <key n="114">
       <name>r</name>
       <desc>Toggle Rescue</desc>
       <binding>
@@ -102,7 +102,7 @@
           <min>0.0</min>
           <max>1</max>
       </binding>
-    </key-->
+    </key>
 
     <key n="15">
       <name>Ctrl-O</name>
@@ -133,7 +133,7 @@
       </binding>
     </key>
 
-    <key n="87"> 
+    <!--key n="87"> 
       <name>W</name>
       <desc>Winch down</desc>
       <repeatable type="bool">true</repeatable>
@@ -171,7 +171,7 @@
             screen.log.write("Winch required!");
         </script>
       </binding>
-    </key>
+    </key-->
 			
     <key n="106">
         <name>j</name>
