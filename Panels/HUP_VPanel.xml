@@ -10,8 +10,14 @@
 
 <PropertyList>
 
-    <path>Models/hup-vpanel.ac</path>
-    <texture-path>Models/Textures</texture-path>
+  <path>Models/hup-vpanel.ac</path>
+  <texture-path>Models/Textures</texture-path>
+
+  <!-- ALS Interior Shadows -->
+  <effect>
+    <inherits-from>Models/Effects/interior/cockpit-interior</inherits-from>
+    <object-name>rect</object-name>
+  </effect>
 
 <!--==LINE 1 =========================-->
 

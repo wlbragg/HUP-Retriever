@@ -18,56 +18,100 @@ Gerard Robin
     
 	<animation>
 		<type>noshadow</type>
-                <object-name>VPanel</object-name>
+    <object-name>VPanel</object-name>
  	</animation>
     
-    <effect>
-	    <inherits-from>Aircraft/HUP-Retriever/Models/Effects/reflectp-shine</inherits-from>
-	    <object-name>Pedale-GRudder-Pilote</object-name>
-	    <object-name>Base-GRudder-Pilote</object-name>
-	   <object-name>Pedale-DRudder-Pilote</object-name>
-	    <object-name>Base-DRudder-Pilote</object-name>
-	   <object-name>GRudder-Copilote</object-name>
-	    <object-name>Base-GRudder-Copilote</object-name>
-	    <object-name>DRudder-Copilote</object-name>
-	     <object-name>Base-DRudder-Copilote</object-name>
+  <!--effect>
+    <inherits-from>Aircraft/HUP-Retriever/Models/Effects/reflectp-shine</inherits-from>
+    <object-name>Pedale-GRudder-Pilote</object-name>
+    <object-name>Base-GRudder-Pilote</object-name>
+    <object-name>Pedale-DRudder-Pilote</object-name>
+    <object-name>Base-DRudder-Pilote</object-name>
+    <object-name>GRudder-Copilote</object-name>
+    <object-name>Base-GRudder-Copilote</object-name>
+    <object-name>DRudder-Copilote</object-name>
+    <object-name>Base-DRudder-Copilote</object-name>
 	</effect>
-	
-	
+
 	<effect>
-            <inherits-from>Aircraft/HUP-Retriever/Models/Effects/reflecttrain_2</inherits-from>
-	    <object-name>Collective-Pilote</object-name>
-	    <object-name>Manche-Pilote</object-name>
-	    <object-name>Manche-Copilote</object-name>
-	     
-            <!--<object-name></object-name>-->
-        </effect>
-    
-	
-	<model>
-            <name>BPanel</name>
-            <path>Aircraft/HUP-Retriever/Panels/HUP_BPanel.xml</path>
-            <offsets>
-                <x-m>0</x-m>
-                <y-m>0</y-m>
-                <z-m>-0</z-m>
-                <pitch-deg>0</pitch-deg>
-            </offsets>
-        </model>
-	
-	
-	<model>
-            <name>VPanel</name>
-            <path>Aircraft/HUP-Retriever/Panels/HUP_VPanel.xml</path>
-            <offsets>
-                    <x-m>-4.33172</x-m>
-                    <y-m>0.0</y-m>
-                    <z-m>-0.160922</z-m>
-                    <pitch-deg>0</pitch-deg>
-            </offsets>
-        </model>
-	
-	
+    <inherits-from>Aircraft/HUP-Retriever/Models/Effects/reflecttrain_2</inherits-from>
+    <object-name>Collective-Pilote</object-name>
+    <object-name>Manche-Pilote</object-name>
+    <object-name>Manche-Copilote</object-name>
+  </effect-->
+
+  <!-- ALS Interior Shadows -->
+  <effect>
+    <inherits-from>Models/Effects/interior/cockpit-interior</inherits-from>
+    <object-name>Base-DRudder-Copilote</object-name>
+    <object-name>Base-DRudder-Pilote</object-name>
+    <object-name>Base-GRudder-Copilote</object-name>
+    <object-name>Base-GRudder-Pilote</object-name>
+    <object-name>Collective-Pilote</object-name>
+    <object-name>Copilot-Yoke-sock</object-name>
+    <object-name>DSiege-Base</object-name>
+    <object-name>DSiege-Bras</object-name>
+    <object-name>Panel</object-name>
+    <object-name>Pedale-DRudder-Pilote</object-name>
+    <object-name>Pedale-GRudder-Pilote</object-name>
+    <object-name>Pilot-Yoke-sock</object-name>
+    <object-name>block</object-name>
+    <object-name>block.001</object-name>
+    <object-name>block.002</object-name>
+    <object-name>block.003</object-name>
+    <object-name>block.004</object-name>
+    <object-name>block.005</object-name>
+    <object-name>box</object-name>
+    <object-name>box.001</object-name>
+    <object-name>box.002</object-name>
+    <object-name>box.003</object-name>
+    <object-name>box.004</object-name>
+    <object-name>cylinder</object-name>
+    <object-name>cylinder.001</object-name>
+    <object-name>cylinder.002</object-name>
+    <object-name>cylinder.003</object-name>
+    <object-name>cylinder.004</object-name>
+    <object-name>cylinder.005</object-name>
+    <object-name>cylinder.006</object-name>
+    <object-name>disk</object-name>
+    <object-name>disk.001</object-name>
+    <object-name>disk.002</object-name>
+    <object-name>object</object-name>
+    <object-name>object.003</object-name>
+    <object-name>object.004</object-name>
+    <object-name>object.005</object-name>
+    <object-name>object.006</object-name>
+
+    <object-name>DSiege-H</object-name>
+    <object-name>DSiege-V</object-name>
+    <object-name>Manche-Copilote</object-name>
+    <object-name>Manche-Pilote</object-name>
+    <object-name>sphere.001</object-name>
+    <object-name>sphere.002</object-name>
+  </effect>
+
+  <model>
+    <name>BPanel</name>
+    <path>Aircraft/HUP-Retriever/Panels/HUP_BPanel.xml</path>
+    <offsets>
+      <x-m>0</x-m>
+      <y-m>0</y-m>
+      <z-m>-0</z-m>
+      <pitch-deg>0</pitch-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>VPanel</name>
+    <path>Aircraft/HUP-Retriever/Panels/HUP_VPanel.xml</path>
+    <offsets>
+      <x-m>-4.33172</x-m>
+      <y-m>0.0</y-m>
+      <z-m>-0.160922</z-m>
+      <pitch-deg>0</pitch-deg>
+    </offsets>
+  </model>
+
 	<!--========================================================================-->
 	
         <animation>

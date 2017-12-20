@@ -24,8 +24,7 @@
         <object-name>Trappe</object-name>
         <object-name>Moteur-Echap</object-name>
         <object-name>Cockpit-Bulle-Struct</object-name>
-
-        <!--<object-name></object-name>-->
+        <object-name>Cockpit-Bulle-Struct.001</object-name>
     </effect>
 
 	  <effect>
@@ -51,14 +50,13 @@
 	    <!--<object-name>GRudder-Pilote</object-name>
 	    <object-name>DRudder-Pilote</object-name>
 	    <object-name>GRudder-Copilote</object-name>
-	     <object-name>DRudder-Copilote</object-name>-->
+	    <object-name>DRudder-Copilote</object-name>
 	    <object-name>Collective-Pilote</object-name>
 	    <object-name>Manche-Pilote</object-name>
-	    <object-name>Manche-Copilote</object-name>
-      <!--<object-name></object-name>-->
+	    <object-name>Manche-Copilote</object-name-->
     </effect>
 
-    <effect>
+    <!--effect>
       <inherits-from>Aircraft/HUP-Retriever/Models/Effects/reflectp-shine</inherits-from>
       <object-name>Pedale-GRudder-Pilote</object-name>
       <object-name>Base-GRudder-Pilote</object-name>
@@ -68,6 +66,48 @@
       <object-name>Base-GRudder-Copilote</object-name>
       <object-name>DRudder-Copilote</object-name>
       <object-name>Base-DRudder-Copilote</object-name>
+    </effect-->
+
+    <!-- ALS Interior Shadows -->
+    <effect>
+      <inherits-from>Models/Effects/interior/cockpit-interior</inherits-from>
+      <object-name>Cockpit-left-window-Lock</object-name>
+      <object-name>Cockpit-left-window-frame</object-name>
+      <object-name>Cockpit-right-window-Lock</object-name>
+      <object-name>Cockpit-right-window-frame</object-name>
+      <object-name>GPorte</object-name>
+      <object-name>GPorte-Doublage</object-name>
+      <object-name>GPorte-Lock</object-name>
+      <object-name>Hatch-Lock</object-name>
+      <object-name>Hatch-Lock-handle</object-name>
+      <object-name>Trappe-Doublage</object-name>
+      <object-name>box</object-name>
+      <object-name>box.001</object-name>
+      <object-name>box.003</object-name>
+      <object-name>box.004</object-name>
+      <object-name>box.005</object-name>
+      <object-name>box.006</object-name>
+      <object-name>box.008</object-name>
+      <object-name>box.009</object-name>
+      <object-name>box.010</object-name>
+      <object-name>box.012</object-name>
+      <object-name>box.013</object-name>
+      <object-name>box.014</object-name>
+      <object-name>box.015</object-name>
+      <object-name>box.016</object-name>
+      <object-name>cabin-insude</object-name>
+      <object-name>cylinder.001</object-name>
+      <object-name>cylinder.002</object-name>
+      <object-name>cylinder.003</object-name>
+      <object-name>cylinder.004</object-name>
+      <object-name>cylinder.005</object-name>
+      <object-name>cylinder.006</object-name>
+      <object-name>cylinder.007</object-name>
+      <object-name>object</object-name>
+      <object-name>object.002</object-name>
+      <object-name>object.003</object-name>
+      <object-name>object.005</object-name>
+      <object-name>object.009</object-name>
     </effect>
 
     <animation>

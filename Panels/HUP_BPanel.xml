@@ -7,16 +7,19 @@ Gerard Robin
 
 <PropertyList>
 
-    <path>Models/hup-bpanel.ac</path>
-    <texture-path>Models/Textures</texture-path>
-    
-    
-    <!--<effect>
-	<inherits-from>Aircraft/HUP-Retriever/Models/Effects/reflectp-shine</inherits-from>
-		
-    </effect>-->
-    
-    
+  <path>Models/hup-bpanel.ac</path>
+  <texture-path>Models/Textures</texture-path>
+ 
+  <!--<effect>
+	  <inherits-from>Aircraft/HUP-Retriever/Models/Effects/reflectp-shine</inherits-from>
+  </effect>-->
+
+  <!-- ALS Interior Shadows -->
+  <effect>
+    <inherits-from>Models/Effects/interior/cockpit-interior</inherits-from>
+    <object-name>cylinder</object-name>
+  </effect>
+
     <model>
             <name>Ignition</name>
             <path>Aircraft/HUP-Retriever/Instruments/Module-Ignition_Master.xml</path>
