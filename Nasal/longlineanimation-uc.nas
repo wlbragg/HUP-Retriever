@@ -27,9 +27,10 @@ var longline_animation = func (reset) {
   #else
   #  var altitude = getprop("position/true-agl-ft");
 
+#ropeoffset = -.64;
   var ropeoffset = 0;
   if (getprop("sim/gui/dialogs/aicargo-dialog/connector") == 1)
-    ropeoffset = -.64;
+    ropeoffset = -.19
   else
     ropeoffset = getprop("sim/cargo/rope/offset");
 

@@ -34,16 +34,16 @@
 		<type>select</type>
 		<object-name>Rope</object-name>
 		<condition>
-		    <and>
+		    <!--and-->
 		    <equals>
 				<property>/sim/model/rescue</property>
 				<value>1</value>
 			</equals>
-			<not-equals>
+			<!--not-equals>
 			    <property>fdm/jsbsim/animation/rescue/rescue-lift-cmd</property>
 			    <value>0</value>
 			</not-equals>
-		    </and>
+		    </a-->
 		</condition>
         </animation>
 	
@@ -52,16 +52,16 @@
 	     <object-name>Hook</object-name>
 	    <object-name>Crown</object-name>
             <condition>
-		<and>
+		<!--and-->
 		    <equals>
 				<property>/sim/model/rescue</property>
 				<value>1</value>
 			</equals>
-			<not-equals>
+			<!--not-equals>
 			    <property>fdm/jsbsim/animation/rescue/rescue-lift-cmd</property>
 			    <value>0</value>
 			</not-equals>
-		    </and>
+		    </and-->
             </condition>
         </animation>
 	
@@ -72,16 +72,16 @@
 	    <object-name>Casque</object-name>
 	     <object-name>life-jacket</object-name>	   
             <condition>
-		<and>
+		<!--and-->
 		    <equals>
 				<property>/sim/model/rescue</property>
 				<value>1</value>
 			</equals>
-			<greater-than>
+			<!--greater-than>
 			    <property>fdm/jsbsim/animation/rescue/rescue-lift-cmd</property>
 			    <value>0.024</value>
 			</greater-than>
-		    </and>
+		    </and-->
             </condition>
         </animation>
 

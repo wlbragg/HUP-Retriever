@@ -533,9 +533,9 @@
     <name>ropew</name>
     <path>rope-uc.ac</path>
     <offsets>
-      <x-m> -1.93 </x-m>
-      <y-m>  0.9 </y-m>
-      <z-m> -0.95</z-m>
+      <x-m> -1.75 </x-m>
+      <y-m>  0.25 </y-m>
+      <z-m> -0.45</z-m>
     </offsets>
     <condition>
       <and>
@@ -553,9 +553,9 @@
     <y-offset>0.7</y-offset>
     <z-offset>1.0</z-offset>
     <center>
-      <x-m> -1.93 </x-m>
-      <y-m>  0.9 </y-m>
-      <z-m> -0.95</z-m>
+      <x-m> -1.75 </x-m>
+      <y-m>  0.25 </y-m>
+      <z-m> -0.45</z-m>
     </center>
   </animation>
 
@@ -593,9 +593,9 @@
     <name>cablew</name>
     <path>cable-uc.ac</path>
     <offsets>
-      <x-m> -1.93 </x-m>
-      <y-m>  0.9 </y-m>
-      <z-m> -0.95</z-m>
+      <x-m> -1.75 </x-m>
+      <y-m>  0.25 </y-m>
+      <z-m> -0.45</z-m>
     </offsets>
     <condition>
       <and>
@@ -611,9 +611,9 @@
     <y-offset>0.7</y-offset>
     <z-offset>1.0</z-offset>
     <center>
-      <x-m> -1.93 </x-m>
-      <y-m>  0.9 </y-m>
-      <z-m> -0.95</z-m>
+      <x-m> -1.75 </x-m>
+      <y-m>  0.25 </y-m>
+      <z-m> -0.45</z-m>
     </center>
   </animation>
 
@@ -626,15 +626,6 @@
     </offsets>
   </model>
 
-  <model>
-    <path>winch.ac</path>
-    <offsets>
-      <x-m> -1.3 </x-m>
-      <y-m>  0.9 </y-m>
-      <z-m>  0.38 </z-m>
-    </offsets>
-  </model>
-
   <animation>
     <object-name>hitch</object-name>
     <type>select</type>
@@ -644,17 +635,6 @@
           <property>/sim/gui/dialogs/aicargo-dialog/connector</property>
         </not>
         <property>/sim/gui/dialogs/aicargo-dialog/connection</property>
-      </and>
-    </condition>
-  </animation>
-
-  <animation>
-    <object-name>winch</object-name>
-    <type>select</type>
-    <condition>
-      <and>
-        <property>/sim/gui/dialogs/aicargo-dialog/connection</property>
-        <property>/sim/gui/dialogs/aicargo-dialog/connector</property>
       </and>
     </condition>
   </animation>

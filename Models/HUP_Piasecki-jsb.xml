@@ -163,6 +163,30 @@
         <y-m>0</y-m>
         <z-m>2</z-m>
       </offsets>
+      <condition>
+        <or>
+			    <and>
+			      <equals>
+              <property>/sim/gui/dialogs/aicargo-dialog/rescue</property>
+              <value>1</value>
+            </equals>
+            <property>sim/gui/dialogs/aicargo-dialog/connector</property>
+		        <equals>
+			        <property>fdm/jsbsim/animation/cockpit-hatch-cmd-norm</property>
+			        <value>1.0</value>
+		        </equals>
+			    </and>
+          <and>
+			      <equals>
+              <property>/sim/gui/dialogs/aicargo-dialog/rescue</property>
+              <value>1</value>
+            </equals>
+            <not>
+              <property>sim/gui/dialogs/aicargo-dialog/connector</property>
+            </not>
+			    </and>
+        </or>
+		  </condition>
     </model>
 
     <model>	
@@ -198,7 +222,7 @@
 
     <!--======================RESCUE=================================-->
 
-	  <model>
+	  <!--model>
       <name>Winch</name>
       <path>Aircraft/HUP-Retriever/Models/HUP-Winch.xml</path>
       <offsets>
@@ -206,7 +230,7 @@
         <y-m>0</y-m>
         <z-m>0</z-m>
       </offsets>
-    </model>
+    </model-->
 
 	  <model>
       <name>Rescue-Op</name>
@@ -247,100 +271,100 @@
     </animation>
 
 	<animation>
-            <type>select</type>
-            <object-name>Rescue-noman</object-name>
-            <condition>
-		    <and>
-			<not><property>fdm/jsbsim/animation/rescue/rescuer</property></not>
-                    <equals>
-                        <property>fdm/jsbsim/animation/cockpit-hatch-pos-norm</property>
-                        <value>1</value>
-                    </equals>
-		    </and>
-            </condition>
-        </animation>
-	
+    <type>select</type>
+    <object-name>Rescue-noman</object-name>
+    <condition>
+      <and>
+			  <not>
+          <property>fdm/jsbsim/animation/rescue/rescuer</property>
+        </not>
+        <equals>
+          <property>fdm/jsbsim/animation/cockpit-hatch-pos-norm</property>
+          <value>1</value>
+        </equals>
+      </and>
+    </condition>
+  </animation>
+
+	<animation>
+    <type>rotate</type>
+    <object-name>Rescue-Op</object-name>
+    <property>jsbsim/fdm/animation/rescue/pitch-deg</property>
+    <factor>1</factor>
+    <center>
+      <x-m>-3.3219</x-m>
+      <y-m>0.200305</y-m>
+      <z-m>0.485714</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>-1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+	<animation>
+    <type>rotate</type>
+    <object-name>Rescue-Op</object-name>
+    <property>fdm/jsbsim/animation/rescue/roll-deg</property>
+    <factor>1</factor>
+    <center>
+      <x-m>-3.3219</x-m>
+      <y-m>0.200305</y-m>
+      <z-m>0.485714</z-m>
+    </center>
+    <axis>
+      <x>1</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+  </animation>
 	
 	<animation>
-            <type>rotate</type>
-	    <object-name>Rescue-Op</object-name>
-            <property>jsbsim/fdm/animation/rescue/pitch-deg</property>
-            <factor>1</factor>
-            <center>
-                <x-m>-3.3219</x-m>
-                <y-m>0.200305</y-m>
-                <z-m>0.485714</z-m>
-            </center>
-            <axis>
-                <x>0</x>
-                <y>-1</y>
-                <z>0</z>
-            </axis>
-        </animation>
+    <type>rotate</type>
+    <object-name>Rescue-noman</object-name>
+    <property>jsbsim/fdm/animation/rescue/pitch-deg</property>
+    <factor>1</factor>
+    <center>
+      <x-m>-3.3219</x-m>
+      <y-m>0.200305</y-m>
+      <z-m>0.485714</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>-1</y>
+      <z>0</z>
+    </axis>
+  </animation>
 	
 	<animation>
-            <type>rotate</type>
-             <object-name>Rescue-Op</object-name>
-           <property>fdm/jsbsim/animation/rescue/roll-deg</property>
-            <factor>1</factor>
-            <center>
-                <x-m>-3.3219</x-m>
-                <y-m>0.200305</y-m>
-                <z-m>0.485714</z-m>
-            </center>
-            <axis>
-                <x>1</x>
-                <y>0</y>
-                <z>0</z>
-            </axis>
-        </animation>
-	
-	<animation>
-            <type>rotate</type>
-	    <object-name>Rescue-noman</object-name>
-            <property>jsbsim/fdm/animation/rescue/pitch-deg</property>
-            <factor>1</factor>
-            <center>
-                <x-m>-3.3219</x-m>
-                <y-m>0.200305</y-m>
-                <z-m>0.485714</z-m>
-            </center>
-            <axis>
-                <x>0</x>
-                <y>-1</y>
-                <z>0</z>
-            </axis>
-        </animation>
-	
-	<animation>
-            <type>rotate</type>
-             <object-name>Rescue-noman</object-name>
-           <property>fdm/jsbsim/animation/rescue/roll-deg</property>
-            <factor>1</factor>
-            <center>
-                <x-m>-3.3219</x-m>
-                <y-m>0.200305</y-m>
-                <z-m>0.485714</z-m>
-            </center>
-            <axis>
-                <x>1</x>
-                <y>0</y>
-                <z>0</z>
-            </axis>
-        </animation>
-	
-	
+    <type>rotate</type>
+   <object-name>Rescue-noman</object-name>
+   <property>fdm/jsbsim/animation/rescue/roll-deg</property>
+    <factor>1</factor>
+    <center>
+      <x-m>-3.3219</x-m>
+      <y-m>0.200305</y-m>
+      <z-m>0.485714</z-m>
+    </center>
+    <axis>
+      <x>1</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
 	<model>
-            <name>Light_Rescue-Op</name>
-            <path>Aircraft/HUP-Retriever/Models/Remb/Hup-sar-Rembrandt_Lights.xml</path>
-	    <!--<path>Aircraft/HUP-Retriever/Models/Remb/Al3-Rembrandt_Lights.xml</path>-->
-            <offsets>
-                    <x-m>-2.43567</x-m>
-                    <y-m>0.222528</y-m>
-                    <z-m>0</z-m>
-                    <pitch-deg>0</pitch-deg>
-            </offsets>
-        </model>
+    <name>Light_Rescue-Op</name>
+    <path>Aircraft/HUP-Retriever/Models/Remb/Hup-sar-Rembrandt_Lights.xml</path>
+    <!--<path>Aircraft/HUP-Retriever/Models/Remb/Al3-Rembrandt_Lights.xml</path>-->
+    <offsets>
+      <x-m>-2.43567</x-m>
+      <y-m>0.222528</y-m>
+      <z-m>0</z-m>
+      <pitch-deg>0</pitch-deg>
+    </offsets>
+  </model>
 	
 	
 	<animation>

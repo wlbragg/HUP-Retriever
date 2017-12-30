@@ -94,15 +94,15 @@
         </animation>
 	
 	
-	<animation>
+	<!--animation>
             <type>select</type>
 	     <object-name>W_Hook</object-name>
 	    <object-name>W_Crown</object-name>
             <condition>
 		<or>
 		    <equals>
-			<property>sim/model/rescue</property>
-			<value>0</value>
+			<property>/sim/model/rescue</property>
+			<value>1</value>
 		    </equals>
 		    <equals>
 			<property>fdm/jsbsim/animation/rescue/rescue-lift-cmd</property>
@@ -110,7 +110,7 @@
 		    </equals>
 		</or>
             </condition>
-        </animation>
+        </animation-->
 	
 	
 	 <animation>

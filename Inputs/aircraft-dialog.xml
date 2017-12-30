@@ -14,26 +14,33 @@
 
 <PropertyList>
   <nasal>
-        <open>
-            # Cargo Hauling option
-            var p = getprop("sim/gui/dialogs/aicargo-dialog/connection");
-            setprop("/sim/model/HUP-Retriever/cargo_connection_flag_0", 0);
-            setprop("/sim/model/HUP-Retriever/cargo_connection_flag_1", 0);
-            setprop("/sim/model/HUP-Retriever/cargo_connection_flag_" ~ p, 1);
+    <open>
+      # Cargo Hauling option
+      var p = getprop("sim/gui/dialogs/aicargo-dialog/connection");
+      setprop("/sim/model/HUP-Retriever/cargo_connection_flag_0", 0);
+      setprop("/sim/model/HUP-Retriever/cargo_connection_flag_1", 0);
+      setprop("/sim/model/HUP-Retriever/cargo_connection_flag_" ~ p, 1);
 
-            # Long Line option
-            p = getprop("sim/gui/dialogs/aicargo-dialog/longline");
-            setprop("/sim/model/HUP-Retriever/longline_flag_0",0);
-						setprop("/sim/model/HUP-Retriever/longline_flag_1",0);
-            setprop("/sim/model/HUP-Retriever/longline_flag_" ~ p, 1);
+      # Long Line option
+      p = getprop("sim/gui/dialogs/aicargo-dialog/longline");
+      setprop("/sim/model/HUP-Retriever/longline_flag_0",0);
+			setprop("/sim/model/HUP-Retriever/longline_flag_1",0);
+      setprop("/sim/model/HUP-Retriever/longline_flag_" ~ p, 1);
 
-            # Hitch/Winch option
-            p = getprop("sim/gui/dialogs/aicargo-dialog/connector");
-            setprop("/sim/model/HUP-Retriever/connector_flag_0",0);
-						setprop("/sim/model/HUP-Retriever/connector_flag_1",0);
-            setprop("/sim/model/HUP-Retriever/connector_flag_" ~ p, 1);
-        </open>
-    </nasal>
+      # Hitch/Winch option
+      p = getprop("sim/gui/dialogs/aicargo-dialog/connector");
+      setprop("/sim/model/HUP-Retriever/connector_flag_0",0);
+			setprop("/sim/model/HUP-Retriever/connector_flag_1",0);
+      setprop("/sim/model/HUP-Retriever/connector_flag_" ~ p, 1);
+
+      # Rescue Rope type option
+      p = getprop("sim/gui/dialogs/aicargo-dialog/rescue");
+      setprop("/sim/model/HUP-Retriever/rescue_flag_0",0);
+			setprop("/sim/model/HUP-Retriever/rescue_flag_1",0);
+      setprop("/sim/model/HUP-Retriever/rescue_flag_2",0);
+      setprop("/sim/model/HUP-Retriever/rescue_flag_" ~ p, 1);
+    </open>
+  </nasal>
 
   <name>aircraft-dialog</name>
 	<layout>vbox</layout>
@@ -169,188 +176,349 @@
 
   <hrule/>
 
+  <group>
+	  <layout>table</layout>
+
+	  <text>
+		  <label>Rescue Mission</label>
+		  <halign>left</halign>
+		  <row>2</row>
+	    <col>0</col>
+	  </text>
+
+    <checkbox>
+      <label>Open Floor Hatch</label>
+      <halign>left</halign>
+      <row>2</row>
+	    <col>3</col>
+      <property>fdm/jsbsim/animation/cockpit-hatch-cmd-norm</property>
+      <live>true</live>
+      <binding>
+        <command>nasal</command>
+        <script>
+          var p = "fdm/jsbsim/animation/cockpit-hatch-cmd-norm";
+          setprop(p, var i = !getprop(p));
+          gui.popupTip("Floor Hatch " ~ (i ? "Opened" : "Closed"));
+
+					var rm = getprop("/sim/gui/dialogs/aicargo-dialog/rescue");
+          if (rm == 0) {
+            setprop("/sim/model/rescue", 1);
+            setprop("fdm/jsbsim/animation/rescue/rescue-lift-sim", 1);
+            setprop("fdm/jsbsim/animation/mission-winch-pos-norm", 1);
+          }
+        </script>
+      </binding>
+    </checkbox>
+
+		<radio>
+      <row>3</row>
+		  <col>0</col>
+			<halign>left</halign>
+			<label>Classic</label>
+			<property>sim/model/HUP-Retriever/rescue_flag_0</property>
+			<live>true</live>
+			<enable>
+				<not>
+					<property>/sim/freeze/replay-state</property>
+				</not>
+			</enable>
+      <binding>
+				<command>dialog-apply</command>
+			</binding>
+			<binding>
+				<command>nasal</command>
+				<script>
+          setprop("/sim/model/rescue", 1);
+					setprop("/sim/gui/dialogs/aicargo-dialog/rescue", 0);
+          setprop("sim/model/HUP-Retriever/rescue_flag_0",1);
+					setprop("sim/model/HUP-Retriever/rescue_flag_1",0);
+          setprop("sim/model/HUP-Retriever/rescue_flag_2",0);
+
+          var pa = getprop("fdm/jsbsim/animation/cockpit-hatch-cmd-norm");
+          if (1 > pa) gui.popupTip("Hatch door must be opened to deploy the winch!");
+          setprop("fdm/jsbsim/animation/rescue/rescue-lift-sim", 1);
+          setprop("fdm/jsbsim/animation/mission-winch-pos-norm", 1);
+
+          #rescue.rope_manager.stop();
+        </script>
+      </binding>
+		</radio>
+
+		<radio>
+      <row>4</row>
+		  <col>0</col>
+			<halign>left</halign>
+			<label>Flexible rope</label>
+			<property>sim/model/HUP-Retriever/rescue_flag_1</property>
+			<live>true</live>
+			<enable>
+				<not>
+					<property>/sim/freeze/replay-state</property>
+				</not>
+			</enable>
+      <binding>
+				<command>dialog-apply</command>
+			</binding>
+			<binding>
+				<command>nasal</command>
+				<script>
+          setprop("/sim/model/rescue", 0);
+					setprop("/sim/gui/dialogs/aicargo-dialog/rescue", 1);
+          setprop("sim/model/HUP-Retriever/rescue_flag_0",0);
+					setprop("sim/model/HUP-Retriever/rescue_flag_1",1);
+          setprop("sim/model/HUP-Retriever/rescue_flag_2",0);
+
+          setprop("fdm/jsbsim/animation/rescue/rescue-lift-sim", 0);
+          setprop("fdm/jsbsim/animation/mission-winch-pos-norm", 0);
+
+          #rescue.rope_manager.start();
+        </script>
+      </binding>
+		</radio>
+
+		<radio>
+      <row>5</row>
+		  <col>0</col>
+			<halign>left</halign>
+			<label>None</label>
+			<property>sim/model/HUP-Retriever/rescue_flag_2</property>
+			<live>true</live>
+			<enable>
+				<not>
+					<property>/sim/freeze/replay-state</property>
+				</not>
+			</enable>
+      <binding>
+				<command>dialog-apply</command>
+			</binding>
+			<binding>
+				<command>nasal</command>
+				<script>
+          setprop("/sim/model/rescue", 0);
+					setprop("/sim/gui/dialogs/aicargo-dialog/rescue", 2);
+          setprop("sim/model/HUP-Retriever/rescue_flag_0",0);
+					setprop("sim/model/HUP-Retriever/rescue_flag_1",0);
+          setprop("sim/model/HUP-Retriever/rescue_flag_2",1);
+
+          setprop("fdm/jsbsim/animation/rescue/rescue-lift-sim", 0);
+          setprop("fdm/jsbsim/animation/mission-winch-pos-norm", 0);
+
+          #rescue.rope_manager.start();
+        </script>
+      </binding>
+		</radio>
+  </group>
+
+	<text>
+		<label>Cargo Connection</label>
+		<halign>center</halign>
+	</text>
+
 	<group>
-		<layout>vbox</layout>
+		<layout>hbox</layout>
+		<radio>
+			<halign>left</halign>
+			<label>Hard Docked</label>
+			<property>sim/model/HUP-Retriever/cargo_connection_flag_0</property>
+			<live>true</live>
+			<enable>
+        <and>
+				  <not>
+					  <property>/sim/freeze/replay-state</property>
+				  </not>
+          <not>
+					  <property>/sim/cargo/cargo-on-hook</property>
+				  </not>
+          <equals>
+            <property>/sim/gui/dialogs/aicargo-dialog/rescue</property>
+            <value>1</value>
+          </equals>
+        </and>
+			</enable>
+      <binding>
+        <command>nasal</command>
+        <script>
+          var p = "sim/gui/dialogs/aicargo-dialog/connection";
+          setprop(p, var i = 0);
+          gui.popupTip("Cargo connection " ~ (i ? "Long Line" : "Hard Docked"));
+          setprop("sim/model/HUP-Retriever/cargo_connection_flag_0",1);
+					setprop("sim/model/HUP-Retriever/cargo_connection_flag_1",0);
+        </script>
+      </binding>
+		</radio>
+		<radio>
+			<halign>left</halign>
+			<label>Long Line</label>
+			<property>sim/model/HUP-Retriever/cargo_connection_flag_1</property>
+			<live>true</live>
+			<enable>
+        <and>
+				  <not>
+					  <property>/sim/freeze/replay-state</property>
+				  </not>
+          <not>
+					  <property>/sim/cargo/cargo-on-hook</property>
+				  </not>
+          <equals>
+            <property>/sim/gui/dialogs/aicargo-dialog/rescue</property>
+            <value>1</value>
+          </equals>
+        </and>
+			</enable>
+      <binding>
+        <command>nasal</command>
+        <script>
+          var p = "sim/gui/dialogs/aicargo-dialog/connection";
+          setprop(p, var i = 1);
+          gui.popupTip("Cargo connection " ~ (i ? "Long Line" : "Hard Docked"));
+          setprop("sim/model/HUP-Retriever/cargo_connection_flag_0",0);
+					setprop("sim/model/HUP-Retriever/cargo_connection_flag_1",1);
+          setprop("sim/model/firetank/enabled", 0);
+        </script>
+      </binding>
+		</radio>
+	</group>
+	<group>
+		<layout>hbox</layout>
+		<radio>
+			<halign>left</halign>
+			<label>Rope</label>
+			<property>sim/model/HUP-Retriever/longline_flag_0</property>
+			<live>true</live>
+			<enable>
+        <and>
+				  <not>
+					  <property>/sim/freeze/replay-state</property>
+				  </not>
+          <property>/sim/gui/dialogs/aicargo-dialog/connection</property>
+          <equals>
+            <property>/sim/gui/dialogs/aicargo-dialog/rescue</property>
+            <value>1</value>
+          </equals>
+        </and>
+			</enable>
+      <binding>
+        <command>nasal</command>
+        <script>
+          var p = "sim/gui/dialogs/aicargo-dialog/longline";
+          setprop(p, var i = 0);
+          gui.popupTip("Line type " ~ (i ? "Cable" : "Rope"));
+          setprop("sim/model/HUP-Retriever/longline_flag_0",1);
+					setprop("sim/model/HUP-Retriever/longline_flag_1",0);
+        </script>
+      </binding>
+		</radio>
+		<radio>
+			<halign>left</halign>
+			<label>Cable</label>
+			<property>sim/model/HUP-Retriever/longline_flag_1</property>
+			<live>true</live>
+      <enable>
+        <and>
+				  <not>
+					  <property>/sim/freeze/replay-state</property>
+				  </not>
+          <property>/sim/gui/dialogs/aicargo-dialog/connection</property>
+          <equals>
+            <property>/sim/gui/dialogs/aicargo-dialog/rescue</property>
+            <value>1</value>
+          </equals>
+        </and>
+			</enable>
+      <binding>
+        <command>nasal</command>
+        <script>
+          var p = "sim/gui/dialogs/aicargo-dialog/longline";
+          setprop(p, var i = 1);
+          gui.popupTip("Line type " ~ (i ? "Cable" : "Rope"));
+          setprop("sim/model/HUP-Retriever/longline_flag_0",0);
+					setprop("sim/model/HUP-Retriever/longline_flag_1",1);
+        </script>
+      </binding>
+		</radio>
+	</group>
+	<group>
+		<layout>hbox</layout>
+		<radio>
+			<halign>left</halign>
+			<label>Hitch</label>
+			<property>sim/model/HUP-Retriever/connector_flag_0</property>
+			<live>true</live>
+			<enable>
+        <and>
+				  <not>
+					  <property>/sim/freeze/replay-state</property>
+				  </not>
+          <property>/sim/gui/dialogs/aicargo-dialog/connection</property>
+          <equals>
+            <property>/sim/gui/dialogs/aicargo-dialog/rescue</property>
+            <value>1</value>
+          </equals>
+        </and>
+			</enable>
+      <binding>
+        <command>nasal</command>
+        <script>
+          var p = "sim/gui/dialogs/aicargo-dialog/connector";
+          setprop(p, var i = 0);
+          gui.popupTip("Connector type " ~ (i ? "Winch" : "Hitch"));
+          setprop("sim/model/HUP-Retriever/connector_flag_0",1);
+					setprop("sim/model/HUP-Retriever/connector_flag_1",0);
+        </script>
+      </binding>
+		</radio>
+		<radio>
+			<halign>left</halign>
+			<label>Winch</label>
+			<property>sim/model/HUP-Retriever/connector_flag_1</property>
+			<live>true</live>
+      <enable>
+        <and>
+				  <not>
+					  <property>/sim/freeze/replay-state</property>
+				  </not>
+          <property>/sim/gui/dialogs/aicargo-dialog/connection</property>
+          <equals>
+            <property>/sim/gui/dialogs/aicargo-dialog/rescue</property>
+            <value>1</value>
+          </equals>
+        </and>
+			</enable>
+      <binding>
+        <command>nasal</command>
+        <script>
+          var p = "sim/gui/dialogs/aicargo-dialog/connector";
+          setprop(p, var i = 1);
+          gui.popupTip("Connector type " ~ (i ? "Winch" : "Hitch"));
+          setprop("sim/model/HUP-Retriever/connector_flag_0",0);
+					setprop("sim/model/HUP-Retriever/connector_flag_1",1);
+          p = getprop("fdm/jsbsim/animation/cockpit-hatch-cmd-norm");
+          if (1 > p) gui.popupTip("Hatch door must be opened to deploy the winch!");
+        </script>
+      </binding>
+		</radio>
+	</group>
 
-		<text>
-			<label>Cargo Connection</label>
-			<halign>center</halign>
-		</text>
-
-		<group>
-			<layout>hbox</layout>
-			<radio>
-				<halign>left</halign>
-				<label>Hard Docked</label>
-				<property>sim/model/HUP-Retriever/cargo_connection_flag_0</property>
-				<live>true</live>
-				<enable>
-          <and>
-					  <not>
-						  <property>/sim/freeze/replay-state</property>
-					  </not>
-            <not>
-						  <property>/sim/cargo/cargo-on-hook</property>
-					  </not>
-          </and>
-				</enable>
-        <binding>
-          <command>nasal</command>
-          <script>
-            var p = "sim/gui/dialogs/aicargo-dialog/connection";
-            setprop(p, var i = 0);
-            gui.popupTip("Cargo connection " ~ (i ? "Long Line" : "Hard Docked"));
-            setprop("sim/model/HUP-Retriever/cargo_connection_flag_0",1);
-						setprop("sim/model/HUP-Retriever/cargo_connection_flag_1",0);
-          </script>
-        </binding>
-			</radio>
-			<radio>
-				<halign>left</halign>
-				<label>Long Line</label>
-				<property>sim/model/HUP-Retriever/cargo_connection_flag_1</property>
-				<live>true</live>
-				<enable>
-          <and>
-					  <not>
-						  <property>/sim/freeze/replay-state</property>
-					  </not>
-            <not>
-						  <property>/sim/cargo/cargo-on-hook</property>
-					  </not>
-          </and>
-				</enable>
-        <binding>
-          <command>nasal</command>
-          <script>
-            var p = "sim/gui/dialogs/aicargo-dialog/connection";
-            setprop(p, var i = 1);
-            gui.popupTip("Cargo connection " ~ (i ? "Long Line" : "Hard Docked"));
-            setprop("sim/model/HUP-Retriever/cargo_connection_flag_0",0);
-						setprop("sim/model/HUP-Retriever/cargo_connection_flag_1",1);
-            setprop("sim/model/firetank/enabled", 0);
-          </script>
-        </binding>
-			</radio>
-		</group>
-		<group>
-			<layout>hbox</layout>
-			<radio>
-				<halign>left</halign>
-				<label>Rope</label>
-				<property>sim/model/HUP-Retriever/longline_flag_0</property>
-				<live>true</live>
-				<enable>
-          <and>
-					  <not>
-						  <property>/sim/freeze/replay-state</property>
-					  </not>
-            <property>/sim/gui/dialogs/aicargo-dialog/connection</property>
-          </and>
-				</enable>
-        <binding>
-          <command>nasal</command>
-          <script>
-            var p = "sim/gui/dialogs/aicargo-dialog/longline";
-            setprop(p, var i = 0);
-            gui.popupTip("Line type " ~ (i ? "Cable" : "Rope"));
-            setprop("sim/model/HUP-Retriever/longline_flag_0",1);
-						setprop("sim/model/HUP-Retriever/longline_flag_1",0);
-          </script>
-        </binding>
-			</radio>
-			<radio>
-				<halign>left</halign>
-				<label>Cable</label>
-				<property>sim/model/HUP-Retriever/longline_flag_1</property>
-				<live>true</live>
-        <enable>
-          <and>
-					  <not>
-						  <property>/sim/freeze/replay-state</property>
-					  </not>
-            <property>/sim/gui/dialogs/aicargo-dialog/connection</property>
-          </and>
-				</enable>
-        <binding>
-          <command>nasal</command>
-          <script>
-            var p = "sim/gui/dialogs/aicargo-dialog/longline";
-            setprop(p, var i = 1);
-            gui.popupTip("Line type " ~ (i ? "Cable" : "Rope"));
-            setprop("sim/model/HUP-Retriever/longline_flag_0",0);
-						setprop("sim/model/HUP-Retriever/longline_flag_1",1);
-          </script>
-        </binding>
-			</radio>
-		</group>
-		<group>
-			<layout>hbox</layout>
-			<radio>
-				<halign>left</halign>
-				<label>Hitch</label>
-				<property>sim/model/HUP-Retriever/connector_flag_0</property>
-				<live>true</live>
-				<enable>
-          <and>
-					  <not>
-						  <property>/sim/freeze/replay-state</property>
-					  </not>
-            <property>/sim/gui/dialogs/aicargo-dialog/connection</property>
-          </and>
-				</enable>
-        <binding>
-          <command>nasal</command>
-          <script>
-            var p = "sim/gui/dialogs/aicargo-dialog/connector";
-            setprop(p, var i = 0);
-            gui.popupTip("Connector type " ~ (i ? "Winch" : "Hitch"));
-            setprop("sim/model/HUP-Retriever/connector_flag_0",1);
-						setprop("sim/model/HUP-Retriever/connector_flag_1",0);
-          </script>
-        </binding>
-			</radio>
-			<radio>
-				<halign>left</halign>
-				<label>Winch</label>Hitch
-				<property>sim/model/HUP-Retriever/connector_flag_1</property>
-				<live>true</live>
-        <enable>
-          <and>
-					  <not>
-						  <property>/sim/freeze/replay-state</property>
-					  </not>
-            <property>/sim/gui/dialogs/aicargo-dialog/connection</property>
-          </and>
-				</enable>
-        <binding>
-          <command>nasal</command>
-          <script>
-            var p = "sim/gui/dialogs/aicargo-dialog/connector";
-            setprop(p, var i = 1);
-            gui.popupTip("Connector type " ~ (i ? "Winch" : "Hitch"));
-            setprop("sim/model/HUP-Retriever/connector_flag_0",0);
-						setprop("sim/model/HUP-Retriever/connector_flag_1",1);
-          </script>
-        </binding>
-			</radio>
-		</group>
-    <group>
+  <group>
     <layout>hbox</layout>
     <padding>6</padding>
     <checkbox>
       <halign>left</halign>
-      <label>Cargo Effects Rope</label>
+      <label>Rope Collides With Cargo's top Surface</label>
       <property>/sim/gui/dialogs/aicargo-dialog/alt-origin</property>
       <live>true</live>
       <enable>
           <and>
-					  <not>
-						  <property>/sim/freeze/replay-state</property>
-					  </not>
+				    <not>
+					    <property>/sim/freeze/replay-state</property>
+				    </not>
             <property>/sim/gui/dialogs/aicargo-dialog/connection</property>
+            <equals>
+              <property>/sim/gui/dialogs/aicargo-dialog/rescue</property>
+              <value>1</value>
+            </equals>
           </and>
-				</enable>
+			  </enable>
       <binding>
         <command>dialog-apply</command>
       </binding>
