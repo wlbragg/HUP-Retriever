@@ -18,7 +18,7 @@
 
 	<model>
 		<name>BoutonG</name>
-		<path>Aircraft/H-21C_Shawnee/Instruments/Bouton_pt-Nord.xml</path>
+		<path>Aircraft/HUP-Retriever/Instruments/Bouton_pt-Nord.xml</path>
 		<offsets>
                     <x-m>0.016</x-m>
                     <y-m>-0.030431</y-m>
@@ -29,7 +29,7 @@
 
         <model>
             <name>BoutonD</name>
-            <path>Aircraft/H-21C_Shawnee/Instruments/Bouton_pt-Nord.xml</path>
+            <path>Aircraft/HUP-Retriever/Instruments/Bouton_pt-Nord.xml</path>
             <offsets>
                 <x-m>0.016</x-m>
                 <y-m>0.030431</y-m>

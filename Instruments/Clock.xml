@@ -26,7 +26,7 @@
 		</offsets>
 	</model>-->
 
-	<model>
+	<!--model>
 		<name>Bouton</name>
 		<path>Aircraft/Lysander/Instruments/Bouton_pt-f8e.xml</path>
 		<offsets>
@@ -69,7 +69,7 @@
                     <wrap>1</wrap>
                 </binding>
             </action>
-        </animation>
+        </animation-->
 
 	<animation include="Instrument-Light4.xml">
 		<object-name>SecondHand</object-name>

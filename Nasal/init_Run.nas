@@ -17,7 +17,8 @@ var init_Run = func {
   setprop("fdm/jsbsim/fcs/wing-fold-cmd", 0);
   setprop("fdm/jsbsim/fcs/brake-parking-cmd-norm", 0);
 
-  #starter appears to need a prime, first attempt primes the engine?
+  #starter appears to need a prime, first attempt primes the engine, sometimes?
+  #still buggy needs work
   setprop("fdm/jsbsim/propulsion/engine[0]/starter", 1);
 	interpolate("fdm/jsbsim/propulsion/engine[0]/starter", 0, 6.0);
 	interpolate("fdm/jsbsim/propulsion/engine[0]/starter", 1, 7.0);
